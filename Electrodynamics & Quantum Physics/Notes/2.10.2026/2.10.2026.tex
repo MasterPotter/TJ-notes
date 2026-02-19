@@ -1,0 +1,59 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage[
+]{geometry}
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{2/10/2026}
+\lfoot{Chapter 4.5}
+\rfoot{}
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Electrodynamics \\ Notes}\end{center}
+\section{Recap/Intro}
+Remember that the reason that quantum computers are better than classical computers
+is that for given states, a quantum computer doesn't have to go through all of them - 
+rather, it can just set up a bunch of states as a superposition and deal with it all in 
+one fell swoop. This concept is called quantum parallelism, since quantum computers are 
+essentially a bunch of classical computers operating side by side.\newline \newline
+solution.
+\section{Today's stuff}
+Classically, we write code to find solutions. In quantum, we can write code to confirm a 
+solution. For example, take the following two problems:
+\[\text{Find all x for which } x^2 + x - 6 = 0\]
+\[\text{Confirm that 2 is a solution to } x^2 + x - 6 = 0\]
+Classically, doing the first is really bad - you'd have to just plug in over
+and over. However, quantumly, just plug things in and they work out on their own by 
+parallelism. As far as code flow goes, we can first generate all possible
+solutions to a problem, and then pass that into an operator that confirms the valid 
+among those "solutions".\newline \newline 
+Essentially, that means that there are 3 steps to most quantum coding:
+\begin{enumerate}
+    \item Generate all possible solutions
+    \item Confirm out which ones are valid via a parallelism structure
+    \item Measure the results and done!
+\end{enumerate}
+Now, let's say Alice and Bob are playing a game. Here's what happens:
+\begin{enumerate}
+    \item Alice picks a random binary 4-bit number (e.g. 0000,0001,...1111) and 
+    denotes it as a vector, $\overrightarrow{x}$. She gives that vector to Bob.
+    \item Bob applies a function $f(\vec{x}) = \{ 0,1\}$ The function is 
+    either constant (i.e. always returns 0 or 1) or it's a balance function 
+    (by some parameters it selects whether to return a 0 or 1, each with 50\%
+    probability).
+    \item Bob returns that output to Alice.
+    \item Alice tries to guess whether or not the function is balanced or constant.
+\end{enumerate}
+There's two possible constant functions, and two possible balanced functions, for N=1
+qubits. 
+\section{What's next}
+\end{document}

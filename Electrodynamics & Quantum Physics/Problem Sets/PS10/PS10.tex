@@ -1,0 +1,203 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket} % For Dirac notation < | >
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{}
+% Setup for headers and footers
+\pagestyle{fancy}
+\fancyhf{} % Clear all headers and footers
+\fancyhead[L]{Electrodynamics}
+\fancyhead[C]{(Chapter 3)}
+\fancyhead[R]{Worksheet PS.10}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+% Title block for the first page
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+}
+\begin{document}
+\thispagestyle{plain}
+
+\begin{center}
+    {\Large Electrodynamics}\\
+    {\Large Worksheet PS.10}\\
+    \vspace{0.2cm}
+    (Chapter 3)\\
+    December 8, 2025\\
+    Zoeb Izzi
+\end{center}
+
+\vspace{0.5cm}
+
+% Problem 1
+\noindent \textbf{1. Changing field}
+\hrule
+\vspace{0.3cm}
+
+\noindent Consider an electron. For this problem, take the classical Larmour precession rate as $\omega = eB/m$ where $e$ is the elementary charge, $B$ is the magnetic field strength, and $m$ is the mass of the electron.
+
+\begin{enumerate}[label=\alph*.]
+    \item At time $t = 0$, the observable $S_x$ is measured with the result $+\hbar/2$. What is the state vector $\ket{\psi_0}$ immediately after this measurement?
+    \newline \newline 
+    Since the electron's state was measured the electron must now be in the state of the output of said measurement - thus, \boxed{\ket{\psi_0} = \ket+_x = \frac 1 {\sqrt2} \left( \ket+_z + \ket-_z\right)}
+    \item Immediately after the measurement, a magnetic field $\mathbf{B} = B\hat{k}$ is applied and the particle is allowed to evolve for a time $T$. What is the state of the system at time $t = T$?
+    \newline \newline 
+    Let the Hamiltonian be:
+    \[\hat H = -\vec \mu \cdot \vec B = \frac {\omega \hbar} 2\begin{pmatrix}
+        1 & 0 \\0 & -1
+    \end{pmatrix}\]
+    Thus, with a little bit of the 5 step method that I'm too lazy to show, we get:
+    \[\boxed{\ket{\psi(T)} = \frac 1 {\sqrt2} \ket{+z} + \frac 1 {\sqrt2}  e^{i \omega T}\ket{-z}}\]
+    \item At $t = T$, the magnetic field is instantaneously switched to $\mathbf{B} = B\hat{\jmath}$. After another time $T$, a measurement of $S_x$ is carried out once more. What is the probability that a value of $+\hbar/2$ is found?
+    \newline The new Hamiltonian for this setup is as follows:
+    \[\hat H = \frac{\omega\hbar}2\begin{pmatrix}
+        0 & -i \\ i & 0
+    \end{pmatrix}\]
+
+    Moreover, the rotation operator about the $y$-axis is:
+    \[\hat R_y = \begin{pmatrix}
+        \cos\theta &-\sin\theta \\ \sin\theta & \cos\theta
+    \end{pmatrix}\]
+    so multiplying our initial state by this gives us:
+    \[\ket{\psi(2T)} = \frac{1}{\sqrt2}\begin{pmatrix}
+        \cos\theta-e^{i2\theta}\sin\theta\\
+        \sin\theta+e^{i2\theta}\cos\theta
+    \end{pmatrix}\]
+    from which the square root of the probability of measuring spin up is:
+    \[\frac 1 {\sqrt2}\begin{pmatrix}
+        1\\1
+    \end{pmatrix} \times \frac 1 {\sqrt2} \begin{pmatrix}
+        \cos\theta-e^{i2\theta}\sin\theta\\
+        \sin\theta+e^{i2\theta}\cos\theta
+    \end{pmatrix} = \frac 1 2 \left(\cos\theta-e^{i2\theta}\sin\theta + \sin\theta+e^{i2\theta}\cos\theta \right)\]
+     \[  = e^{i\theta}\left( \cos^2 \theta - i \sin^2 \theta\right)\]
+     making the probability of measuring spin up:
+     \[(e^{i\theta}\left( \cos^2 \theta - i \sin^2 \theta\right))^2 = (\cos ^4 \theta + \sin ^4 \theta) = \boxed{1 - \frac 1 2 \sin(\omega T)}\]
+     assuming we measure at time $t=2T$.
+\end{enumerate}
+
+\vspace{0.5cm}
+
+% Problem 2
+\noindent \textbf{2. A 3 State System Evolution}
+\hrule
+\vspace{0.3cm}
+
+\noindent Consider a three-dimensional Hilbert space spanned by the orthonormal basis states
+\[
+\{ \ket{1}, \ket{2}, \ket{3} \}.
+\]
+The Hamiltonian of the system is given by
+\[
+\hat{H} = \hbar\Omega
+\begin{pmatrix}
+0 & 1 & 0 \\
+1 & 0 & 1 \\
+0 & 1 & 0
+\end{pmatrix},
+\]
+where $\Omega$ is a real positive constant with units of angular frequency.\\
+At time $t = 0$, the system is prepared in the state
+\[
+\ket{\psi(0)} = \ket{1}.
+\]
+
+\begin{enumerate}[label=\alph*.]
+    \item Find the eigenenergies for this system.
+    \newline It's a 3 state system, meaning the eigenenergies must necessarily be the eigenvalues of the matrix:
+    \[\boxed{\pm \frac 1{\sqrt2}\Omega \hbar, 0}\]
+    \item The eigenvectors of $\hat{H}$ are:
+    \[
+    \ket{E_1} = \frac{1}{\sqrt{2}}
+    \begin{pmatrix}
+    1 \\ 0 \\ -1
+    \end{pmatrix}
+    \quad
+    \ket{E_2} = \frac{1}{2}
+    \begin{pmatrix}
+    1 \\ \sqrt{2} \\ 1
+    \end{pmatrix}
+    \quad
+    \ket{E_3} = \frac{1}{2}
+    \begin{pmatrix}
+    1 \\ -\sqrt{2} \\ 1
+    \end{pmatrix}
+    \]
+    Rewrite the initial state in the energy basis.\newline
+    The initial state is $\ket{\psi(0)} = \ket{1} = \sum_n \ket{E_n}\braket{E_n}{\psi(0)}$. Calculating the coefficients:
+    \begin{align*}
+        c_1 &= \braket{E_1|1} = \frac{1}{\sqrt{2}}(1) + 0 + 0 = \frac{1}{\sqrt{2}} \\
+        c_2 &= \braket{E_2|1} = \frac{1}{2}(1) + 0 + 0 = \frac{1}{2} \\
+        c_3 &= \braket{E_3|1} = \frac{1}{2}(1) + 0 + 0 = \frac{1}{2}
+    \end{align*}
+    Thus, the state in the energy basis is:
+    \[ \boxed{\ket{\psi(0)} = \frac{1}{\sqrt{2}}\ket{E_1} + \frac{1}{2}\ket{E_2} + \frac{1}{2}\ket{E_3}} \]
+    \item Write the time evolved state $\ket{\psi(t)}$, making sure to factor out a global phase from the $\ket{1}$ basis state.\newline
+    The time evolved state is as follows:
+    \[ \ket{\psi(t)} = \frac{1}{\sqrt{2}}\ket{E_1} + \frac{1}{2}e^{-i\sqrt{2}\Omega t}\ket{E_2} + \frac{1}{2}e^{i\sqrt{2}\Omega t}\ket{E_3} \]
+    Expanding back into the provided basis:
+    \begin{align*}
+        \ket{\psi(t)} &= \frac{1}{2}\begin{pmatrix} 1 \\ 0 \\ -1 \end{pmatrix} + \frac{1}{4}e^{-i\sqrt{2}\Omega t}\begin{pmatrix} 1 \\ \sqrt{2} \\ 1 \end{pmatrix} + \frac{1}{4}e^{i\sqrt{2}\Omega t}\begin{pmatrix} 1 \\ -\sqrt{2} \\ 1 \end{pmatrix} \\
+        &= \begin{pmatrix} \frac{1}{2} + \frac{1}{2}\cos(\sqrt{2}\Omega t) \\ -\frac{i}{\sqrt{2}}\sin(\sqrt{2}\Omega t) \\ -\frac{1}{2} + \frac{1}{2}\cos(\sqrt{2}\Omega t) \end{pmatrix}
+    \end{align*}
+    Substituting angle identities:
+    \[ \boxed{\ket{\psi(t)} = \cos^2\left(\frac{\sqrt{2}\Omega t}{2}\right)\ket{1} - \frac{i}{\sqrt{2}}\sin(\sqrt{2}\Omega t)\ket{2} - \sin^2\left(\frac{\sqrt{2}\Omega t}{2}\right)\ket{3}} \]
+    
+    \item Determine the time-dependent measurement probabilities:
+    \begin{enumerate}[label=\roman*.]
+        \item $P_1(t) = |\braket{1|\psi(t)}|^2 = \boxed{\cos^4\left(\frac{\sqrt{2}\Omega t}{2}\right)}$
+        \item $P_2(t) = |\braket{2|\psi(t)}|^2 = \left| -\frac{i}{\sqrt{2}}\sin(\sqrt{2}\Omega t) \right|^2 = \boxed{\frac{1}{2}\sin^2(\sqrt{2}\Omega t)}$
+        \item $P_3(t) = |\braket{3|\psi(t)}|^2 = \left| -\sin^2\left(\frac{\sqrt{2}\Omega t}{2}\right) \right|^2 = \boxed{\sin^4\left(\frac{\sqrt{2}\Omega t}{2}\right)}$
+    \end{enumerate}
+    
+    \item We know the system starts in the state $\ket{1}$, based on your answer from part (d), which state does it evolve into next - $\ket{2}$ or $\ket{3}$? At what times (in terms of $\Omega$) does the system evolve into each basis state?
+    \newline The system evolves into $\ket2$ next because from $t=0$ onwards, the probability of getting $\ket2$ is squared, compared to that of $\ket3$, which is to the fourth power. Since the sine function naturally is less than or equal to 1, this makes $\ket2$ have the highest probability of being chosen as the next outcome.
+\end{enumerate}
+
+\vspace{0.5cm}
+
+% Problem 3
+\noindent \textbf{3. Time Dependent Hamiltonian}
+\hrule
+\vspace{0.3cm}
+
+\noindent For this question assume we are driving a spin 1/2 system using a time-dependent field (as described in the book):
+\[
+\hat{H} = \omega_0 \hat{S}_z + \omega_1 [\cos(\omega t)\hat{S}_x + \sin(\omega t)\hat{S}_y]
+\]
+or as a matrix
+\[
+\hat{H} = \frac{\hbar}{2}
+\begin{pmatrix}
+\omega_0 & \omega_1 e^{-i\omega t} \\
+\omega_1 e^{i\omega t} & -\omega_0
+\end{pmatrix}
+\]
+Following the details in the book, complete the following questions.
+
+\begin{enumerate}[label=\alph*.]
+    \item Assuming the resonance condition $\omega = \omega_0$, Solve the differential equation for the coefficients $\alpha_{\pm}(t)$. Use your results to find the transformed state vectors $\ket{\tilde{\psi}(t)}$ and the state vector $\ket{\psi(t)}$ You should assume the state starts off in the $\ket{+z}$ state.
+    \newline 
+    In the rotating frame, we have:
+    \[ i \begin{pmatrix} \dot{\alpha}_+ \\ \dot{\alpha}_- \end{pmatrix} = \frac{\omega_1}{2} \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} \alpha_+ \\ \alpha_- \end{pmatrix} \]
+    Applying the initial conditions $\alpha_+(0)=1, \alpha_-(0)=0$, 
+    \[ \boxed{\alpha_+(t) = \cos\left(\frac{\omega_1 t}{2}\right), \quad \alpha_-(t) = -i \sin\left(\frac{\omega_1 t}{2}\right)} \]
+    \[ \boxed{\ket{\tilde{\psi}(t)} = \cos\left(\frac{\omega_1 t}{2}\right) \ket{+z} - i \sin\left(\frac{\omega_1 t}{2}\right) \ket{-z}} \]
+    The actual state vector in the lab frame is $\ket{\psi(t)} = e^{-i\omega t \hat{S}_z/\hbar}\ket{\tilde{\psi}(t)}$:
+    \[ \boxed{\ket{\psi(t)} = e^{-i\omega t/2} \cos\left(\frac{\omega_1 t}{2}\right) \ket{+z} - i e^{i\omega t/2} \sin\left(\frac{\omega_1 t}{2}\right) \ket{-z}} \]
+    
+    \item Verify that a $\pi$-pulse ($\omega_1 t = \pi$) produces a complete spin flip. Calculate both the transformed state vector $\ket{\tilde{\psi}(t)}$ and the actual state vector $\ket{\psi(t)}$ for this pulse.\newline
+    Set $\omega_1 t = \pi$, meaning $\frac{\omega_1 t}{2} = \frac{\pi}{2}$.
+    \[ \ket{{\psi}(t)} = \cos(\pi/2)\ket{+z} - i\sin(\pi/2)\ket{-z} = \boxed{-i\ket{-z}} \]
+    \[ \ket{\psi(t)} = \boxed{-i e^{i\omega t/2} \ket{-z}} \]
+    This makes the probability of measuring spin-down in the $z$-direction 1, which affirms that a spin flip has occurred. 
+    
+\end{enumerate}
+All done!
+\end{document}

@@ -1,0 +1,183 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage[
+]{geometry}
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{2/5/2026}
+\lfoot{Chapter 1}
+\rfoot{}
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques (AMT) \\ Worksheet 1}\end{center}
+\vspace{10mm}
+\begin{enumerate}
+    \item Consider the sequence $\{ a_n\}^\infty_{n=1}$, where $a_n = \frac{(-1)^nn}{n+1}$
+    \begin{enumerate}
+        \item Write out the first 5 terms of the sequence. What general behavior can you deduce from these terms?
+        \newline \newline The first 5 terms are:
+        \begin{equation*}a_1=-\frac12, a_2=\frac23, a_3 =-\frac34, a_4=\frac45, a_5=-\frac56\end{equation*}
+        From this, it looks like the absolute value of the sequence approaches 1, with each term's sign alternating.\newline
+        \item Is this sequence monotonic? Is it bounded? Would you say that the sequence converges or diverges? If it 
+        diverges, would you say that it contains a convergent subsequence? \newline \newline The sequence is 
+        \textbf{not monotonic}, as shown above because $a_2>a_1$, but $a_3<a_2$. It \textbf{is bounded}, however, 
+        because the absolute value of the sequence can never exceed 1, since $\frac{n}{n+1}$ can never exceed 1. I would say 
+        \textbf{the sequence diverges}, since it will end up oscillating between numbers close to 1 and -1 for all 
+        eternity, but it \textbf{does contain 2 convergent subsequences} - one of all the positive numbers, going to 1, 
+        and one of all the negative ones, going to -1.\newline
+        \item Determine the limit points of this sequence.\newline \newline
+        
+    \end{enumerate}
+    \item Consider the sequence $\{ a_n\}^\infty_{n=1}$, where $a_1=3$ and $a_{n+1} = 7 - \frac{2}{a_n}$.
+    \begin{enumerate}
+        \item Write out the first 5 terms of the sequence. What general behavior of the terms do your results 
+        suggest? Does it appear to be monotonic? Does it appear to be bounded?
+        \newline \newline
+        The first 5 terms are: 
+        \begin{equation*}a_1 = 3, a_2 = \frac{19}3, a_3=\frac{127}{19}, a_4=\frac{851}{127}, a_5=\frac{5703}{851}\end{equation*}
+        The terms seem to \textbf{converge} to a number just over 7. The sequence appears to be \textbf{monotonic} and bounded, 
+        below by 3 and above by 7.\newline
+        \item Show that this sequence is bounded, $ 2< a_n <7 $ for all $n$, by induction (assume that $2 < a_k<7$ for some value 
+        of $k$, then use the recurrence relation to show that $2 < a_{k+1}<7$).
+        \begin{equation*}2 < a_k < 7\end{equation*}
+        \begin{equation*}\frac17 < \frac1{a_k} < \frac12\end{equation*}
+        \begin{equation*}-1 < -\frac2{a_k}<-\frac27\end{equation*}
+        \begin{equation*}6 < 7-\frac2{a_k}<\frac{47}7\end{equation*}
+        \begin{equation*}6 < a_{k+1}<\frac{47}{7}\end{equation*}
+        \begin{equation*}2 < 6 < a_{k+1} < \frac{47}7\end{equation*}
+        \begin{equation*}\boxed{2 < a_{k+1}<\frac{47}7}\end{equation*}\newline
+        \item The sequence is indeed monotonic increasing. Prove this by induction. Your proof will be similar 
+        to that found in part (b).
+        \newline \newline For the base case, where $n=1$:
+        \begin{equation*}a_1 < a_2 \xrightarrow{} 3 < \frac{19}{3} \text{ is true.}\end{equation*}
+        Next, let:
+        \begin{equation*}a_k < a_{k+1}\end{equation*}
+        \begin{equation*}\frac{1}{a_k} > \frac{1}{a_k+1}\end{equation*}
+        \begin{equation*}-\frac{2}{a_k} < -\frac{2}{a_k+1}\end{equation*}
+        \begin{equation*}7-\frac{2}{a_k} < 7-\frac{2}{a_k+1}\end{equation*}
+        \begin{equation*}\boxed{a_{k+1} < a_{k+2}}\end{equation*}\newline
+        \item Based on your analysis in (b) and (c), can you say for sure that this sequence converges? If so, 
+        what number (exactly) does it converge to?
+        \newline \newline 
+        Since this sequence is bounded, it has at least one limit point, and since it's also monotonically increasing, it 
+        \textbf{does converge.} It converges to:
+        \begin{equation*}L = 7 - \frac2L\end{equation*}
+        \begin{equation*}L^2 = 7L-2\end{equation*}
+        \begin{equation*}L^2 - 7L + 2 = 0\end{equation*}
+        \begin{equation*}L = \frac{7 \pm \sqrt{41}}{2}\end{equation*}
+        Since $\frac{7-\sqrt{41}}2 < 3$, we know that the sequence converges to:
+        \begin{equation*}\boxed{\frac{7 + \sqrt{41}}{2}}\end{equation*}
+        \newline
+        
+    \end{enumerate}
+    
+    \item Consider the sequence $\{ a_n\}^\infty_{n=1}$, where $a_1=3$ and $a_{n+1} = 7 + \frac{2}{a_n}$.
+    \begin{enumerate}
+        \item Write out the first 5 terms of the sequence. What general behavior of the terms do your results suggest? 
+        Does it appear to be monotonic? Does it appear to be bounded?
+        \newline \newline
+        The first 5 terms are: 
+        \begin{equation*}a_1 = 3, a_2 = \frac{23}3, a_3=\frac{167}{23}, a_4=\frac{1215}{167}, a_5=\frac{8839}{1215}\end{equation*}
+        The terms seem to \textbf{converge} to a number just over 7. The sequence is \textbf{not monotonic}, 
+        since $a_4 > a_3$, but $a_3 < a_2$. It does appear to be bounded, below by 3 and above by 12.\newline
+        \item This sequence is not monotonic, but it is bounded. Show using induction that the sequence is bounded by 2 from 
+        below and 12 from above. What convergence property can you state definitively from this result?
+        \newline \begin{equation*} 2 < a_n < 12 \end{equation*}
+        \begin{equation*} \frac{1}{12}< \frac1{a_n} < \frac12 \end{equation*}
+        \begin{equation*} \frac{1}{6}< \frac2{a_n} < 1 \end{equation*}
+        \begin{equation*} \frac{43}{6}< 7 + \frac2{a_n} < 8 \end{equation*}
+        \begin{equation*} \frac{43}{6}< a_{n+1} < 8 \end{equation*}
+        \begin{equation*} 2 < \frac{43}{6}< a_{n+1} < 8 < 12 \end{equation*}
+        \begin{equation*}\boxed{2 < a_{n+1} < 12 }\end{equation*}
+        We can't state any convergence property from this because again, the sequence isn't monotonic, so there could be 
+        two limit points, and no convergence.\newline
+
+        \item The sequence is convergent. Determine exactly what number it converges to and verify this result from 
+        investigating a few terms in the sequence.
+        \[L = 7 + \frac2L\]
+        \[L^2-7L-2=0\]
+        \[L=\frac{7 \pm \sqrt{57}}{2}\]
+        Since $\frac{7 - \sqrt{57}}{2} < 0$, and we know our sequence is bounded by 2 and 12, we know that the converged value
+        is:
+        \[\boxed{\frac{7 +\sqrt{57}}{2}}\]\newline
+    \end{enumerate}
+    \item Consider the sequence $\{ S_n\}_{n=1}^\infty$, where $S_1 = 1$ and $S_{n+1} = S_n + \frac1{n+1}$.
+    \begin{enumerate}
+        \item Write out the first 5 terms of the sequence. Does it appear to be monotonic? Does it appear to be bounded?\newline\newline
+        The first five terms are:
+        \[S_1 = 1, S_2 = \frac32, S_3 = \frac{11}6, S_4 = \frac{25}{12}, S_5 = \frac{137}{60}\]\newline
+        It appears to be monotonically increasing, and it appears to be bounded by 3.\newline
+        \item The difference between adjacent terms in this sequence, $S_{n+1} - S_n = \frac{1}{n+1}$, clearly goes to 0 as 
+        $n \xrightarrow{} \infty$. Does this imply the sequence is convergent? Why or why not?
+        \newline \newline No. Convergence requires bounds, and even though each term gets closer and closer to the next, that doesn't mean 
+        that the sequence is bounded.\newline
+        \item Prove that this sequence is monotonic (it is not difficult, and does not require induction). Does this mean it converges?
+        \newline \newline \[n > 0, \frac{1}{n+1} > 0 \hspace{1mm}\forall \hspace{1mm}n, \hspace{1mm}\therefore\hspace{1mm} S_n \text{ is monotonically increasing.}\]
+        Again, this does not necessarily mean that it converges, because we don't know that there are bounds on the sequence,
+        so it could just increase forever, like how $1,2,3$ is monotonically increasing but obviously divergent.\newline
+        \item Work through the logic of the following expression:
+        \[S_n = 1 + \frac12 + \frac13 + \frac 14 (\text{last 2 sum to } > \frac12, < 1)...\]
+        Can you state conclusively whether or not this sequence converges based on this analysis? If it converges, can you give
+        a bound that its limit is definitely less than?\newline \newline I can say this doesn't converge because we know 
+        that there are infinite of these "groups" in the limit. Each of these groups sums to a number greater than $\frac12$.
+        Since there are infinite groups of them, then we know that there are infinite amounts of at least $\frac12$, meaning that
+        the sum of this sequence will be greater than the sum of the sequence $\frac12, \frac12, \frac12, ... $, which diverges. Thus, 
+        this sequence also diverges.
+    \end{enumerate}
+    \item Consider the sequence $\{ S_n\}_{n=1}^\infty$, where $S_1 = 1$ and $S_{n+1} = S_n + \frac1{(n+1)^2}$.
+    \begin{enumerate}
+        \item Write out the first 5 terms of the sequence. Does it appear to be monotonic? Does it appear to be bounded?\newline\newline
+        The first five terms are:
+        \[S_1 = 1, S_2 = \frac54, S_3 = \frac{49}{36}, S_4 = \frac{205}{144}, S_5 = \frac{5269}{3600}\]\newline
+        It appears to be monotonically increasing, and it appears to be bounded below by 1 and above by 2.\newline
+        \item The difference between adjacent terms in this sequence, $S_{n+1} - S_n = \frac{1}{(n+1)^2}$, clearly goes to 0 as 
+        $n \xrightarrow{} \infty$. Does this imply the sequence is convergent? Why or why not?
+        \newline \newline No. Convergence requires bounds, and even though each term gets closer and closer to the next, that doesn't mean 
+        that the sequence is bounded.\newline
+        \item Prove that this sequence is monotonic. Does this mean it converges?
+        \newline \newline \[n > 0, \frac{1}{n+1} > 0, \frac1{n+1} > 0, \hspace{1mm}\forall \hspace{1mm}n, \hspace{1mm}\therefore\hspace{1mm} S_n \text{ is monotonically increasing.}\]
+        Again, this does not necessarily mean that it converges, because we don't know that there are bounds on the sequence,
+        so it could just increase forever, like how $1,2,3$ is monotonically increasing but obviously divergent. We don't know there
+        is a limit point yet.\newline
+        \item Work through the logic of the following expression:
+        \[S_n = 1 + \frac1{2}^2 + \frac1{3}^2 + \frac 1{4^2} (\text{last 2 sum to } > \frac12, < 1)...\]
+        Can you state conclusively whether or not this sequence converges based on this analysis? If it converges, can you give
+        a bound that its limit is definitely less than?\newline \newline I can say this does converge because we know 
+        that there are infinite of these "groups" in the limit. Each of these groups sums to a number less than $\frac12^p$, where $p$
+        represents the "group" number. Since there are infinite groups of them, then we know that there are infinite amounts 
+        of at most $\frac12^p$, meaning that the sum of this sequence will be less than the sum of the sequence $1, \frac12, \frac14, \frac18, ... $, which converges. Thus, 
+        this sequence also converges.
+    \end{enumerate}
+    \item Consider the sequence $\{a_n \}_{n=1}^\infty$, where $a_n = cos(n^2)$.
+    \begin{enumerate}
+        \item Write out the first 5 terms of the sequence (decimal approximations are appropriate). Does it appear to be 
+        monotonic? Does it appear to be bounded?\newline \newline
+
+        The first 5 terms are:
+        \[a_1 = 0.5403, a_2 = - 0.6536, a_3 = -0.9111, a_4 = -0.9577, a_5 = 0.9912\]
+        This is not monotonic, since $S_1 > S_2$ but $S_5 > S_4$. It is bounded by -1 and 1 as lower and upper bounds,
+        since those are the bounds of the cosine function.\newline
+        \item The difference between adjacent terms in this sequence, $a_{n+1}-a_n = cos((n+1)^2) - cos(n^2)$, clearly doesn't
+        go to 0 as $n\xrightarrow{} \infty$. Does this mean that the sequence doesn't converge?
+        \newline \newline Yes. The limit of the sequence must approach 0 in order for the it to converge.\newline
+        \item Prove that the sequence is bounded. What does this imply about its convergence characteristics?
+        \newline \newline The sequence is bounded because of the inherent bounds on the cosine function, which are 
+        $-1 \le \cos(n) \le 1 \hspace{1mm} \forall n$.\newline 
+        \item Can you prove that this sequence has at least 1 limit point? Can you find a limit point of this sequence? 
+        What is the difference between these two statements?\newline \newline
+        The sequence has at least one limit point because it's an infinite sequence that's bounded, but we don't know what
+        that limit point is because finding the limit points is far more difficult than ascertaining that one exists.
+        The difference between the two is that one is just proving that something is there, while the other asks 
+        what it is.
+    \end{enumerate}
+\end{enumerate}
+\end{document}

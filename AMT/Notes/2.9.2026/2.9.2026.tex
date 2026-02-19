@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage[
+]{geometry}
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{2/9/2026}
+\lfoot{Unit 1}
+\rfoot{}
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques (AMT) \\ Notes}\end{center}
+\section{Recap}
+Remember that we can establish convergence of a series if we can make the "tail" (the ending) of that series small. 
+$\sum_n=1^\infty a_n$ converges if an only if given any $\varepsilon > 0 \in N$ such that:
+\[|\sum_{n=N+1}^{N+P}| < \varepsilon \forall P \in N\].
+\section{Today's stuff}
+Going back to BC, let's recall that the series cannot converge if the limit of the series is greater than 0. That is, if there's 
+a series which has a limit of 1, say, then it will not converge because it will end up diverging to $\infty$. Further
+recall the definition of absolute convergence, where:
+\[c_n \text{ converges absolutely if } \sum_{n=1}^{\infty} c_n \text{converges.}\]
+Clearly, if a series is absolutely convergent, then it is convergent (duh). Recall further the triangle inequality, where
+for any two complex numbers, $\left| z\right| - \left| w\right| \le \left| z+w \right| \le \left| z\right| + \left| w\right|$
+Let's also recall the direct comparison test, where if we have a sequence $\{a_n\}^{\infty}_{n=1}$ and $\{b_n\}^{\infty}_{n=1}$, where
+both are sequences of positive numbers with $a_n \geq b_n \forall n$. If $\sum{a_n}_{n=1}^{\infty}$ converges, then so does 
+$\sum{b_n}_{n=1}^{\infty}$ - if $\sum{b_n}_{n=1}^{\infty}$ diverges, then so does $\sum{a_n}_{n=1}^{\infty}$. If 
+$\sum{a_n}_{n=1}^{\infty}$ diverges, then you know nothing about $\sum{b_n}_{n=1}^{\infty}$. You need to have the inequality in the right way to use it.
+That's why more often, the test used is the limit comparison test, where if $\lim_{n\xrightarrow{}\infty} \left| \frac{a_n}{b_n} \right| = L \neq 0$, then both 
+either converge or diverge. They do whatever they do together. A proof of this follows:\newline \newline
+Since $\lim_{n\xrightarrow{}\infty} \frac{a_n}{b_n} = L$, given any $\varepsilon > 0 \ in N$ such that $L - \epsilon < \frac{a_n}{b_n} < L+\varepsilon$.
+This means that $(L - \epsilon)b_n < a_n < (L+\varepsilon)b_n$, for every $n < N$. Further, for any $M > N$, we have:
+\[(L - \epsilon)\sum_{n=M+1}^{M+P}b_n < \sum_{n=M+1}^{M+P}a_n < (L+\varepsilon)\sum_{n=M+1}^{M+P}b_n\]
+Now, if $\sum_{n=1}^{\infty}a_n$ converges, that means that the tail of the $a_n$ can be as small as I want. That means
+that the term before it must also be (as long as $L$ is not 0) very small. Thus, the series $\sum_{n=1}^{\infty}b_n$ converges.
+However, if $\sum_{n=1}^{\infty}a_n$ diverges, then you can prove that $\sum_{n=1}^{\infty}b_n$ also diverges by the same
+logic, just using the right side instead of the left. If you know stuff about $b_n$ rather than $a_n$, you can just consider the 
+reciprocal of $L$ instead (which we can only do because $L\ne 0$). We could also just use the inequality from the other side.
+\newline \newline
+Now, let's consider the integral comparison test, where, given the positive sequence $\{ a_n\}_{n=1}^{\infty}$, if a 
+decreasing, continuous function can be found for which $f(n) = a_n$ for all n, then:
+\[\int_{N+1}^{N+P+1}f(x)dx < \sum_{n=N+1}^{N+P}a_n < \int_{N}^{N+P}f(x)dx\]
+In other words, the improper integral and the infinite series either both converge or both diverge. We can only make these "both"
+statements if we have 3 sides to this inequality. Also, we can do a lot more than just divergence proving - for instance, 
+\[\int_{n+1}^{m+1} f(x)dx < \sum{k=n+1}^{m}a_k < \int_{n}^{m}f(x)dx\]
+Let's say we want to estimate $H_{\text{1 trillion}}$, where $H_n$ represents the sum of the harmonic numbers up until that point.
+In order to estimate $H_{10^{12}}$ using the fact that $H_{10}$ = 2.92\dots.\newline \newline
+\[\int_{11}^{10^{12}+1} \frac{dx}{x} < \sum_{k=11}^{10^{12}}\frac1k < \int_{10}{10^{12}}\frac{dx}{x}\]
+\[\ln \frac{10^{12}+1}{11} < \sum_{k=11}^{10^{12}}\frac1k < \ln 10^{11}\]
+Using a calculator and dropping the +1, 
+\[25.233 < \sum_{k=11}^{10^{12}}\frac1k < 25.438\]
+Thus, considering the first estimation of $H_{10}$ as 2.928, we get:
+\[28.162 < H_{10^{12}} < 28.2574\]
+Turns out, the bounds are always about 0.1 apart in the long run. 
+
+
+\end{document}

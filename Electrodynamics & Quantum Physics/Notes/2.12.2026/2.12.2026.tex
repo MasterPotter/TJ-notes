@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont, braket}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage[
+]{geometry}
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{2/12/2026}
+\lfoot{Chapter 4.5}
+\rfoot{}
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Electrodynamics \\ Notes}\end{center}
+\section{Recap/Intro}
+Recall what oracles do and how quantum algorithms work. Recall further
+that the takeaway from Deutsch-Josa is that oracles change the computational
+question from find an answer to confirm an answer. Today we're talking
+about how to make and break encryption.
+\section{Today's stuff}
+We consider two kinds of encryption - symmetric and asymmetric. Considering
+a message, the sender encrypts the message, sends it, and the receiver
+decrypts it. Symmetric encryption is when the same thing is used to encrypt 
+and decrypt - asymmetric is not. \newline \newline
+We'll start with \textbf{XOR masks}. Let's make a message, 
+\[M = 10011\]
+and an encryption key, 
+\[K=01100\]
+All we do is we take the XOR of these two, giving us a cipher:
+\[C = 11111\]
+Alice then sends this message to Bob, who decodes the message by 
+XORing it with his key, giving him the original message. XOR masks like this
+are used in current encryption protocols. 
+\newline \newline 
+Today, our goal is to, given an input message and a cipher, to find
+the key. That's what we call Simon's algorithm, which is similar
+to the Deutsch-Josa algorithm - it's just that instead of 1 ancilla bit,
+we have $N$ ancilla bits. Also, only the computational bits go through the 
+Hadamard gates each time, and all of them get measured - other than that, same
+thing. This oracle, though, has a different job - it needs to find the 
+collision. Also, the starting state is:
+\[\ket0^n \otimes \ket0^n\]
+where the first group is the computational bits and the second is the 
+ancilla bits. The state after the Hadamards will become:
+\[\frac{1}{\sqrt{2^n}}\sum_{x \in \{0,1\}} \ket{x} \otimes \ket0\]
+Now, we apply the oracle:
+\[\hat O \ket x \ket y = \ket x \ket {y \oplus f(x)} \]
+making our state:
+\[\frac{1}{\sqrt{2^n}} \sum_x \ket x \ket {f(x)}\]
+where $f(x)$ is our XOR mask, containing the key. Now, we move up the measurement
+of the ancilla bits and we measure them before applying the Hadamard to the computational
+bits, making the system collapse:
+\[f(x) = f(x \oplus x)\]
+\[\frac1{\sqrt2} \left[ \ket x + \ket{x \oplus s}\right] \ket{f(x)}\]
+Next we apply the Hadamard to the computational bits:
+\[\frac1{\sqrt2} \frac1{\sqrt{2^n}}\sum\left[(-1)^{x\cdot z} + (-1)^{(x\oplus s) \cdot z} \right]\cdot \ket z\]
+\[\frac{1}{\sqrt{2^N+1}} \sum(-1)^{x \cdot z} \left[ 1 + (-1)^{s \cdot z} \right]\ket z\]
+\section{What's next}
+\end{document}

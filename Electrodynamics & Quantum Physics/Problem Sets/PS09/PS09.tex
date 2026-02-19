@@ -1,0 +1,106 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage[
+]{geometry}
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{12/8/2025}
+\lfoot{Chapter 3}
+\rfoot{Problem Set 9}
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Electrodynamics \\ Problem Set 9}\end{center}
+\begin{center}\section*{Magnetic procession}\end{center}
+\normalsize{Consider an electron that, at time $t = 0$ is in the state $\ket{\psi(t=0)} = \ket{+}_z = \frac 1 {\sqrt2} \left(\ket{+y} + \ket{-y}\right)$}\newline
+\subsection*{\centering Part A}
+Since the system hasn't been allowed to evolve at all, the state is just the initial, so the probabilities are:
+\[\boxed{P(\ket{+x}) = \frac 12 \qquad P(\ket{-x}) = \frac 12}\]
+Just as expected!
+\begin{center}\subsection*{Part B}\end{center}
+
+Following the 5 step process:\newline
+\begin{itemize}
+    \item Make the Hamiltonian.
+\[\hat H = \frac{-q}{M_e}B_0 \frac \hbar 2 \begin{pmatrix} 0 & i \\ -i & 0 \end{pmatrix} = \frac{\omega \hbar}{2} \hat \sigma_y\]
+    \item Determine the eigenstates and eigenenergies of $\hat H$.\newline\newline
+    Defining $\omega = \frac{eB_0}m$,
+        \[E_1 = \frac {\omega \hbar } 2, E_2 = -\frac{\omega \hbar} 2 \]
+    \[\ket {E_1} = \ket{+y}, \ket{E_2} = \ket{-y}\]
+    \item Write $\ket{\psi(0)}$ into the energy basis.\newline\newline
+    Since $\ket{E_{1,2}} = \ket{\pm y}$,
+    \[\ket{\psi_0} = (\bra{+y}\ket{\psi_0})\ket{+y} + \bra{-y}\ket{\psi_0})\ket{-y}\]
+    \[\ket{\psi_0} = \frac1 {\sqrt2} \left( \ket{+y} + \ket{-y}\right)\]
+    \[\ket{\psi_0} = \frac1 {\sqrt2} \left( \ket{E_1} + \ket{E_2}\right)\]
+    \item Write down the time-evolved state
+    \[\ket{\psi(t)} = \frac1 {\sqrt2} \ket{E_1} + \frac1{\sqrt2}e^{i\omega t}\ket{E_2}\]
+    \item Make measurements! (in this case unnecessary)
+\end{itemize}
+Thus, the time-evolved state is just:
+\[\boxed{\ket{\psi(t)} = \frac1 {\sqrt2} \ket{E_1} + \frac1{\sqrt2}e^{i\omega t}\ket{E_2}}\]
+\begin{center}\subsection*{Part C}\end{center}
+Reforming $\ket\psi$, 
+\[\ket{\psi(t)} = \frac{1}{\sqrt2} \left[ \frac 1 {\sqrt2} \ket{+z} + \frac i {\sqrt2} \ket{-z}\right] + \frac{1}{\sqrt2} \left[ \frac 1 {\sqrt2} \ket{+z} - \frac i {\sqrt2} \ket{-z}\right]e^{i\omega t}\]
+\[\left( \frac 1 2 + \frac 1 2 e^{i \omega t} \right)\ket{+z} + i \left( \frac 1 2 - \frac 1 2 e^{i\omega t}\right) \ket{-z}\]
+Now, finding the actual probability:
+\[P_{+x} = \left| \braket{+x}{\psi(t)} \right|^2\]
+\[ = \left| \left(\frac 1 {\sqrt2} \ket{+z} + \frac1{\sqrt2}\ket{-z} \right)\ket{\psi(t)}\right|^2\]
+\[ = \frac 1 8 \left| (1+e^{i\omega t}) + i(1-e^{i\omega t})\right|^2\]
+\[ = \boxed{\frac 12 \left( 1 + \sin \omega t\right)}\]
+Thus the probability of spin down is:
+\[1 - \text(above) = \boxed{\frac 1 2 (1 - \sin \omega t)}\]
+
+\section*{ \centering Three state system}
+\normalsize{Let a Hamiltonian be defined by 
+\[\hat H = \begin{pmatrix}
+    A & 0 & B \\ 0 & C & 0 \\ B & 0 & A
+\end{pmatrix}\] where $A,B,C$ are real numbers. Use the following notation for unit vectors:
+\[\ket 1 = \begin{pmatrix}
+    1\\0\\0
+\end{pmatrix}, \ket 2 = \begin{pmatrix}
+    0\\1\\0
+\end{pmatrix}, \ket 3 = \begin{pmatrix}
+    0\\0\\1
+\end{pmatrix}\]}
+\begin{center}\subsection*{Part A}\end{center}
+By mass algebra that I don't want to type, we get:
+\[\boxed{E_1 = A + B, E_2 = C, E_3 = A - B}\]
+\[\boxed{\ket{E_1}= \frac 1{\sqrt2} \begin{pmatrix}
+    1 \\ 0 \\ 1
+\end{pmatrix}, \ket{E_2}= \begin{pmatrix}
+    0 \\ 1 \\ 0
+\end{pmatrix}, \ket{E_3}= \frac 1{\sqrt2} \begin{pmatrix}
+    1 \\ 0 \\ -1
+\end{pmatrix}}\]
+\subsection*{\centering Part B}
+This probability is encapsulated by:
+\[\left|\braket{2}{\psi(t)}\right|^2\]
+Let:
+\[E_1 = \ket1, E_2 = \ket2, E_3 = \ket3\]
+Therefore, since we start in state $\ket 2$,
+\[\ket{\psi(t)} = e^{-\frac i \hbar Ct}\ket2\]
+The probability of measuring $\ket2$ must therefore be:
+\[\boxed{\left|\braket{2}{\psi(t)}\right|^2 = 1}\]
+\begin{center}\subsection*{Part C}\end{center}
+This probability is encapsulated by:
+\[\left|\braket{3}{\psi(t)}\right|^2\]
+But here,
+\[\ket{\psi(t)} = \frac 1 {\sqrt2} \left( e^{-\frac i\hbar(A+B)t} \frac 1 {\sqrt2}(\ket1 + \ket3) + e^{-\frac i\hbar(A-B)t} \frac 1 {\sqrt2}(\ket1 - \ket3)\right)\]
+Where, if we take our measurement:
+\[\left|\braket{3}{\psi(t)}\right|^2 = \left| \frac 1 2 \left( e^{-\frac i \hbar (A+B)t} + e^{-\frac i \hbar (A-B)t}\right)\right|^2\]
+Factoring out and simplifying:
+\[\left|\braket{3}{\psi(t)}\right|^2 = \left| e^{-\frac i \hbar At} \cos\frac{Bt}{\hbar}\right|^2\]
+Thus, 
+\[\boxed{\left|\braket{3}{\psi(t)}\right|^2 = \cos^2\frac{Bt}{\hbar}}\]
+\newline\newline
+All done!
+
+\end{document}

@@ -1,0 +1,120 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage[
+]{geometry}
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{2/10/2026}
+\lfoot{Unit 1}
+\rfoot{}
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques (AMT) \\ Notes}\end{center}
+\section{Recap}
+We can use the integral comparison test to estimate the sums of a finite number of terms for divergent series. We can use that 
+concept to consider a different combination, and a convergent series. 
+\section{Today's stuff}
+\subsection{Integral Test}
+Consider a sequence $S_n = H_n - \ln(n+1)$. Analyzing the graph of $y = \frac1x$, let's make some rectangles with the upper left
+point lying on the graph and width 1. Considering these rectangles going from $x=1$ to $x=n$, the sum of the areas of all
+of the boxes is $1 + \frac12 + \frac13 + \dots + \frac1n$.
+\[H_n = \sum_{k=1}^n \frac1k\]
+Now, the area under the curve is:
+\[\int_{1}^{n+1}\frac1x dx = \ln(n+1)\]
+Let's look at the differences between the box area and what we'd call the integral area, which is the $S_n$ series. $S_1$
+describes the difference between the first rectangle and the integral over that boundary, $S_2$ over the first two, etc.
+From this, since that area is strictly positive (approaching 0), we know that $S_n$ is strictly increasing. Further, by looking
+at the graph, we can sort of replicate the error terms of all of the subsequent terms in the first bar by drawing the curve there
+and all of the boxes are doomed to fit, since math. It's like if you just shifted the error part of each bar sideways until it 
+clicked into place in the first bar.\newline \newline
+Now, because they all fit in the first bar, we know that the sum of all the errors must be less than the area of the first box,
+which we already established was 1. Therefore, the sequence $S_n$ is bounded by 1, and since it's monotonic and bounded,
+it \textbf{MUST} converge. Let's try and make an estimate for the value, though.\newline \newline
+Remember from yesterday, 
+\[28.162 < H_{10^{12}} < 28.2574\]
+Therefore, 
+\[28.162 - \ln(10^{12}+1) < H_{10^{12}} - \ln(10^{12}+1) < 28.2574 - \ln(10^{12}+1)\]
+\[0.531 < H_{10^{12}} - \ln(10^{12}+1) < 0.6264\]
+The average of the bounds is around $0.5772$, which is very important - so much so that it has it's own variable, 
+$\gamma$.
+\[\gamma = \lim_{n\xrightarrow{}\infty} (H_n - \ln n)\]
+Don't worry, the $n+1$ vs $n$ doesn't make a difference. Back to work - let's recall the power series, where:
+\[\sum_{n=1}^{\infty} \frac{1}{n^p}\]
+where if $p>1$, it converges, and otherwise it diverges. We can use the integral comparison test to estimate the value
+of this convergent series, such as the $p$-series with $p=3$.
+\[\sum_{n=1}^{10}\frac1{n^3} = 1.19753\]
+\[\int_{11}^{\infty} \frac1{n^3}< \sum_{n=11}^{\infty} \frac1{n^3}< \int_{10}^{\infty}\frac1{n^3}\]
+\[1.2017< \sum_{n=1}^{\infty} \frac1{n^3} < 1.2025\]
+We can use the integral comparison test to see how much each term contributes. Also, as a fun fact, the error is about
+$\frac1{11^3}$, and 11 was the first term we didn't compute. 
+\subsection{Root Test}
+The ratio test (like the root test) is basically a comparison test for geometric series. It basically asks the question, 
+"If you were a geometric series, which would you be?"
+Suppose the following:
+\[ \lim_{n\xrightarrow{}\infty} \sqrt[n]{a_n} = r \]
+Then, given any $\varepsilon > 0 \in N$ such that $r - \varepsilon < \sqrt[n]{a_n} < r + \varepsilon \hspace{1mm} \forall
+\hspace{1mm} n > N$.
+\[(r-\varepsilon)^n < a_n < (r+\varepsilon)^n\]
+\[\sum_{n=N+1}^{N+P}(r-\varepsilon)^n < \sum_{n=N+1}^{N+P} a_n < \sum_{n=N+1}^{N+P} (r+\varepsilon)^n\]
+Note that if $r < 1$, we then we can choose $\varepsilon$ so small that $r + \epsilon < 1$ as well. This is a strict limit - 
+r \textbf{MUST} be less than 1. It must be a fixed number such that $r < 1$, because we need to be able to add a little bit 
+to it - just a small amount - and it still must be less than 1. In other words, I can take $\varepsilon = \frac{1-\varepsilon}{2}$
+and, as long as $r < 1$, we have satisfied this. Since this means that the last series in that inequality 
+converges and so does $a_n$, and conversely, if $r > 1$, we know that the last series in that inequality diverges, and 
+thus so does $a_n$.
+\newline \newline
+However, if $r = 1$, then no matter how small $\varepsilon$ is, we know that the first series in that inequality converges
+and the last one diverges, meaning that we know nothing about $a_n$ and the test is inconclusive. Note that you can't really use 
+the root test unless $k$ or whatever the main variable is appears in the power.
+\subsection{Power series}
+A power series is a series of the form:
+\[\sum_{n=0}^{\infty} c_n(z-z_0)^n\]
+where $z_0$ is called the "center" of the series. This series and the root test were made for each other. This series converges
+when:
+\[\lim_{n\rightarrow\infty} \sqrt[n]{|c_n||z-z_0|^n} < 1\] 
+The goal is to get the root and the power to agree, because that is what collapses the inner calculation. Anyways,
+\[\lim_{n\rightarrow\infty} |z-z_0|\sqrt[n]{|c_n|} < 1\]
+We define the radius of convergence $R$ such that: 
+\[\frac1R = \lim_{n\rightarrow\infty} \sqrt[n]{|c_n|}\]
+The power series converges on $|z-z_0| < R$. We used $z$ on purpose because nothing requires $x$ or $z$ to be real. If we enter
+the complex plane, we can use the radius of convergence to determine the circle centered around $z_0$ such that, if $z$ is in 
+that circle, the power series converges. Quite a step up from the old radius of convergence which dealt with purely real 
+numbers. The thing is the power series can only converge on a disk in the complex plane, and that comes as a result of the root test.
+The radius of this disk is the distance from the center to the \textbf{closest} "problem point" in the function. We define 
+a "problem point" as a place where you're dividing by 0, taking a logarithm of 0, taking a non-natural power of 0, or doing
+some other thing that you're not supposed to do.\newline \newline Example: Find the power series centered at 3 that converges to 
+$\frac{2}{5-z}$.
+\[\frac{2}{5-z} = \frac{2}{5-(z-3+3)} = \frac{2}{2-(z-3)} = \frac1{1-\frac{z-3}{2}} = \sum_{n=0}^{\infty}\left( \frac{z-3}2\right)^n
+ = \sum_{n=0}^{\infty}\left( \frac{1}{2}\right)^n (z-3)^n\]
+ Moreover,
+ \[\frac1R = \lim_{n\rightarrow\infty} \sqrt[n]{0.5^n} = 0.5 = \frac12\]
+ and the distance from the center to the nearest problem point (5) is indeed 2.
+ Therefore, $|z-3|<2$.\newline \newline
+ Another practice problem is to do the same but centered at -1.
+ \[\frac2{5-z} = \frac2{6-(z+1)} = \frac{\frac13}{1-\frac{z+1}{6}} = \frac13\sum_{n=0}^{\infty} \left( \frac{z+1}6\right)^n\]
+which will lead to a radius of convergence of 6, as expected. \newline\newline
+New practice problem: Find the first four nonzero terms in the Maclaurin expansion of $\frac2{3-2x+x^2}$ (centered at 0).
+\[\frac2{3-2x+x^2} = \frac2{2+(1-x)^2} = \frac1{1+\frac{(x-1)^2}{2}} = \sum_{n=0}^{\infty}\left[ -\frac{(x-1)^2}{2}\right]^n\]
+Let's write out some terms now.
+\[1 - \frac{(x-1)^2}{2} + \frac{(x-1)^4}{2^2} - ... \]
+However, this isn't centered at 0, rather it's centered at 1. Also, if you wanted to consolidate the terms you need, you end up 
+with a lot of uncontrolled expansion, and a lot of infinities. Let's regain control and try it some other way.
+\[\frac2{3-2x+x^2} = \frac{\frac23}{1-\frac{2x-x^2}{3}} = \frac23 \sum_{n=0}^{\infty}\left(\frac{2x-x^2}{3}\right)^n\].
+THAT IS NOT A POWER SERIES! It does not have to converge in a disk! This series in particular DOES NOT converge on a disk. 
+However, the Maclaurin series is a power series and it will converge in a disk. 
+\[\frac23 \left[ 1 + \frac{2x-x^2}{3} + \left( \frac{2x-x^2}{3}\right)^2 + \left( \frac{2x-x^2}{3}\right)^3\right]\]
+Here, we have a lot less contributions from each term to the ones that we need (i.e. the constant, 1st power x, 2nd power x, 3rd power x 
+terms all have a finite amount of terms contributing to their value). The first four nonzero terms are:
+\[\frac23 \left[ 1 + \frac{2x}{3} + \frac{x^2}{9} - \frac{4x^3}{27}\right]\]
+\subsection{Ratio Test}
+nah
+\end{document}
