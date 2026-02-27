@@ -1,0 +1,61 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{\today}
+\lfoot{Bookwork 2}
+\rfoot{}
+
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques \\ Bookwork 2}\end{center}
+\vspace{10mm}
+\begin{enumerate}
+    \item Problem 5.7.4: The analysis of the diffraction pattern of a circular opening involves:
+    \[\int_{0}^{2\pi} \cos (c \cos \phi ) \, d\phi\]
+    Expand the integrand in a series and integrate by using:
+    \[\int_{0}^{2\pi} \cos^{2n}\phi d\phi = \frac{2\pi\cdot (2n)!}{2^{2n} n!} \qquad\qquad\qquad \int_{0}^{2\pi} \cos^{2n+1}\phi d \phi = 0\]
+    \newline \newline
+    \[ \int_0^{2\pi} \cos(c \cos \varphi) \, d\varphi = \int_0^{2\pi} \sum_{n=0}^{\infty} \frac{(-1)^n}{(2n)!} (c \cos \varphi)^{2n} \, d\varphi = \int_0^{2\pi} \sum_{n=0}^{\infty} \frac{(-1)^n c^{2n}}{(2n)!} \cos^{2n} \varphi \, d\varphi = \sum_{n=0}^{\infty} \frac{(-1)^n c^{2n}}{(2n)!} \int_0^{2\pi} \cos^{2n} \varphi \, d\varphi \] \[ = \sum_{n=0}^{\infty} \frac{(-1)^n c^{2n}}{(2n)!} \left[ \frac{(2n)!}{2^{2n}(n!)^2} \cdot 2\pi \right] = \sum_{n=0}^{\infty} \frac{(-1)^n c^{2n}}{2^{2n}(n!)^2} \cdot 2\pi = 2\pi \sum_{n=0}^{\infty} \frac{(-1)^n}{(n!)^2} \left(\frac{c}{2}\right)^{2n}  = \boxed{2\pi J_0 (c)}\]
+    \item Problem 5.7.7: Expand the incomplete factorial function:
+    \[\gamma(n+1,x) \equiv \int_{0}^{x}e^{-t}t^ndt\]
+    in a eries in powers of $x$. What is the range of convergence of the resulting series?
+\newline \newline
+    \[ \int_0^x e^{-t} t^n \, dt = \int_0^x \left( \sum_{p=0}^{\infty} \frac{(-t)^p}{p!} \right) t^n \, dt= \int_0^x \sum_{p=0}^{\infty} \frac{(-1)^p t^{n+p}}{p!} \, dt \] 
+    \[= \sum_{p=0}^{\infty} \frac{(-1)^p}{p!} \int_0^x t^{n+p} \, dt = \sum_{p=0}^{\infty} \frac{(-1)^p x^{n+p+1}}{p!(n+p+1)} = \boxed{x^{n+1} \left[ \frac{1}{n+1} - \frac{x}{n+2} + \frac{x^2}{2!(n+3)} - \cdots + \frac{(-1)^p x^p}{p!(n+p+1)} + \cdots \right] }\]
+    \boxed{\text{Range of convergence: } \infty \text{. The series converges for all }x.}
+    \item The Klein-Nisha formula for the scattering of photons by electrons contains a term of the form:
+    \[f(\varepsilon) = \frac{(1+\varepsilon)}{\varepsilon^2}\left[ \frac{2+2\varepsilon}{1+2\varepsilon}-\frac{\ln(1+2\varepsilon)}{\varepsilon}\right]\]
+    Here, $\varepsilon = \frac{hv}{mc^2}$, the ratio of the photon energy to the electron rest mass energy. Find:
+    \[\lim_{\varepsilon \to 0} f(\varepsilon)\]
+    \newline \newline
+    \[ \lim_{\varepsilon \to 0} \frac{1+\varepsilon}{\varepsilon^2} \left[ \frac{2+2\varepsilon}{1+2\varepsilon} - \frac{\ln(1+2\varepsilon)}{\varepsilon} \right] = \lim_{\varepsilon \to 0} \frac{1+\varepsilon}{\varepsilon^2} \left[ \left(1 + \frac{1}{1+2\varepsilon}\right) - \frac{1}{\varepsilon}\left(2\varepsilon - \frac{(2\varepsilon)^2}{2} + \frac{(2\varepsilon)^3}{3} - \cdots\right) \right] \]
+    \[= \lim_{\varepsilon \to 0} \frac{1+\varepsilon}{\varepsilon^2} \left[ (1 + 1 - 2\varepsilon + 4\varepsilon^2 - \cdots) - \left(2 - 2\varepsilon + \frac{8}{3}\varepsilon^2 - \cdots\right) \right] = \lim_{\varepsilon \to 0} \frac{1+\varepsilon}{\varepsilon^2} \left[ \frac{4}{3}\varepsilon^2 + \text{ terms of order $\varepsilon^3$ or higher} \right] \]
+    \[= \boxed{\frac{4}{3}} \]
+    \item Problem 5.7.19 (a): An analysis of the Gibbs phenomenon of Section 14.5 leds to the expression:
+    \[\frac{2}{\pi} \int_{0}^{\pi} \frac{\sin\xi}{\xi} d\xi\]
+    Expand the integrand in a series and integrate term by term. Find the numerical value of this expression to four significant figures.
+    \newline \newline
+    \[ \frac{2}{\pi} \int_0^\pi \frac{\sin \xi}{\xi} d\xi = \frac{2}{\pi} \int_0^\pi \left( \sum_{n=0}^{\infty} \frac{(-1)^n \xi^{2n}}{(2n+1)!} \right) d\xi = \frac{2}{\pi} \sum_{n=0}^{\infty} \frac{(-1)^n}{(2n+1)!} \int_0^\pi \xi^{2n} d\xi = \frac{2}{\pi} \sum_{n=0}^{\infty} \frac{(-1)^n \pi^{2n+1}}{(2n+1)(2n+1)!} \]\[= 2 \sum_{n=0}^{\infty} \frac{(-1)^n \pi^{2n}}{(2n+1)(2n+1)!} = 2 \left( 1 - \frac{\pi^2}{18} + \frac{\pi^4}{600} - \frac{\pi^6}{35280} + \cdots \right) \approx \boxed{1.179} \]
+    \item Problem 5.8.1: The ellipse $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ may be represented parametrically by $x = a\sin \theta$, $y = b \cos \theta$. Show that the length of the arc within the first quadrant is:
+    \[a \int_{0}^{\frac{\pi}{2}}\sqrt{1 - m \sin^2 \theta} \, d\theta = aE(m), \text{where $0 \le m = \frac{a^2-b^2}{a^2}\le 1$}\]
+    \newline \newline
+    \[ \int_0^{\pi/2} \sqrt{\left(\frac{dx}{d\theta}\right)^2 + \left(\frac{dy}{d\theta}\right)^2} d\theta = \int_0^{\pi/2} \sqrt{(a \cos \theta)^2 + (-b \sin \theta)^2} d\theta = \int_0^{\pi/2} \sqrt{a^2 \cos^2 \theta + b^2 \sin^2 \theta} d\theta \]\[= \int_0^{\pi/2} \sqrt{a^2 (1 - \sin^2 \theta) + b^2 \sin^2 \theta} d\theta = \int_0^{\pi/2} \sqrt{a^2 - (a^2 - b^2) \sin^2 \theta} d\theta = \int_0^{\pi/2} \sqrt{a^2 \left(1 - \frac{a^2 - b^2}{a^2} \sin^2 \theta \right)} d\theta \]\[= \boxed{a \int_0^{\pi/2} (1 - m \sin^2 \theta)^{1/2} d\theta = a E(m) }\]
+    \item Problem 5.11.5: Show that:
+    \[\prod_{n=2}^{\infty} \left[ 1 - \frac{2}{n(n+1)}\right] = \frac{1}3\]
+    \newline \newline
+    \[ \prod_{n=2}^{\infty} \left[ 1 - \frac{2}{n(n+1)} \right] = \lim_{N \to \infty} \prod_{n=2}^{N} \frac{(n-1)(n+2)}{n(n+1)} = \lim_{N \to \infty} \left( \prod_{n=2}^{N} \frac{n-1}{n} \right) \left( \prod_{n=2}^{N} \frac{n+2}{n+1} \right)\]\[ = \lim_{N \to \infty} \left( \frac{1}{2} \cdot \frac{2}{3} \cdots \frac{N-1}{N} \right) \left( \frac{4}{3} \cdot \frac{5}{4} \cdots \frac{N+2}{N+1} \right) = \lim_{N \to \infty} \left( \frac{1}{N} \right) \left( \frac{N+2}{3} \right) = \boxed{\frac{1}{3}} \]
+    \item Problem 5.11.6: Show that:
+    \[\prod_{n=2}^{\infty} \left( 1 - \frac{1}{n^2}\right) = \frac{1}2\]
+    \[ \prod_{n=2}^{\infty} \left( 1 - \frac{1}{n^2} \right) = \lim_{N \to \infty} \prod_{n=2}^{N} \frac{n^2-1}{n^2} = \lim_{N \to \infty} \prod_{n=2}^{N} \frac{(n-1)(n+1)}{n \cdot n} = \lim_{N \to \infty} \left( \prod_{n=2}^{N} \frac{n-1}{n} \right) \left( \prod_{n=2}^{N} \frac{n+1}{n} \right) \]\[= \lim_{N \to \infty} \left( \frac{1}{2} \cdot \frac{2}{3} \cdots \frac{N-1}{N} \right) \left( \frac{3}{2} \cdot \frac{4}{3} \cdots \frac{N+1}{N} \right) = \lim_{N \to \infty} \left( \frac{1}{N} \right) \left( \frac{N+1}{2} \right) = \lim_{N \to \infty} \frac{N+1}{2N} = \boxed{\frac{1}{2}} \]
+\end{enumerate}
+\end{document}

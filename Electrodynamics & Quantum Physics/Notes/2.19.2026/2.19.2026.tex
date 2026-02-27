@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont, braket}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{2/12/2026}
+\lfoot{Chapter 4.5}
+\rfoot{}
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Electrodynamics \\ Notes}\end{center}
+\section{Recap/Intro}
+\section{Today's stuff}
+Grover's Algorithm.
+\begin{enumerate}
+    \item Make a uniform superposition of all states. Do a Hadamard Transform on all input states.
+    \item Feed into the oracle, which picks an answer. The oracle identifies the right state with a phase.
+    \item Amplify the amplitude so that the right answer is pushed to have higher probability.
+\end{enumerate}
+For example, in a 2 qubit example, we'd start with (after the Hadamard transform):
+\[\frac{1}{2}\left[\ket{00} + \ket{01} + \ket{10} + \ket{11}\right]\]
+After applying the phase oracle, we see that it's changed the state to:
+\[\frac{1}{2}\left[\ket{00} + \ket{01} + \ket{10} - \ket{11}\right]\]
+Now, we just apply the amplification, which flips the state about the 
+average so much so that the final output state is the only one that you have 
+any realistic probability of getting.
+\section{What's next}
+\end{document}

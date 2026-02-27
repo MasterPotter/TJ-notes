@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{\today}
+\lfoot{Problem Set 1}
+\rfoot{}
+
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques \\ Bookwork 1}\end{center}
+\vspace{10mm}
+\begin{enumerate}
+    \item Problem 5.1.1: Show that $\sum_{n=1}^{\infty} \frac{1}{(2n-1)(2n+1)} = \frac{1}{2}$.
+    \newline \textit{Hint}: Show by induction that $s_m = \frac{m}{2m+1}$
+    \newline \newline
+    When $m=1$,
+    \[s_1 = \frac{1}{(2(1)-1)(2(1)+1)} = \frac{1}{3}\]
+    When $m = k$,
+    \[s_k = \frac{k}{2k+1}\]
+    When $m = k+1$,
+    \[s_{k+1} = s_k + \frac{1}{(2(k+1)-1)(2(k+1)+1)} = \frac{k}{2k+1} + \frac{1}{(2k+1)(2k+3)}\]
+    \[ = \frac{k}{2k+1} + \frac{1}{(2k+1)(2k+3)} = \frac{k(2k+3) + 1}{(2k+1)(2k+3)} = \frac{2k^2 + 3k + 1}{(2k+1)(2k+3)} = \frac{(2k+1)(k+1)}{(2k+1)(2k+3)} = \frac{k+1}{2(k+1)+1}\]
+    \[\lim_{k \rightarrow \infty} \frac{k+1}{2(k+1)+1} = \boxed{\frac{1}{2}}\]
+    \item Problem 5.2.7: Test the following for convergence.
+    \begin{enumerate}
+        \item $\sum_{n=1}^{\infty} \frac{1}{n(n+1)}$
+        \newline \newline By the limit comparison test:
+        \[a_n = \frac{1}{n(n+1)}\]
+        \[b_n = \frac{1}{n^2}\]
+        \[\lim_{n \to \infty} \frac{a_n}{b_n} = \lim_{n \to \infty} \frac{\frac{1}{n(n+1)}}{\frac{1}{n^2}} = \lim_{n \to \infty} \frac{n^2}{n(n+1)} = \lim_{n \to \infty} \frac{n}{n+1} = 1\]
+        $\sum_{n=1}^{\infty} b_n = \sum_{n=1}^{\infty} \frac{1}{n^2}$ converges (p-series with $p=2>1$), therefore 
+        $\sum_{n=1}^{\infty} a_n$ also \boxed{\text{converges}}.
+        \item $\sum_{n=2}^{\infty} \frac{1}{n\ln n}$
+        \newline \newline By the integral test:
+        \[f(x) = \frac{1}{x \ln x}\]
+        For $x\geq 2$, $f(x)$ is positive, continuous and decreasing.
+        \[\int_2^{\infty} \frac{1}{x \ln x} dx = \lim_{t \to \infty} \int_2^t \frac{1}{x \ln x} dx = \lim_{t \to \infty} [\ln(\ln x)]_2^t = \lim_{t \to \infty} (\ln(\ln t) - \ln(\ln 2)) = +\infty\]
+        Thus the series \boxed{\text{diverges}}.
+        \item $\sum_{n=1}^{\infty} \frac{1}{n2^n}$
+        \newline \newline By the direct comparison test:
+        \[n \geq 1 \text{ (since $n=1$ is the lower bound of the sum)}\]
+        \[n \cdot 2^n \geq 2^n\]
+        \[\frac{1}{n \cdot 2^n} \leq \frac{1}{2^n}\]
+        $\sum_{n=1}^{\infty} \frac{1}{2^n}$ converges, 
+        therefore, $\sum_{n=1}^{\infty} \frac{1}{n2^n}$ also \boxed{\text{converges}}.
+        \item $\sum_{n=1}^{\infty} \ln(1+\frac{1}{n})$
+        \newline \newline
+        Using a telescoping series:
+        \[\sum_{n=1}^{\infty} \ln(1+\frac{1}{n}) = \sum_{n=1}^{\infty} \ln(\frac{n+1}{n}) = \sum_{n=1}^{\infty} [\ln(n+1) - \ln(n)]\]
+        \[ = \ln(2) - \ln(1) + \ln(3) - \ln(2) + \ln(4) - \ln(3) + \cdots = \lim_{n \to \infty} \ln(n+1) = +\infty\]
+        Thus the series \boxed{\text{diverges}}.
+        \item $\sum_{n=1}^{\infty} \frac{1}{n \cdot n^{\frac{1}{n}}}$
+        By the limit comparison test:
+        \[a_n = \frac{1}{n \cdot n^{\frac{1}{n}}}, b_n = \frac{1}{n}, \ln b_n = \frac{1}{n}\ln n\]
+        \[\lim_{n \rightarrow \infty} \frac{\ln n}{n} = \lim_{n \rightarrow \infty} \frac{\frac{1}{n}}{1} = 0\]
+        \[\lim_{n \rightarrow \infty} b_n = e^0 = 1\]
+        \[\therefore \hspace{1mm} a_n \text{ behaves like } \frac{1}{n} \text{ for large } n\]
+        $\sum_{n=1}^{\infty} \frac{1}{n}$ diverges, therefore $\sum_{n=1}^{\infty} a_n$ \boxed{\text{diverges}}.
+    \end{enumerate}
+    \item Problem 5.2.10: Given that a pockeet calculator yields $\sum_{n=1}^{\infty} n^{-3} = 1.202007$, show that:
+    \[1.202056 \leq \sum_{n=1}^{\infty}n^{-3} \leq 1.202057.\] \textit{Hint}: Use integrals 
+    to set lower and upper bounds on $\sum_{n=101}^{\infty} n^{-3}$
+    \newline \newline
+    By the integral test:
+    \[\int_{101}^{\infty} \frac{1}{x^3} dx \leq \sum_{n=101}^{\infty} \frac{1}{n^3} \leq \int_{100}^{\infty} \frac{1}{x^3} dx\]
+    \[\int_{101}^{\infty} \frac{1}{x^3} dx = \left[ -\frac{1}{2x^2} \right]_{101}^{\infty} = \frac{1}{2 \cdot 101^2} \approx 0.000049\]
+    \[\int_{100}^{\infty} \frac{1}{x^3} dx = \left[ -\frac{1}{2x^2} \right]_{100}^{\infty} = \frac{1}{2 \cdot 100^2} = 0.00005\]
+    \[\therefore 0.000049 \leq \sum_{n=101}^{\infty} \frac{1}{n^3} \leq 0.00005\]
+    \[\therefore 1.202007 + 0.000049 \leq \sum_{n=1}^{\infty} n^{-3} \leq 1.202007 + 0.00005\]
+    \[\boxed{1.202056 \leq \sum_{n=1}^{\infty} n^{-3} \leq 1.202057}\]
+    \item Problem 5.6.14: The relativistic sum $\omega$ of two velocities $u$ and $v$ is given by:
+    \[\frac{\omega}{c} = \frac{\frac{u}{c} + \frac{v}{c}}{1 + \frac{uv}{c^2}}\]
+    If:
+    \[\frac{v}{c} = \frac{u}{c} = 1 - \alpha,\]
+    where $0 \leq \alpha \leq 1$, find $\frac{\omega}{c}$ in power of $\alpha$ through terms of $\alpha^3$.
+    \newline \newline
+    \[\frac{\omega}{c} = \frac{1 - \alpha + 1 - \alpha}{1 + (1 - \alpha)^2} = \frac{2(1 - \alpha)}{1 + (1 - \alpha)^2}\]
+    \[ = 1 - \frac{\alpha^2}{2 - 2\alpha + \alpha^2} = 1 - \frac{1}{2}\alpha^2 \left[ \frac{1}{1 - (\alpha - \frac{\alpha^2}{2})}\right]\]
+    \[ = 1 - \frac{1}{2}\alpha^2\left[ 1 + \left( \alpha - \frac{\alpha^2}{2} \right) + \left( \alpha - \frac{\alpha^2}{2} \right)^2 + \cdots \right]\]
+    \[ = 1 - \frac{1}{2}\alpha^2\left[ 1 + \alpha + \frac{\alpha^2}{2} - \alpha^3 + \cdots \right]\]
+    Thus
+    $\boxed{\frac{\omega}{c} \approx 1 -\frac{1}{2}\alpha^2 -\frac{1}{2}\alpha^3}$.
+    \item Problem 5.6.17: In a head-on proton-proton collision, the ratio of the kinetic
+    energy in the center of mass system to the incident kinetic energy is:
+    \[R = \frac{\sqrt{2mc^2(E_k + 2mc^2)}-2mc^2}{E_k}\]
+    Find the value of this ratio of kinetic energies for:
+    \begin{enumerate}
+        \item $E_k \ll mc^2$ (nonrelativistic)
+        \[R = \frac{\sqrt{2mc^2E_k + 4m^2c^4}-2mc^2}{E_k} = 2mc^2\sqrt{1 + \frac{E_k}{2mc^2}}\]
+        \[E_k \ll mc^2 \Rightarrow \frac{E_k}{2mc^2} \text{ is very small.}, \therefore \hspace{1mm} \approx 1 + \frac{E_k}{4mc^2}\]
+        \[\therefore \hspace{1mm} R \approx \frac{2mc^2 + \frac{E_k}{2} - 2mc^2}{E_k} = \boxed{\frac{1}{2}}\]
+        \item $E_k \gg mc^2$ (extreme-relativistic) 
+        \[\sqrt{2mc^2E_k + 4m^2c^4} \approx \sqrt{2mc^2E_k}\]
+        \[R \approx \frac{\sqrt{2mc^2E_k} - 2mc^2}{E_k} \approx \frac{\sqrt{2mc^2E_k}}{E_k}= \sqrt{\frac{{2mc^2}}{{E_k}}}\]
+        As the disparity between $E_k$ and $mc^2$ becomes larger,
+        $R \approx -\frac{2mc^2}{E_k} \Rightarrow \boxed0$
+    \end{enumerate}
+\end{enumerate}
+\end{document}

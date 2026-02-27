@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{2/9/2026}
+\lfoot{Unit 1}
+\rfoot{}
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques (AMT) \\ Notes}\end{center}
+\section{Today's stuff}
+\subsection{Intro}
+We know that this works for absolute convergence:
+    \[\prod_{k=1}^{\infty} \text{ converges absolutely if and only if }
+     \sum_{k=1}^{\infty}a_k \text{ does.}\]
+Also, recall that:
+\[\frac12 |a_k| < \left|\ln(1 + a_k)\right| < 2|a_k|\]
+which is true for all values of $a_k$ less than 0.1. It works for larger ones too,
+but we are always considering the limit as $a_k \to 0$, so it doesn't make a huge
+difference, which one we pick. It's always about the 3-way inequality, like the 
+limit comparison test, root test, ratio test, etc. 
+\subsection{Examples of Infinite Products}
+Write the polynomial of minimal degree that is 5 when $x=0$ and has roots 
+at $-4,-3,2,5$.
+\begin{align*}
+    P(x) &= a(x+4)(x+3)(x-2)(x-5) \\
+    P(0) &= 5 \\
+    5 &= a(4)(3)(-2)(-5) \\
+    5 &= 120a \\
+    a &= \frac{1}{24} \\
+    P(x) &= \frac{1}{24}(x+4)(x+3)(x-2)(x-5)\\
+    &= \left( 1 + \frac{x}{4}\right)\left( 1 + \frac{x}{3}\right)\left( 1 - \frac{x}{2}\right)
+    \left( 1 - \frac{x}{5}\right)
+\end{align*}
+which looks eerily similar to the what we wrote above.
+\newline\newline
+Consider a new example:
+\[\sin x\]
+However, if we tried the above trick, we'd end up with 0 as our polynomial. 
+Let's try, instead, dividing by $x$ for now:
+\[\frac{\sin x}{x} = \left( 1 + \frac{x}{\pi}\right)\left( 1 - \frac{x}{\pi}\right)
+\left( 1 + \frac{x}{2\pi}\right)\left( 1 - \frac{x}{2\pi}\right) \cdots\]
+which is equal to:
+\[\prod_{k=1}^{\infty} \left( 1 + \frac{x}{k\pi}\right)\prod_{j=1}^{\infty}\left( 1 - 
+\frac{x}{j\pi}\right)\]
+This appears to be a product of two divergent infinite products, but we can see that 
+they diverge to the product of $0 \cdot \infty$, which is indeterminate. We can try
+to use difference of squares to get:
+\[\prod_{k=1}^{\infty} \left( 1 - \frac{x^2}{k^2\pi^2}\right)\]
+Now, by comparison to the p-series with $p=2$, we know this converges. This is called the 
+\textbf{infinite product representation} for $\frac{\sin x}{x}$. There are a bunch: Taylor, Maclaurin,
+Product, etc. The Taylor/Maclaurin series give us the derivatives easily, while the 
+product representation gives us the roots easily.
+\newline\newline
+We still need to remove the $x$ in the denominator. Let's try this:
+\[\left(1 - \frac{x^2}{\pi^2}\right)\left(1 - \frac{x^2}{2^2\pi^2}\right)\left(1 - \frac{x^2}{3^2\pi^2}\right) \cdots\]
+Combining them all together and grouping by term, we get:
+\[1 - \frac{x^2}{\pi^2}\left(1 + \frac{1}{2^2} + \frac{1}{3^2} + \cdots\right) +\cdots
+= 1 - \frac{x^2}{\pi^2}\sum_{k=1}^{\infty} \frac{1}{k^2} + \frac{x^4}{\pi^4} 
+\sum_{k=1}^{\infty} \sum_{j=k+1}^{\infty} \frac{1}{k^2j^2} + \cdots\]
+Now, we know that this must be the same as the Maclaurin expansion for $\frac{\sin x}{x}$.
+This tells us that:
+\[1 - \frac{x^2}{6} + \frac{x^4}{120} - \cdots = 1 - \frac{x^2}{\pi^2}\sum_{k=1}^{\infty} \frac{1}{k^2} + \frac{x^4}{\pi^4} 
+\sum_{k=1}^{\infty} \sum_{j=k+1}^{\infty} \frac{1}{k^2j^2} + \cdots\]
+This means that:
+\[\frac16 = \frac{1}{\pi^2}\sum_{k=1}^{\infty} \frac{1}{k^2}\]
+which tells us that:
+\[\sum_{k=1}^{\infty} \frac{1}{k^2} = \frac{\pi^2}{6}\]
+However, it also tell us that:
+\[\frac{1}{120} = \frac{1}{\pi^4}\sum_{k=1}^{\infty} \sum_{j=k+1}^{\infty} \frac{1}{k^2j^2}
+ = \left(\sum_{k=1}^{\infty} \frac{1}{k^2}\right)^2 = \left(\frac{\pi^2}{6}\right)^2\]
+ \[ = \sum_{k=1}^{\infty} \frac{1}{k^4} + 2\sum_{k=1}^{\infty} \sum_{j=k+1}^{\infty} \frac{1}{k^2j^2}\]
+similar to the classic $(a+b)^2 = a^2 + 2ab + b^2$. Plugging in, we get:
+\[\frac{\pi^4}{36} = \sum_{k=1}^{\infty} \frac{1}{k^4} + 2\times \frac{\pi^2}{120}
+= \frac{\pi^4}{6} \cdot \frac{1}{15} = \frac{\pi^4}{90}\]
+Notice that we don't have this done for any of the odd numbers. That's because the 
+odd numbers aren't going to be present in the even function that we did via the difference
+of squares. If we tried to rip apart the difference of squares, we see that we would get an 
+indeterminate form, which is no bueno. 
+A related series is the Riemann zeta function:
+\[\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s}\]
+Another is the set of Dirichlet functions:
+\[\eta(s) = \sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n^s} = 1 - \frac{1}{2^s} + \frac{1}{3^s} - \frac{1}{4^s} + \cdots\]
+\[\lambda(s) = \sum_{n=1}^{\infty} \frac{1}{(2n-1)^s} = 1 + \frac{1}{3^s} + \frac{1}{5^s} + \frac{1}{7^s} + \cdots\]
+\[\beta(s) = \sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{(2n-1)^s} = 1 - \frac{1}{3^s} + \frac{1}{5^s} - \frac{1}{7^s} + \cdots\]
+ \end{document}

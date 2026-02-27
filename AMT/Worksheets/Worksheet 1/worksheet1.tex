@@ -1,0 +1,259 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{\today}
+\lfoot{Problem Set 1}
+\rfoot{}
+
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques \\ Problem Set 1}\end{center}
+\vspace{10mm}
+
+\begin{enumerate}
+    \item We showed in class that the harmonic sequence defined by $H_n = \sum_{k=1}^n \frac{1}{k}$ diverges. We start with the sum of the first thousand terms, $H_{1000} \approx 7.48547$.
+    \begin{enumerate}
+        \item Use the integral comparison inequality to bound the value of $H_{10^{12}}$. How far apart are your bounds?
+        \newline \newline
+        We estimate the total sum by adding the tail to the known partial sum:
+        \[ H_{10^{12}} = H_{1000} + \sum_{k=1001}^{10^{12}} \frac{1}{k} \]
+        Using the Integral Comparison Test for the sum from $M=1000$ to $N=10^{12}$ with $f(x) = \frac{1}{x}$:
+        \[ H_{1000} + \int_{1001}^{10^{12}+1} \frac{1}{x} dx < H_{10^{12}} < H_{1000} + \int_{1000}^{10^{12}} \frac{1}{x} dx \]
+        
+        {Upper Bound:}
+        \[ \text{Upper} = 7.48547 + \left[\ln x\right]_{1000}^{10^{12}} = 7.48547 + \ln(10^{12}) - \ln(1000) \]
+        \[ = 7.48547 + 12\ln(10) - 3\ln(10) = 7.48547 + 9(2.302585) \approx \boxed{28.20874} \]
+        
+        {Lower Bound:}
+        \[ \text{Lower} = 7.48547 + \left[\ln x\right]_{1001}^{10^{12}+1} = 7.48547 + \ln(10^{12}+1) - \ln(1001) \]
+        \[ \approx 7.48547 + 27.63102 - 6.90875 \approx \boxed{28.20774} \]
+        
+        {Difference:}
+        The difference between the bounds is app    roximately the area of the first rectangle of the tail:
+        \[ \text{Diff} \approx \int_{1000}^{1001} \frac{1}{x} dx \approx \frac{1}{1000} = \boxed{0.001} \]
+        \newline
+        
+        \item If one term was added each second since the beginning of the universe (13.7 billion years), use the integral comparison inequality to bound the resulting sum. Use $3.155 \times 10^7$ s/year. How far apart are your bounds?
+        \newline \newline
+        \[ N = 13.7 \times 10^9 \times 3.155 \times 10^7 = 4.32235 \times 10^{17} \]
+        
+        We treat this as $H_N = H_{1000} + \sum_{1001}^N \frac{1}{k}$.
+        \[ H_{1000} + \int_{1001}^{N+1} \frac{dx}{x} < H_N < H_{1000} + \int_{1000}^{N} \frac{dx}{x} \]
+        
+        {Upper Bound:}
+        \[ \text{Upper} = 7.48547 + \ln(4.32235 \times 10^{17}) - \ln(1000) \]
+        \[ = 7.48547 + 40.6083 - 6.9078 \approx \boxed{41.186} \]
+        
+        {Lower Bound:}
+        \[ \text{Lower} = 7.48547 + \ln(4.32235 \times 10^{17} + 1) - \ln(1001) \]
+        \[ = 7.48547 + 40.6083 - 6.9088 \approx \boxed{41.185} \]
+        
+        {Difference:}
+        Because we started our integration at $1000$, the bounds are very tight:
+        \[ \text{Diff} \approx \frac{1}{1000} = \boxed{0.001} \]
+        \newline
+
+        \item If one \textit{trillion} terms were added each second, bound the resulting sum. How far apart are your bounds?
+        \newline \newline
+        \[ N' = N \times 10^{12} \approx 4.32235 \times 10^{29} \]
+        
+        
+        {Upper Bound:}
+        \[ \text{Upper} = 7.48547 + \ln(N') - \ln(1000) \]
+        \[ \ln(N') = \ln(4.322 \times 10^{29}) \approx 68.239 \]
+        \[ \text{Upper} = 7.48547 + 68.239 - 6.9078 \approx \boxed{68.817} \]
+        
+        {Lower Bound:}
+        \[ \text{Lower} = 7.48547 + \ln(N'+1) - \ln(1001) \]
+        \[ = 7.48547 + 68.239 - 6.9088 \approx \boxed{68.816} \]
+        
+        {Difference:}
+        \[ \text{Diff} \approx \boxed{0.001} \]
+        \newline
+
+        \item Use the integral comparison inequality to estimate the number of terms that must be added for the sum to exceed 100.
+        \newline \newline
+        \[\]
+        Using the simplified integral estimation $\ln(n+1) \approx 100$:
+        \[ n \approx e^{100} - 1 \]
+        \[ n \approx 2.688 \times 10^{43} \]
+        Answer: $\boxed{2.688 \times 10^{43}}$
+        \newline
+
+        \item Use the integral comparison inequality to estimate the number of terms that must be added for the sum to exceed 1000.
+        \newline \newline
+        Using $\ln(n+1) \approx 1000$:
+        \[ n \approx e^{1000} \]
+        \[ n \approx 10^{434.29} = \boxed{1.970 \times 10^{434}} \]
+        \newline
+
+        \item Explain what is meant by the statement that the harmonic series diverges, but it does not do so \textit{quickly}.
+        \newline \newline
+        It means the sum grows without bound (diverges), but the rate of growth is logarithmic. As seen above, increasing the number of terms by a factor of a trillion ($10^{12}$) only increased the sum by $\approx 27.6$.
+        \newline
+
+        \item Glacial sequence $G_n = \sum_{k=2}^n \frac{1}{k \ln k}$. Given $G_{1000} = 2.7274$, bound $G_{10^{12}}$.
+        \newline \newline
+        \[ G_{1000} + \int_{1001}^{10^{12}+1} f(x) dx < G_{10^{12}} < G_{1000} + \int_{1000}^{10^{12}} f(x) dx \]
+        {Upper Bound:}
+        \[ 2.7274 + \ln(\ln 10^{12}) - \ln(\ln 1000) \]
+        \[ = 2.7274 + \ln(12 \ln 10) - \ln(3 \ln 10) = 2.7274 + \ln(4) \approx \boxed{4.1137} \]
+        {Lower Bound:}
+        \[ 2.7274 + \ln(\ln(10^{12}+1)) - \ln(\ln 1001) \approx \boxed{4.1136} \]
+        {Difference:}
+        \[ \text{Diff} \approx f(1000) = \frac{1}{1000 \ln 1000} \approx \frac{1}{6907} \approx \boxed{0.00014} \]
+        \newline
+
+        \item Bound sum for 1 term/sec ($N \approx 4.32 \times 10^{17}$). How far apart are bounds?
+        \newline \newline
+        {Upper Bound:}
+        \[ 2.7274 + \ln(\ln N) - \ln(\ln 1000) \]
+        \[ \ln(\ln N) \approx \ln(40.608) \approx 3.704 \]
+        \[ \ln(\ln 1000) \approx 1.933 \]
+        \[ \text{Sum} \approx 2.7274 + 3.704 - 1.933 \approx \boxed{4.498} \]
+        {Difference:}
+        Since we start at 1000, the difference is $f(1000)$:
+        \[ \text{Diff} \approx \boxed{0.00014} \]
+        \newline
+
+        \item Bound sum for 1 trillion terms/sec ($N' \approx 4.32 \times 10^{29}$). How far apart are bounds?
+        \newline \newline
+        {Upper Bound:}
+        \[ 2.7274 + \ln(\ln N') - \ln(\ln 1000) \]
+        \[ \ln(\ln N') \approx \ln(68.239) \approx 4.223 \]
+        \[ \text{Sum} \approx 2.7274 + 4.223 - 1.933 \approx \boxed{5.017} \]
+        {Difference:}
+        \[ \text{Diff} \approx f(1000) \approx \boxed{0.00014} \]
+        \newline
+
+        \[ \int_2^{n+1} \frac{1}{x \ln x} dx \le \sum_{k=2}^n \frac{1}{k \ln k} \]
+\[ \ln(\ln(n+1)) - \ln(\ln(2)) \le 100 \]
+\[ \ln(\ln(n+1)) - (-0.3665) \le 100 \]
+\[ \ln(\ln(n+1)) \le 99.6335 \]
+\[ \ln(n+1) \le e^{99.6335} \]
+\[ n \approx e^{e^{99.6335}} \]
+\[ \log_{10}(10^x) = \log_{10}\left(e^{e^{99.6335}}\right) \]
+\[ x = e^{99.6335} \cdot \log_{10}(e) \]
+\[ x \approx (2.688 \times 10^{43}) \cdot (0.4343) \]
+\[\boxed{ x \approx 1.167 \cdot 10^{43} }\]
+    \end{enumerate}
+
+    \item The integral comparison inequality used to estimate convergent series.
+    \begin{enumerate}
+        \item Given $\sum_{k=2}^{100} \frac{\ln^3 k}{k^2} = 4.0558...$, show convergence and bound value. How far apart are bounds?
+        \newline \newline
+        \newline
+
+        \item Given $\sum_{k=2}^{100} \frac{1}{k \ln^2 k} = 1.8928...$, show convergence and bound value. How far apart are bounds?
+        \newline \newline
+         $\int\frac{1}{x \ln^2 x}dx$ = $-\frac{1}{\ln x}$.\newline
+        {Upper Tail:} $\left[ -\frac{1}{\ln x} \right]_{100}^\infty = \frac{1}{\ln 100} \approx 0.2171$.
+        Total Sum $\approx 1.8928 + 0.2171 = \boxed{2.110}$.\newline
+        {Difference:}
+        \[ \text{Diff} \approx f(100) = \frac{1}{100 (\ln 100)^2} \approx \boxed{0.00047} \]
+        \newline
+
+        \item Significance of contributions from $k > 100$.
+        \newline \newline
+        In (a), the tail ($1.95$) is $\approx 32\%$ of the total. In (b), the tail ($0.217$) is $\approx 10\%$. These are {significant} contributions; the partial sum $S_{100}$ is not a good approximation on its own.
+    \end{enumerate}
+
+    \item Given $f(x) = \int_0^x \frac{1-\cos(2t^2)}{t^3} dt$.
+    \begin{enumerate}
+        \item Taylor expansion of integrand.
+        \newline \newline
+        \[\sum_{n=1}^{\infty} \frac{(-1)^{n+1} 2^{2n} t^{4n-3}}{(2n)!}\]
+        \newline
+        
+        \item Integrate term-by-term for $f(x)$.
+        \newline \newline
+        \[ f(x) = \sum_{n=1}^{\infty} \frac{(-1)^{n+1} 2^{2n}}{(2n)!(4n-2)} x^{4n-2} \]
+        \newline
+
+        \item Determine $f^{(10)}(0)$.
+        \newline \newline
+        Coefficient of $x^{10}$ is $\frac{2}{225}$. Taylor term is $\frac{f^{(10)}(0)}{10!} x^{10}$.
+        \[ f^{(10)}(0) = \frac{2 \cdot 10!}{225} = \boxed{32,256} \]
+        \newline
+
+        \item Determine $f^{(20)}(0)$.
+        \newline \newline
+        Powers are $4k-2$ (2, 6, 10, 14, 18, 22...). 20 is not in the series.
+        \[ \boxed{f^{(20)}(0) = 0} \]
+    \end{enumerate}
+
+    \item Given $g(x) = x^2 \int_0^x \frac{\ln(5+2t^3)-\ln 5}{t^3} dt$.
+    \begin{enumerate}
+        \item Taylor expansion of integrand.
+        \newline \newline
+\[ \frac{\ln(1+\frac{2}{5}t^3)}{t^3} = \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n} \left(\frac{2}{5}\right)^n t^{3n-3} \]
+        \newline
+
+        \item Determine $g(x)$ series.
+        \newline \newline
+\[ g(x) = \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n(3n-2)} \left(\frac{2}{5}\right)^n x^{3n} \]
+        \newline
+
+        \item Determine $g^{(11)}(0)$.
+        \newline \newline
+        Powers are multiples of 3. 11 is not a multiple of 3.
+        \[ \boxed{0} \]
+        \newline
+
+        \item Determine $g^{(18)}(0)$.
+        \newline \newline
+        Corresponds to $n=6$ term in $\ln(1+u)$ expansion ($u^6 \propto t^{18}$).
+        \[ C_{18} = -\frac{1}{6}(\frac{2}{5})^6 \cdot \frac{1}{16} = -\frac{2}{46875} \]
+        \[ g^{(18)}(0) = 18! \cdot C_{18} = \boxed{-\frac{2 \cdot 18!}{46875}} \]
+    \end{enumerate}
+
+    \item Determine first four nonzero terms of $h(x) = \frac{x}{1-x+x^2}$ and radius of convergence.
+    \newline \newline
+    Use geometric series on $\frac{x(1+x)}{1+x^3} = (x+x^2)(1-x^3+x^6-\dots)$.
+    \[ x + x^2 - x^4 - x^5 + \dots \]
+    Terms: $\boxed{x, x^2, -x^4, -x^5}$.
+    Roots of denominator $1-x+x^2$ are $e^{\pm i \pi/3}$. Magnitude is 1.
+    \[ \boxed{R=1} \]
+
+    \item Consider sequence $\{a_k\}$ and $S_n = \sum a_k$. Assume $S_n$ diverges.
+    \begin{enumerate}
+        \item Explain why $\{S_n\}$ is monotonic increasing.
+        \newline \newline
+        $a_k > 0 \implies S_{n+1} = S_n + a_{n+1} > S_n$. \newline
+
+        \item Explain why $\sum \frac{a_n}{S_n}$ diverges.
+        \newline \newline
+        $\sum_{N}^{N+P} \frac{a_n}{S_n} > \frac{S_{N+P}-S_N}{S_{N+P}} \to 1$. Fails Cauchy criterion.\newline
+
+        \item Result for Harmonic sequence?
+        \newline \newline
+        $\sum \frac{1}{n \ln n}$. Diverges.\newline
+
+        \item Explain why there is no `slowest diverging series'.
+        \newline \newline
+        Dividing by partial sum always yields a slower divergent series. Process can be repeated infinitely.\newline
+
+        \item Explain why $\frac{a_n}{S_n^2} < \frac{1}{S_{n-1}} - \frac{1}{S_n}$.
+        \newline \newline
+        $\frac{1}{S_{n-1}} - \frac{1}{S_n} = \frac{a_n}{S_{n-1}S_n}$. Since $S_n > S_{n-1}$, $S_n^2 > S_{n-1}S_n$, so $\frac{a_n}{S_n^2} < \frac{a_n}{S_{n-1}S_n}$.\newline
+
+        \item Bound the series tail $\sum \frac{a_n}{S_n^2}$.
+        \newline \newline
+        Telescoping sum $\sum (\frac{1}{S_{n-1}} - \frac{1}{S_n}) = \frac{1}{S_N} - \frac{1}{S_\infty} = \frac{1}{S_N}$. Series converges.\newline
+
+        \item What series do you get if you treat the Harmonic sequence in this way?
+        \newline \newline
+        $\sum \frac{1}{n (\ln n)^2}$. Converges.
+    \end{enumerate}
+\end{enumerate}
+\end{document}

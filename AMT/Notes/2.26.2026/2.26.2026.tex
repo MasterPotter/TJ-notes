@@ -1,0 +1,140 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{2/9/2026}
+\lfoot{Unit 1}
+\rfoot{}
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques (AMT) \\ Notes}\end{center}
+\section{Recall the following}
+We can see that the gamma function:
+\[\Gamma(z) = \int_0^\infty t^{z-1} e^{-t} dt = \lim_{n \to \infty} \frac{n! n^z}{(n+z)!}\]
+We see that the gamma function is undefined for $z = 0, -1, -2, \dots$ because the integral diverges at $t=0$.
+However, we can solve that with the reciprocal:
+\[\frac{1}{\Gamma(z+1)} = e^{\gamma z} \cdot \prod_{k=1}^{\infty} \left(1 + \frac{z}{k}\right) e^{-z/k}\]
+Now, when $k >> z$, then what we're multiplying behaves like:
+\[1 - \frac{z^2}{2k^2}\]
+And, since that converges absolutely, we know that the product converges for all $z$. The reciprocal has no problems with the complex numbers, 
+it just has 0s there. Recall last class:
+\[\ln \Gamma(1+z) = -\gamma z + \sum_{k=1}^{\infty} \frac{(-1)^k \zeta (k)}{k}z^k, \quad |z| < 1|\]
+Therefore, 
+\[\ln \frac{1}{\Gamma(1+z)} = \gamma z + \sum_{n=1}^{\infty} \left[ \ln \left( 1 + \frac z n \right) - \frac z n\right]\]
+\[-\ln \Gamma(1+z) = \gamma z + \sum_{n=1}^{\infty} \left[ \sum_{k=1}^{\infty} \frac{(-1)^{k+1}}{k} \left( \frac z n \right)^k - \frac z n\right]\]
+Recall that:
+\[-\ln(1-BOX) = \sum_{k=1}^{\infty} \frac{BOX^k}{k}, \quad |BOX| < 1\]
+Thus:
+\[\ln \Gamma(1+z) = -\gamma z - \sum_{n=1}^{\infty} \left[ \sum_{k=1}^{\infty} \frac{(-1)^{k+1}}{k} \left( \frac z n \right)^k - \frac z n\right]\]
+We also see that there's an extra $\frac z n$ in the sum, which is because of the exponential regarding it above. This means that, since we added that exponential in the first place to make sure that the whole thing converged, that this is just doing what it should be doing and making the product converge. Otherwise, it'd be harmonic, which is no bueno.
+Let's rewrite:
+\[\ln \Gamma(1+z) = -\gamma z - \sum_{n=1}^{\infty} \left[ \sum_{k=2}^{\infty} \frac{(-1)^{k+1}}{k} \left( \frac z n \right)^k \right], \quad |z| < 1\]
+\[ = - \gamma z + \sum_{k=2}^{\infty} \frac{(-1)^k}{k} z^k \cdot \sum_{n=1}^{\infty} \frac{1}{n^k} = -\gamma z + \sum_{k=2}^{\infty} \frac{(-1)^k \zeta(k)}{k} z^k\]
+from the definition of the Riemann zeta function. We're never going to use the limit definition or the rational definition, but we'll use the natural log version ALL the time.
+Also, 
+\[\Gamma(z+1) = z \Gamma(z), \gamma(z)\gamma(1-z) = \frac{\pi}{\sin(\pi z)}\]
+Therefore $\Gamma\left(\frac{1}{2}\right) = \sqrt{\pi}$.
+\section{Today's stuff}
+Consider the following integral:
+\[\int_{0}^{n}t^{z-1}\left(1 - \frac{t}{n}\right)^n dt\]
+We can solve using integration by parts. Because the second term is a polynomial since $n$ is a natural number, we should differentiate it. Recall our favorite integration by parts table:
+\[\begin{tabular}{|c|c|c|}
+\hline
+& $u$ & $dv$ \\
+\hline
++ & $\left( 1 - \frac{t}{n}\right)$ & $t^{z-1}$ \\
+\hline
+- & $n\left( 1 - \frac{t}{n}\right)^{n-1}\left(-\frac{1}{n} \right)$ & $t^z\over z$ \\
+\hline
++ & $n(n-1)\left(1 - \frac{t}{n}\right)^{n-2}\left(-\frac{1}{n} \right)^2$ & $t^{z+1} \over z(z+1)$ \\
+\hline
+- & $n(n-1)(n-2)\left(1 - \frac{t}{n}\right)^{n-3}\left(-\frac{1}{n} \right)^3$ & $t^{z+2} \over z(z+1)(z+2)$ \\
+\hline
+\end{tabular}
+\]
+Using our integration by parts, going across and down, 
+\[\int_{0}^{n}t^{z-1}\left(1 - \frac{t}{n}\right)^n dt \]\[= \left( 1- \frac{t}{n}\right)^n \frac{t^z}{z} + n\left(1 - \frac{t}{n}\right)^{n-1} \frac{t^{z+1}}{z(z+1)}\cdot\frac{1}{n} + n(n-1)\left(1 - \frac{t}{n}\right)^{n-2} \frac{t^{z+2}}{z(z+1)(z+2)}\cdot\frac{1}{n^2} + \cdots\]
+Evaluating from $t=0$ to $t = n$, we see that everywhere but at $n$, the whole thing is 0. However, at $t=n$, it becomes:
+\[n! \cdot \frac{1}{n^n} \cdot \frac{n^{z+n}}{z(z+1)(z+2)\cdots(z+n)} = n! \cdot \frac{n^{z+n}}{z(z+1)(z+2)\cdots(z+n)} = \frac{n!}{n^n} \cdot \frac{n^z}{z(z+1)(z+2)\cdots(z+n)}\]
+This is the same as the gamma function limit expression. If $n \to \infty$, then this becomes the gamma function. 
+\[\]
+\[\]
+Consider the formula for compound interest:
+\[P = P_0 \left( 1 + \frac{r}{n}\right)^{nt}\]
+Here, if we consider the limit as $n \to \infty$, we get:
+\[P = \lim_{n \to \infty} \left(1 + \frac{r}{n}\right)^{n} = e^{r}\]
+Therefore, we have a definition for the integral representation of the $\Gamma(z)$ function:
+\[\Gamma(z) = \int_{0}^{\infty} t^{z-1} e^{-t} dt, \qquad \Re(z) > 0\]
+However, there are values of $z$ for which the Gamma function is perfectly well defined when the 
+integral is not defined. Let's use this to do a few integrals:
+\[\int_{0}^{\infty} x^{m-1} e^{-ax^n}dx\]
+Let's do a u-sub:
+\[t = ax^n, x = \left(\frac{t}{a}\right)^{1/n}, dx = \frac{1}{n} \cdot \frac{t^{\frac{1}{n}-1}}{a^{1/n}}dt\]
+Therefore:
+\[\int_{0}^{\infty} x^{m-1} e^{-ax^n}dx = \int_{0}^{\infty} \left(\frac{t}{a}\right)^{\frac{m-1}{n}} e^{-t} \cdot \frac{1}{n a^{\frac 1 n}} t^{\frac 1 n- 1} dt\]
+Pulling out the constants:
+\[ = \frac{1}{n a^{\frac {m-1}{n} + \frac 1 n}} \int_{0}^{\infty} t^{\frac{m-1}{n} + \frac 1 n - 1} e^{-t} dt\]
+\[ = \frac{1}{n a^{\frac {m}{n}}} \int_{0}^{\infty} t^{\frac{m}{n} - 1} e^{-t} dt\]
+This is just $\Gamma\left(\frac{m}{n}\right)$, so:
+\[\int_{0}^{\infty} x^{m-1} e^{-ax^n}dx = \frac{1}{na^{\frac m n}}\Gamma\left(\frac{m}{n}\right)\]
+You could also do this by taking the derivative of the gamma function but I'm a lazy bum so we're skipping that.
+WE will be using our definitions as escape hatches from bad integrals.\newline \newline
+Let's do another practice.
+\[\int_{0}^{\infty} \ln x \cdot e^{-x} dx\]
+This is hard. Let's consider another integral to solve this:
+\[\int_{0}^{\infty} x^{\varepsilon}e^{-x}dx = \Gamma(1+\varepsilon)\]
+Breaking it down, 
+\[\int_{0}^{\infty} x^{\varepsilon}e^-xdx = \int_{0}^{\infty} (e^{\ln x})^\varepsilon e^{-x}dx = \int_{0}^{\infty}e^{\varepsilon \ln x} e^{-x}dx\]
+Let's find a generating function for our original integral and it's family members. After expanding that exponential, we'll get the gamma function as the generator. Also, we use $\varepsilon$ because we should think of a small nonzero number. If it's small we'd expand, so:
+\[\sum_{k=0}^{\infty} \int_{0}^{\infty} \frac{(\varepsilon \ln x)^k}{k!} e^{-x} dx = \sum_{k=0}^{\infty} \frac{\varepsilon^k}{k!} \cdot \int_{0}^{\infty} \ln^k x \cdot e ^{-x}dx\]
+From the previous definition, we know that:
+\[\Gamma(1+\varepsilon) = \exp(-\gamma z + \sum_{k=2}^{\infty} \frac{(-1)^k \zeta(k)}{k} z^k)\]
+When $\varepsilon$ is small, so is the exponential, so we can bound everything.
+\[\Gamma(1 + \varepsilon) = 1 + -\gamma z + \left[\sum_{k=2}^{\infty} \frac{(-1)^k \zeta(k)}{k} z^k\right] + \frac{1}{2}\left[ -\gamma z + \sum_{k=2}^{\infty} \frac{(-1)^k \zeta(k)}{k} z^k\right]^2 + \frac{1}{3!} \left[ -\gamma z + \sum_{k=2}^{\infty} \frac{(-1)^k \zeta(k)}{k} z^k\right]^3 + \cdots\]
+Since we're only interested in the coefficient of $\varepsilon^1$ (because we're only trying to do it for ln, not $\ln^2$),
+\[\Gamma(1+\varepsilon) = 1 - \gamma \varepsilon\]
+If we wanted to do it for $\varepsilon^2$, 
+\[\Gamma(1+\varepsilon) = 1 - \gamma \varepsilon + \frac{\zeta(2) + \gamma^2}{2}\varepsilon^2\]
+We can do more about this later.
+\section{Beta Function Stuff}
+Consider:
+\[\Gamma(\alpha)\Gamma(\beta) = \int_{0}^{\infty} x^{\alpha -1} e^{-x}dx \cdot \int_{0}^{\infty} y^{\beta - 1}e^{-y}dy\].
+Since these integrations are independent, we can consider this to be a double integral:
+\[\int_{0}^{\infty}dx \int_{0}^{\infty}dy \cdot x^{\alpha -1} y^{\beta -1} e^{-(x+y)}\]
+Consider $u = x+y$, integrating over $u, x$.
+\[\int_{0}^{\infty} du \int_{0}^{u}dx \cdot x^{\alpha -  1} (u-x)^{\beta - 1}e^{-u}\]
+Let's use a scaling sub:
+\[t = \frac x u, \int_{0}^{\infty} du \int_{0}^{1} u dt \cdot (ut)^{\alpha - 1}(u-ut)^{\beta - 1}e^{-u}\]
+This integral factors:
+\[\int_{0}^{\infty}u^{\alpha + \beta - 1} e^{-u} du \int_{0}^{1} t^{\alpha-1}(1-t)^{\beta - 1}dt\]
+\[ = \Gamma(\alpha + \beta) \int_{0}^{1} t^{\alpha - 1} (1-t)^{\beta -1 }dt\]
+Therefore, 
+\[\frac{\Gamma(\alpha) \Gamma(\beta)}{\Gamma(\alpha + \beta)} = \int_{0}^{1}t^{\alpha - 1}(1-t)^{\beta - 1}dt = B_1(\alpha, \beta)\]
+B is capital $\beta$. We refer to that as $B_1$ since there are 3 integral representations.
+Some practice follows:
+\[\int_{0}^{1}t^3(1-t)^4 = \frac{\Gamma(4)\Gamma(5)}{\Gamma(9)} = \frac{1}{280}\]
+Also, 
+\[\int_{0}^{1} \frac{dt}{\sqrt{t(1-t)}} = \int_{0}^{1} t^{-0.5} (1-t)^{-0.5}dt = \frac{\Gamma(0.5)\Gamma(0.5)}{\Gamma(1)} = \pi\]
+Also, 
+\[\int_{0}^{1} \left[t(1-t)\right]^{z-1}dt = \frac{\Gamma(z)\Gamma(z)}{\Gamma(2z)}\]
+We could substitute by $u = 2t -1$, and we'd get:
+\[\Gamma(2z) = \Gamma(\frac{1}{2} + \varepsilon) = 2^{-2\varepsilon} \sqrt{\pi}  \cdot \frac{\Gamma(1+2z)}{\Gamma(1+z)}\]
+Let's look at:
+\[\Gamma(10) = 9 \Gamma(9) = 9 \cdot 8 \cdot 7 \cdots \cdot 1\]
+\[ = 2^9 \cdot \frac{9}{2} \frac 7 2 \frac 5 2 \cdot 3 2 \cdot 1 2 \cdot 4 \cdot 3 \cdot 2 \cdot 1\]
+\[ = 2^9 \cdot \frac{9}{2} \frac 7 2 \frac 5 2 \cdot 3 2 \cdot \frac{\Gamma(1.5)}{\gamma(0.5)} \cdot \Gamma(5)\]
+We know that:
+\[\Gamma(1.5) = \Gamma(0.5 + 1) = \frac{1}{2} \Gamma(0.5) \]
+So:
+\[\Gamma(10) = 2^9 \cdot \Gamma(5 + \frac 1 2 ) \Gamma(5) \cdot \frac 1 {\sqrt{\pi}}\]
+Therefore, 
+\[\Gamma(2z) = 2^{2z-1} \cdot \Gamma\left(z+\frac 1 2\right) \Gamma(z) \cdot \frac 1 {\sqrt{\pi}}\]
+\end{document}
