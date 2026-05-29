@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{\today}
+\lfoot{Bookwork 3}
+\rfoot{}
+
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques \\ Bookwork 3}\end{center}
+\vspace{10mm}
+\begin{enumerate}
+    \item \textbf{Problem 5.9.13:} For "small" values of $x$, 
+    \[ln(x!) = -\gamma x + \sum_{n=2}^{\infty} (-1)^n \frac{\zeta(n)}{n}x^n\]
+    where $\gamma$ is the Euler-Mascheroni constant and $\zeta(n)$ is the Riemann zeta function. For what values of $x$ does this series converge?
+    \[\]
+    By the Ratio Test:
+    \[L = \lim_{n\to\infty} \left|\frac{(-1)^{n+1}\zeta(n+1)x^{n+1}}{n+1} \cdot \frac{n}{(-1)^n\zeta(n)x^n} \right| = \lim_{n \to \infty} |x| < 1\]
+    Therefore $-1 < x < 1$. Checking the endpoints, 
+    \[\sum_{n=2}^{\infty} (-1)^n \frac{\zeta(n)}{n}(1)^n = \sum_{n=2}^{\infty} (-1)^n \frac{\zeta(n)}{n}\]
+    The above is a variation on the alternating harmonic series which converges. Therefore $1$ works.
+    \[\sum_{n=2}^{\infty} (-1)^n \frac{\zeta(n)}{n}(-1)^n = \sum_{n=2}^{\infty} (1)^n \frac{\zeta(n)}{n}\]
+    The above is a variation on the harmonic series which diverges. Therefore $-1$ doesn't work.
+    \newline
+    Thus:
+    \[\boxed{-1 < x \le 1}\]\newline
+    \item \textbf{Problem 8.1.7:} Show that:
+    \[\int_{0}^{\infty} e^{-x^4}dx = \Gamma\left( \frac 5 4\right)\]
+    \newline 
+    We derived in class that: 
+    \[\int_{0}^{\infty} x^{m-1} e^{-ax^n}dx = \frac{1}{na^{\frac m n}}\Gamma\left(\frac{m}{n}\right)\]
+    Plugging in, 
+    \[\int_{0}^{\infty} x^{1 - 1}e^{- 1 \cdot x^{4}} = \frac{1}{4\cdot (1)^{\frac 1 4}} \Gamma \left( \frac 1 4\right) = \frac{1}{4} \Gamma \left( \frac 1 4\right) = \Gamma \left( \frac 5 4 \right) \hspace{1mm} \checkmark\]
+    \newline
+    \item \textbf{Problem 8.1.8:} Show that:
+    \[\lim_{x\to 0} \frac{(ax-1)!}{(x-1)!} = \frac 1 a\]
+    \newline \newline 
+    \[\lim_{x\to 0} \frac{(ax-1)!}{(x-1)!} = \lim_{x \to 0} \frac{\Gamma(ax)}{\Gamma(x)} = \lim_{x \to 0} \frac{\frac{\Gamma(ax+1)}{ax}}{\frac{\Gamma(x+1)}{\Gamma(x)}} = \lim_{x \to 0} \left( \frac 1 a \cdot \frac{\Gamma(ax+1)}{\Gamma(x+1)}\right) = \frac 1 a \cdot 1 = \boxed{\frac 1 a}\]
+\end{enumerate}
+\end{document}

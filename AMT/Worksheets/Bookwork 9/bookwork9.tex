@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm, amssymb, mathtools}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{\today}
+\lfoot{Bookwork 9}
+\rfoot{}
+
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques \\ Bookwork 9}\end{center}
+\vspace{10mm}
+\begin{enumerate}
+    \item \textbf{Problem 8.1.23:} The probability density associated with the normal distribution of statistics is given by:
+    \[f(x) = \frac 1 {\sigma (2\pi)^{1/2}}\exp(-\frac{(x-\mu)^2}{2\sigma^2})\]
+    with $(-\infty, \infty)$ for the range of $x$. Show that
+    \begin{enumerate}
+        \item the mean value of $x$, $\langle x \rangle$ is equal to $\mu$.
+        \\
+        \[\langle x \rangle = \int_{-\infty}^{\infty} \frac x {\sigma (2\pi)^{1/2}}\exp(-\frac{(x-\mu)^2}{2\sigma^2})dx \xrightarrow{z = \frac{x-\mu}{\sigma \sqrt{2}}} \frac{1}{\sqrt{\pi}} \int_{-\infty}^{\infty} (z\sigma \sqrt 2 + \mu)e^{-z^2}dz\]
+        \[ = \frac{\sigma \sqrt 2}{\sqrt \pi} \int_{-\infty}^{\infty} z e^{-z^2}dz + \frac{\mu}{\sqrt \pi} \int_{-\infty}^{\infty} e^{-z^2}dz = 0 + \mu = \mu \hspace{5mm} \checkmark\]
+        \item the standard deviation $(\langle x^2 \rangle - \langle x \rangle ^2)^{1/2}$ is given by $\sigma$.
+       \\ \[\langle x \rangle ^2 = \mu^2\]
+        \[\langle x^2 \rangle = \int_{-\infty}^{\infty} \frac {x^2} {\sigma (2\pi)^{1/2}}\exp(-\frac{(x-\mu)^2}{2\sigma^2})dx \xrightarrow{z = \frac{x-\mu}{\sigma \sqrt{2}}} \frac{1}{\sqrt{\pi}} \int_{-\infty}^{\infty} (z\sigma \sqrt 2 + \mu)^2e^{-z^2}dz\]
+        \[ = \frac{2\sigma^2}{\sqrt \pi} \int_{-\infty}^{\infty} z^2e^{-z^2}dz + \frac{2\mu\sigma \sqrt 2}{\sqrt \pi} \int_{-\infty}^{\infty} z e^{-z^2}dz + \frac{\mu^2}{\sqrt \pi} \int_{-\infty}^{\infty} e^{-z^2}dz = \sigma^2 + 0 + \mu^2 = \mu^2 + \sigma^2\]
+        \[\therefore \hspace{2mm} \sqrt{\langle x ^2 \rangle - \langle x \rangle ^2} = \sqrt{\mu^2 + \sigma^2 - \mu^2} = \sqrt{\sigma^2} = \sigma \hspace{5mm} \checkmark\]
+    \end{enumerate}
+    \item \textbf{Problem 8.1.24:} From the gamma distribution
+    \[f(x) = \begin{dcases}
+    \frac{1}{\beta^\alpha\Gamma(\alpha)}x^{\alpha - 1}e^{-\frac x \beta} & x > 0 \\
+    0 & x \leq 0 \end{dcases}\]
+    show that:
+    \begin{enumerate}
+        \item $\langle x \rangle$ (mean) = $\alpha \beta$
+        \\
+        \[\langle x \rangle = \int_{-\infty}^{0} 0\cdot xdx + \int_{0}^{\infty}\frac{x}{\beta^\alpha\Gamma(\alpha)}x^{\alpha - 1}e^{-\frac x \beta}dx = \frac{1}{\beta^\alpha\Gamma(\alpha)}\int_{0}^{\infty}x^{\alpha}e^{-\frac x \beta}dx \xrightarrow{u = \frac x \beta} \frac{\beta}{\Gamma(\alpha)}\int_{0}^{\infty} u^\alpha e^{-u}du = \alpha \beta \hspace{5mm} \checkmark\]
+        \item $\sigma^2$ (variance) $\equiv$ $\langle x ^2 \rangle - \langle x \rangle ^2 = \alpha \beta^2$
+        \\
+        \[\langle x \rangle ^2 = \alpha^2 \beta^2\]
+        \[\langle x^2 \rangle = \int_{0}^{\infty}\frac{x^2}{\beta^\alpha\Gamma(\alpha)}x^{\alpha - 1}e^{-\frac x \beta}dx = \frac{\beta^2}{\Gamma(\alpha)}\int_{0}^{\infty}u^{\alpha + 1}e^{-u}du = \beta^2(\alpha + 1)\alpha\]
+        \[\therefore \hspace{5mm} \langle x^2 \rangle - \langle x \rangle ^2 = \alpha^2\beta^2 + \alpha\beta^2 - \alpha^2 \beta^2 = \alpha \beta^2 \hspace{5mm} \checkmark\]
+    \end{enumerate}
+    \item The beta distribution of probability theory has a probability density:
+    \[f(x) = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}x^{\alpha - 1}(1-x)^{\beta - 1}\]
+    with $x$ restricted to the interval $(0,1)$. Show that:
+    \begin{enumerate}
+        \item $\langle x \rangle$ (mean) = $\displaystyle \frac{\alpha}{\alpha + \beta}$
+        \\
+        \[\frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}\int_{0}^{1}x\cdot x^{\alpha - 1}(1-x)^{\beta - 1} = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}\int_{0}^{1}x^{\alpha}(1-x)^{\beta - 1} = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \cdot \frac{\Gamma(\alpha + 1)\Gamma(\beta)}{\Gamma(\alpha + \beta + 1)} = \frac{\alpha}{\alpha + \beta} \hspace{5mm} \checkmark\]
+        \item $\sigma^2$ (variance) $\equiv$ $\langle x ^2 \rangle - \langle x \rangle ^2 = \displaystyle \frac{\alpha \beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}$
+        \\
+        \[\langle x \rangle ^2 = \frac{\alpha^2}{(\alpha + \beta)^2}\]
+        \[\langle x^2\rangle = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}\int_{0}^{1}x^{\alpha + 1} (1-x)^{\beta - 1}dx = \frac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)} \cdot \frac{\Gamma(\alpha + 2)\Gamma(\beta)}{\Gamma(\alpha + \beta + 2)} = \frac{(\alpha + 1)\alpha}{(\alpha + \beta + 1)(\alpha + \beta)}\]
+        \[\therefore \hspace{5mm} \langle x^2 \rangle - \langle x \rangle ^2 = \frac{(\alpha + 1)\alpha}{(\alpha + \beta + 1)(\alpha + \beta)} - \frac{\alpha^2}{(\alpha + \beta)^2} = \frac{\alpha^3 + \alpha^2 + \alpha^2\beta + \alpha\beta - \alpha^3 - \alpha^2\beta-\alpha^2}{(\alpha + \beta + 1)(\alpha + \beta)^2}\]
+        \[ = \frac{\alpha\beta}{(\alpha + \beta + 1)(\alpha + \beta)^2} \hspace{5mm} \checkmark\]
+    \end{enumerate}
+\end{enumerate}
+\end{document}

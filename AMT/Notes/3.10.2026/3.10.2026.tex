@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{3/10/2026}
+\lfoot{Unit 1}
+\rfoot{}
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques (AMT) \\ Notes}\end{center}
+\section{Today's stuff}
+All practice today. Let's do this integral:
+\subsection{Problem 1}
+\[\int_{0}^{1} \frac{\ln^2(1-t)}{t^2}dt\]
+\subsubsection{Check integral convergence}
+This integral converges. The logarithmic term has an expansion that starts at $t$, which means that the square of it starts at $t^2$, which cancels with the denominator, so all good. At $t=1$, it's a logarithmic irregularity, so we can call it a weakling and move on.
+\subsubsection{Consider instead...}
+...the integral:
+\[\int_{0}^{1} t^{-2+\delta}(1-t)^{\varepsilon}dt\]
+The $\delta, \varepsilon$ are there so we can put up a wall to prevent the divergence from destroying everything. Taking $\delta = 0$ would give us a divergence which makes everything fall apart, since allowing one thing to diverge will cause divergence to spread like a fire and burn the field.
+\\\\We need to introduce a regulator to prevent the divergence from burning up the field long enough for us to extract the information about well defined integrals.
+\\\\Now we evaluate the integral by the beta function definition: 
+\[\int_{0}^{1} t^{-2+\delta}(1-t)^{\varepsilon}dt = \frac{\Gamma(-1+\delta)\Gamma(1+\varepsilon)}{\Gamma(\delta + \varepsilon)}\]
+Now, this integral is enshrined in the coefficient of $\varepsilon^2$ of the considered integral. However, we need to make it $\Gamma(1+stuff)$ to have an expansion that doesn't break, so we'll use the \textbf{recurrence relation} to make the $\Gamma(1+stuff)$. Further, even though in our new integral we need $\delta > 1$, we don't really care because we found in our initial integral that it converges, so we can lowk ignore that pat of the new integral.
+\[\frac{(\varepsilon + \delta)\delta(-1+\delta)\Gamma(-1+\delta)\Gamma(1+\varepsilon)}{\delta(-1+\delta)(\varepsilon + \delta)\Gamma(\varepsilon+\delta)} = -\frac{(\varepsilon + \delta)}{\delta(1-\delta)}\]
+Thus, 
+\[\int_{0}^{1}t^{-2+\delta}(1-t)^{\varepsilon}dt = -\frac{\epsilon + \delta}{\delta} \cdot (1 + \delta + \delta^2 + \delta^3 + \cdot) \exp(\sum_{k=2}^{\infty}\frac{(-1)^k\zeta(k)}{k}\left[ \delta^k + \varepsilon^k - (\varepsilon + \delta)^k\right])\]
+\[ =  \frac{\varepsilon + \delta}{\delta} (1+\delta + \delta^2 + \cdots)\exp(\sum_{k=2}^{\infty} \cdot -2\varepsilon\delta) = \frac{\varepsilon + \delta}{\delta} (1+\delta + \delta^2 + \cdots)\exp(-\zeta(2)\varepsilon\delta + \zeta(3)(\varepsilon^2\delta + \varepsilon\delta^2) + \cdots)\]
+\[= -\frac{1}{\delta} (\varepsilon + \delta) (1+\delta + \delta^2 + \delta^3 + \cdots) \exp(-\zeta(2)\varepsilon\delta + \zeta(3)(\varepsilon^2\delta + \varepsilon\delta^2) + \cdots)\]
+Considering the epsilon from the first term, we need an epsilon delta from the rest. Considering the delta, we can't get a $\varepsilon^2$ without a delta so we hate it for not doing anything worthwhile. Breaking down the exponential, we're only going to get the right term from the epsilon-delta term in the beginning, so we only care about the first power. This makes what we need just $\zeta(2)$.
+\\\\
+Doing the same for the logarithm cubed, 
+\end{document}

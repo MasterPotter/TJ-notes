@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{3/9/2026}
+\lfoot{Unit 1}
+\rfoot{}
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques (AMT) \\ Notes}\end{center}
+\section{Today's stuff}
+Let's determine the value of :
+\[\int_{0}^{1} \frac{\ln(1 - t)}{t}dt\]
+Let's first figure out if it converges so we can see if we even need to compute it. The integrand diverges at 0 and 1. To compute at 0, we expand the logarithm:
+\[\frac{-t - \frac{t^2}{2} - \frac{t^3}{3}}{t} \xrightarrow{as t \to 0 by LHOP} -1\]
+Now, at 1, there's a logarithmic divergence. However, if we remember from last class, logarithms are weaklings, so we can still integrate at 1. To fully compute the log, let's just do the exponential.
+\[\int_{0}^{1} \frac 1 t (1-t)^{\varepsilon}dt = \int_{0}^{1}t^{-1}(1-t)^{\varepsilon} \xrightarrow{B_1} = \frac{\Gamma(0)\Gamma(1+\varepsilon)}{\Gamma(1+\varepsilon)}\]
+This appears as though everything is falling apart, with the cancellations of $\varepsilon$ and the undefined $\Gamma$. However, let's keep looking.
+\[\int_{0}^{1} \frac 1 t (1-t)^{\varepsilon}dt = \int_{0}^{1}t^{-1}e^{\varepsilon\ln(1-t)} = \sum_{k=0}^{\infty} \frac{\varepsilon^k}{k!}\int_{0}^{1}t^{-1}\ln^k (1-t)dt = \int_{0}^{1}t^{-1}dt + \varepsilon\int_{0}^{1}t^{-1}\ln(1-t)dt + \cdots\]
+However, the first integral there destroys everything since it's undefined. We can, however, define a regulator to prevent the divergence from destroying stuff. To do so, let's change the power of $t$ in the original integral to:
+\[\int_{0}^{1}\frac 1 {t^{1-\delta}}(1-t)^{\varepsilon}dt = \int_{0}^{1}t^{-1+\delta}(1-t)^{\varepsilon}dt \xrightarrow{B_1}\frac{\Gamma(\delta)\Gamma(1+\varepsilon)}{\Gamma(1+\varepsilon+\delta)}\]
+This prevents things from cancelling and helps us preserve information. Further,
+\[Above = \frac{\delta\Gamma(\delta)\Gamma(1+\varepsilon)}{\delta\Gamma(1+\varepsilon+\delta)} = \frac{\Gamma(1+\delta)\Gamma(1+\varepsilon)}{\delta\Gamma(1+\varepsilon+\delta)}\]
+Further, expanding:
+\[\frac{1}{\delta} \cdot \frac{\Gamma(1+\delta)\Gamma(1+\varepsilon)}{\Gamma(1+\varepsilon+\delta)} = \frac 1 {\delta} \exp(-\gamma \delta + \sum_{k=2}^{\infty} \frac{(-1)^k\zeta(k)}{k}\delta^k - \gamma\varepsilon + \sum_{k=2}^{\infty} \frac{(-1)^k\zeta(k)}{k}\varepsilon^k) - \sum_{k=2}^{\infty} \frac{(-1)^k\zeta(k)}{k}(\varepsilon+\delta)^k\]
+\[ = \frac{1}{\delta} \left[ 1 + \sum_{k=2}^{\infty} \frac{(-1)^k\zeta(k)}{k}\ + \cdots \right]\]
+We can pull out the term with both $\varepsilon, \delta$, which would give us the answer. However, we could also expand as such:
+\[\int_{0}^{1} t^{-1 + \delta}(1-t)^{\varepsilon}dt = \int_{0}^{1} t^{-1+\varepsilon}dt + \varepsilon \cdot \int_{0}^{1}t^{-1+\varepsilon}\ln(1-t)dt + \frac{\varepsilon^2}{2!}\int_{0}^{1}t^{-1+\delta}\ln^2(1-t)dt\]
+Thus, by the above expansion, the value of the integral is $-\frac{\pi^2}{6}$
+
+STEPS:
+1. Check the bounds to make sure the integral converges
+2. Sub in for epsilon/delta
+3. Double check against the expansion for the coefficient that you need to multiply by the result of finding the right power in the expansion.
+4. Solve and done.
+
+\end{document}

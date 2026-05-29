@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{\today}
+\lfoot{Problem Set 3}
+\rfoot{}
+
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques \\ Problem Set 3}\end{center}
+\vspace{10mm}
+
+\begin{enumerate}
+    \item The cosine function has infinite product representation:
+    \[\cos x = \prod_{k=0}^{\infty} \left[ 1 - \frac{4x^2}{(2k+1)^2\pi^2}\right]\]
+    \begin{enumerate}
+        \item Explain why this product converges for all $x$ except those for which it is 0.
+        \newline \newline 
+        This happens because, for large $k$, the product behaves like $ - \frac{1}{k^2}$. For any infinite product, we know that:
+        \[\prod_{k=0}^{\infty} (1 + a_k) \text{ converges iff } \sum_{k=0}^{\infty} a_k \text{ converges.}\]
+        Thus, since the infinite product behavior described above is the p-series with $p=2$, it converges, which means that the product also converges. 
+        However, this cannot be true when the product itself is 0, because then it's a divergent product to 0. Therefore, the product is only 0 when:
+        \[x = \frac{(2k+1)\pi}{2}\]
+        At all other values of $x$, the series converges.
+        \item Take the logarithm of this product expansion and expand each of the logarithms to get a Maclaurin series for $\ln \cos x$. Express the coefficients of this expansion in terms of a Dirichlet series.
+        \newline \newline 
+        \[\ln \cos x = \sum_{k=0}^{\infty} \ln \left( 1 - \frac{4x^2}{(2k+1)^2\pi^2}\right)\]
+        \[ = -\sum_{k=0}^{\infty} \sum_{j=1}^{\infty} \frac{1}{j} \left(1- \frac{4x^2}{(2k+1)^2\pi^2}\right)^j\] 
+        \[ = - \sum_{n=1}^{\infty} \frac{(4x^2)^n}{n\pi^{2n}}\sum_{k=0}^{\infty} \frac{1}{(2k+1)^{2n}}\]
+        \[ = \boxed{-\sum_{n=1}^{\infty} \frac{(4x^2)^n}{n\pi^{2n}}(1-2^{-2n})\zeta(2n)}\]
+        \item Differentiate the result from part (b) to determine a Maclaurin series for another well-known trigonometric function in terms of Dirichlet series.
+        \newline \newline
+        \[\frac{d}{dx}(\ln \cos x) = - \tan x\]
+        \[\boxed{\tan x = \sum_{n=1}^{\infty} \frac{2(4^n)x^{2n-1}}{\pi^{2n}}(1-2^{-2n})\zeta(2n)}\]
+    \end{enumerate}
+    \item Concerning the Maclaurin series for the logarithm of the Gamma function, 
+    \[\ln \Gamma(1+z) = -\gamma z + \sum_{k=2}^{\infty} \frac{(-1)^k\zeta(k)}{k}z^k\]
+    for $z < 1$.
+    \begin{enumerate}
+        \item Substitute $z = - \frac 1 2$ into this equation to determine an interesting relationship between $\pi$ and the values of the $\zeta$ function. Does your resulting series converge absolutely or conditionally?
+        \[\]
+        Dropping the alternating element to prove absolute convergence:
+        \[\ln(\Gamma\left(\frac 1 2\right)) = \frac{\gamma}{2} + \sum_{k=2}^{\infty} \frac{\zeta(k)}{k2^k}\]
+        \[\ln(\sqrt{\pi}) = \frac{\gamma}{2} + \sum_{k=2}^{\infty} \frac{\zeta(k)}{k2^k}\]
+        Since $\zeta(k) \sim 1$ as $k \to \infty$, the series behaves like
+        \[\sum_{k=2}^{\infty} \frac{1}{k2^k}\]
+        which, as shown by the ratio test:
+        \[\lim_{k \to \infty} \left|\frac{1}{(k+1)2^{k+1}} \cdot \frac{k2^k}{1} \right| = \lim_{k \to \infty} \left| \frac{k}{2(k+1)}\right| = \frac{1}{2}\]
+        Thus, this series \boxed{\text{converges absolutely}}.
+        \item Substitute $z = 1$ into this equation to determine an interesting relationship between $\gamma$ and the values of the $\zeta$ function. Does your resulting series converge absolutely or conditionally?
+        \[\ln(\Gamma(2)) = 0 = -\gamma + \sum_{k=2}^{\infty} \frac{(-1)^k}{k} \zeta(k)\]
+        \[\gamma = \sum_{k=2}^{\infty} \frac{(-1)^k}{k} \zeta(k)\]
+        In the long run, by the other things we've shown above, this will approach $\frac{1}{k}$, which is the harmonic series, which needs alternation to converge. Therefore, this is \boxed{\text{conditionally convergent}}
+    \end{enumerate}
+    \item Use the recurrence relation for the Gamma function to determine the value of $\Gamma(\frac{13}{3})$ in terms of $\Gamma(\frac{1}{3})$.
+    \[\]
+    \[\Gamma\left( \frac {13} 3\right) = \frac{10}{3} \cdot \Gamma\left( \frac {10} 3\right) = \frac{10}{3} \cdot \frac{7}{3} \cdot \Gamma\left( \frac 4 3\right) = \frac{10\cdot7\cdot4\cdot1}{3^4}\Gamma\left( \frac 1 3\right) = \boxed{\frac{280}{81}\Gamma\left( \frac 1 3\right)}\]
+    \item Use the integral representation of the Gamma function to determine the value of the integral $\int_{0}^{\infty} x^2\sqrt x e^{-2x}dx$. You may include various rational number powers of 2 and/or $\pi$ in your result.
+    \[\]
+    We derived in class that: 
+    \[\int_{0}^{\infty} x^{m-1} e^{-ax^n}dx = \frac{1}{na^{\frac m n}}\Gamma\left(\frac{m}{n}\right)\]
+    Plugging in, we get:
+    \[\int_{0}^{\infty} x^{\frac 5 2} e^{-2x}dx = \frac{1}{1 \cdot 2^{\frac{7}{2}}}\Gamma\left(\frac{7}{2}\right) = \frac{1}{8\sqrt 2} \cdot \frac 5 2 \cdot \frac 3 2 \cdot \frac  1 2 \cdot \Gamma \left( \frac 1 2 \right) = \boxed{\frac{15\sqrt{\pi}}{64 \sqrt 2}}\]
+    \item Use the integral representation of the Gamma function to determine the value of the integral $\int_{0}^{\infty} xe^{-2x^3}dx$. You may include a value of the Gamma function evaluated between $0$ and $\frac{1}{2}$ in your answer, along with various rational number powers of 2 and/or $\pi$.
+    \[\]
+    Using the same logic as above, 
+    \[\int_{0}^{\infty} x e^{-2x^3} = \frac{1}{3\cdot2^{\frac{2}{3}}}\Gamma\left( \frac 2 3\right) = \frac{\sqrt[3]{2}}{6} \Gamma\left( \frac{2}{3}\right)\]
+    Further, 
+    \[\Gamma(z)\Gamma(1-z) = \frac{\pi}{\sin(\pi z)}\]
+    Thus, 
+    \[\Gamma\left(\frac{2}{3}\right) = \frac{\pi}{\sin (\pi \cdot \frac{1}{3}) \Gamma\left( \frac{1}{3}\right)} = \frac{2\pi}{\sqrt 3 \Gamma \left( \frac{1}{3}\right)}\]
+    Therefore, 
+    \[\boxed{\int_{0}^{\infty} x e^{-2x^3} = \frac{2 \pi \sqrt[3] 2}{6\sqrt 3 \Gamma(\frac{1}{3})}}\]
+    \item This problem concerns products of the form:
+    \[\prod_{n=1}^{\infty} \left(1 \pm \frac{x}{n}\right)\]
+    \begin{enumerate}
+        \item Write out the first 5 terms in the product $P_N = \prod_{n=1}^{N} \left( 1 + \frac{1}{n}\right)$ as improper fractions in order to find a pattern to determine a closed-form expression for $P_N$. What happens as $N$ tends to $\infty$?
+        \[\]
+        \[\text{First 5 terms: }(1+1), \left(1+\frac 1 2\right), \left(1 + \frac 1 3\right), \left(1 + \frac 1 4\right), \left(1 + \frac 1 5\right)\]
+        As $N$ tends to $\infty$, the terms tend to 1.\[\]
+        \item Write out the first 5 terms in the product $Q_N = \prod_{n=2}^{N}\left( 1 - \frac{1}{n}\right)$ as fractions in order to find a pattern to determine a closed-form expression for $Q_n$. What happens as $N$ tends to $\infty$?
+        \[\] 
+        \[\text{First 5 terms: }\left(1 - \frac 1 2 \right), \left(1 - \frac 1 3 \right), \left(1 - \frac 1 4 \right), \left(1 - \frac 1 5 \right), \left(1 - \frac 1 6 \right)\]
+        As $N$ tends to $\infty$, the terms approach $1$. \[\]
+        \item Explain why the the product at the beginning of this problem should be understood as \textit{divergent} for all values of $x$.\[\]
+        Regardless of the value of (presumably nonzero) $x$, if the sign chosen is $+$, then this becomes a product of $1+H_n$, which diverges because $H_n$ diverges. If the sign picked is $-$, then the first term is $0$, meaning the series diverges to 0.
+        \[\]
+        \item Explain why the product $A=\prod_{n=1}^{\infty} \left[ \left( 1 + \frac x n\right)e^{-\frac x n}\right]$ \textit{is} convergent for all $x$ except negative integers even though the original product in this problem diverges.\[\]
+        \[ \ln A = \sum_{n=1}^{\infty} \left[\ln(1 + \frac{x}{n}) - \frac x n\right] = \sum_{n=1}^{\infty} -\frac{x^2}{2n^2} + \frac{x^3}{3n^4} - \frac{x^4}{4n^4} + \cdots = \sum_{n=1}^{\infty} -\frac{x^2}{2n^2} + O\left(\frac 1 {n^3}\right)\]
+        Since the p-series with $p = 2$ converges absolutely, so deos the product. This is because the $e^{-\frac x n}$ is used as a dampening factor that eliminates the divergent nature of the product.
+        \item Explain why the product $B = \prod_{n=1}^{\infty} \left[ (1 + \frac x n) \ln (\frac{e}{1+ \frac x n })\right]$ \textit{is} convergent for all positive numbers $x$ even though the original product in this problem diverges. Would this product converge if the $e$ was replaced by a 2? Explain.
+        \[\]
+        \[\prod_{n=1}^{\infty} \left[ (1 + \frac x n) \ln (\frac{e}{1+ \frac x n })\right] = \prod_{n=1}^{\infty} \left[ \left( 1 + \frac x n\right) \left( 1 - \ln (1 + \frac x n)\right)\right]\]
+        Expanding, we get:
+        \[1 - \frac{x^2}{2n^2} + O(\frac{1}{n^3})\]
+        Since $\sum_{n=1}^{\infty} \frac{x^2}{2n^2}$ converges by p-series, we know that the series converges for all $x > 0$.If e were replaced by 2, then the factor would approach $\ln(2) \ne 1$ as $n \to \infty$, so the infinite product would diverge.
+        \item Explain why part (d) may be a better choice to provide an expansion that converges than (e). It might be good to think about the differences between where these products are defined.
+        \newline \newline Part (d) covers all complex numbers as well, while part (e) doesn't cover complex numbers. That makes it way better because it can cover more ground in terms of being able to process more numbers.
+    \end{enumerate}
+\end{enumerate}
+\end{document}

@@ -1,0 +1,87 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{\today}
+\lfoot{Problem Set 5}
+\rfoot{}
+
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques \\ Problem Set 5}\end{center}
+\vspace{10mm}
+\begin{enumerate}
+    \item This problem concerns the use of the duplication identity of the Gamma function:
+    \[\Gamma\left( \frac 1 2 + \varepsilon \right) = 2^{-2\varepsilon}\sqrt{\pi}\frac{\Gamma(1+2\varepsilon)}{\Gamma(1+\varepsilon)}\]
+    to investigate the behavior of the Gamma function in the vicinity of $\frac 1 2$.
+    \begin{enumerate}
+        \item Plug in $\varepsilon = 4$ and work out the two sides of this identity separately.
+        \\
+        \[\Gamma\left(\frac{9}{2}\right) = \frac{\Gamma(9)\sqrt{\pi}}{256\Gamma(5)}\]
+        \[\frac 7 2 \cdot \frac 5 2 \cdot \frac 3 2 \cdot \frac 1 2 \cdot \sqrt{\pi} = \frac{8\cdot7\cdot6\cdot5\cdot\sqrt{\pi}}{256}\]
+        \[\frac{7 \cdot 5 \cdot 3}{2^4}\sqrt{\pi} = \frac{7 \cdot 5 \cdot 3}{2^4}\sqrt{\pi} \hspace{3mm} \checkmark\]
+        \item Thinking of $\varepsilon$ as a very small number, expand the right hand side of this identity. Keep up to $\varepsilon^2$. Note that this really isn't that bad if you combine all of the exponentials before expanding.
+        \\
+        \[2^{-2\varepsilon}\sqrt{\pi}\frac{\Gamma(1+2\varepsilon)}{\Gamma(1+\varepsilon)} = \sqrt{\pi}\exp(-2\varepsilon \ln 2 - \gamma \varepsilon + \frac{\pi^2}{4}\varepsilon^2) = \sqrt{\pi}\exp(-(\gamma + 2 \ln 2)\varepsilon + \frac{\pi^2}{4}\varepsilon^2)\]
+        \[ \approx \boxed{\sqrt{\pi}\left[ 1 - (\gamma + 2 \ln 2)\varepsilon + \left( \frac{\pi^2}{4} + \frac{(\gamma + 2 \ln 2)^2}{2}\right)\varepsilon^2\right]}\]
+        \item Your result from part (b) contains the first few terms in a Maclaurin expansion for $\Gamma(\frac 1 2 + \varepsilon)$. Use this fact to determine the exact values of $\Gamma'(\frac 1 2), \Gamma''(\frac 1 2)$.
+        \\
+        \[\Gamma\left(\frac{1}{2} + \varepsilon\right) = \Gamma\left( \frac 1 2\right) + \Gamma'\left( \frac 1 2\right)\varepsilon + \frac{\Gamma''(\frac 1 2)}{2}\varepsilon^2 + \cdots\]
+        \[\boxed{\therefore \Gamma'\left( \frac 1 2 \right) = -\sqrt{\pi}(\gamma + 2 \ln 2)}\]
+        \[\boxed{\therefore \Gamma''\left(\frac 1 2\right)  = \sqrt{\pi}\left[ \frac{\pi^2}{2} + (\gamma + 2 \ln 2)^2\right]}\]
+        \item Use the recurrence relation in conjunction with your result from part (c) to determine the exact values of $\Gamma'(\frac 3 2), \Gamma''(\frac 3 2)$
+        \\ \\ 
+        By the product rule, 
+        \[\Gamma'(z+1) = \Gamma(z) + z\Gamma'(z), \Gamma''(z+1) = 2\Gamma'(z) + z\Gamma''(z)\]
+        Thus, 
+        \[\boxed{\Gamma'\left(\frac 3 2\right) = \sqrt{\pi} \left( 1 - \frac{\gamma}{2} - \ln 2\right)}\]
+        \[\boxed{\Gamma''\left( \frac 3 2\right) = \sqrt{\pi} \left[ \frac{\pi^2}{4} + \frac{(\gamma + 2\ln 2)^2}{2} - 2(\gamma + 2 \ln 2)\right]}\]
+    \end{enumerate}
+    \item Use the duplication identity along with your expression from part (b) of problem 1 to determine the exact value of the following integrals. If an integral does not converge, indicate why it doesn't and move on. There is no need to determine the value of an integral that does not have a value!
+    \begin{enumerate}
+        \item 
+        \[\int_{0}^{\infty} \sqrt{x}\ln x e^{-4x}dx \xrightarrow{ u = 4x, du = 4 dx} \frac 1 4\int_{0}^{\infty} \sqrt{\frac{u}{4}}\ln(\frac u 4)e^{-u}du = \frac{1}{8} \left[\int_{0}^{\infty} u^{\frac 3 2 - 1}\ln ue^{-u} du - 2 \ln 2 \int_{0}^{\infty} u^{\frac 3 2 - 1}e^{-u}du\right]\]
+        \[ = \frac{1}{8} \left( \Gamma'\left(\frac 3 2\right) - 2 \ln 2 \Gamma\left( \frac 3 2 \right)\right) = \boxed{\frac{\sqrt{\pi}}{8} \left( 1 - \frac{\gamma}{2} - 2 \ln 2\right)}\]
+        \item  
+        \[\int_{0}^{\infty} \frac{\ln x}{x \sqrt x}e^{-2x}dx\]
+        This integral \boxed{\text{diverges}} since near 0, the exponential term is approx. 1, so it behaves like $x^{-\frac 3 2}\ln x$. Since the exponent is $-1.5<-1$, there's a nonintegrable singularity at $x=0$.
+        \item 
+        \[\int_{0}^{\infty} \frac{\ln^2 x}{\sqrt x}e^{-4x}dx \xrightarrow{u = 4x, du = 4 dx} \frac 1 2 \int_{0}^{\infty} u^{\frac 1 2 - 1}(\ln^2 u -4\ln 2 \ln u + 4\ln^22)e^{-u}du\]
+        \[ = \frac 1 2 \left[ \Gamma''\left( \frac 1 2\right)- 4 \ln 2 \Gamma'\left( \frac 1 2\right) + 4 \ln^2 2 \Gamma \left( \frac 1 2\right)\right] = \boxed{\frac{\sqrt{\pi}}{2} \left[ \frac{\pi^2}{2}+ (\gamma + 4\ln 2)^2\right]}\]
+        \\
+        \[\]
+    \end{enumerate}
+    \item Use the duplication identity along with your expression from part (b) of problem 1 and the Beta function integral represenation to determine the exact value of the following integrals:
+    \begin{enumerate}
+        \item \[\int_{0}^{1} t\ln t \sqrt{1-t} dt \rightarrow \int_{0}^{1} t^{1+\varepsilon} (1-t)^{\frac 1 2}dt = \frac{\Gamma(2+\varepsilon)\Gamma(\frac 3 2)}{\Gamma(\frac 7 2 + \varepsilon)} = \frac{4\sqrt{\pi}(1+\varepsilon)\Gamma(1+\varepsilon)}{(5+2\varepsilon)(3+2\varepsilon)(1+2\varepsilon)\Gamma(\frac 1 2 + \varepsilon)}\]
+        \[ = \frac{4(1+\varepsilon)2^{2\varepsilon}\Gamma^2(1+\varepsilon)}{(5+2\varepsilon)(3+2\varepsilon)(1+2\varepsilon)\Gamma(1+2\varepsilon)} = \frac{4}{15}\left(1 + \left[ 2\ln 2 - \frac{31}{15}\right]\varepsilon + \cdots \right)\]
+        \[\therefore \int_{0}^{1} t\ln t \sqrt{1-t} dt = \boxed{\frac{8}{15}\ln 2 - \frac{124}{225}}\]
+        \item \[\int_{0}^{1} \sqrt{\frac{t}{1-t}}\ln tdt \rightarrow \int_{0}^{1} t^{\frac 1 2 + \varepsilon} (1-t)^{- \frac 1 2}\ln t dt = \frac{\Gamma(\frac 3 2 + \varepsilon)\Gamma(\frac 1 2)}{\Gamma(2 + \varepsilon)} = \frac{(\frac 1 2 + \varepsilon)\Gamma(\frac 1 2 + \varepsilon)\sqrt{\pi}}{(1+\varepsilon)\Gamma(1 + \varepsilon)}\]
+        \[ = \pi\frac{\frac 1 2 + \varepsilon}{1 + \varepsilon}2^{-2\varepsilon}\frac{\Gamma(1+2\varepsilon)}{\Gamma^2(1+\varepsilon)} = \frac{\pi}{2} + \frac{\pi}{2} (1-2\ln 2)\varepsilon + \cdots \xrightarrow{\text{taking the coeff of $\varepsilon$}} \boxed{\frac{\pi}{2}(1 - 2 \ln 2)}\]
+        \item \[\int_{0}^{1} \frac{\ln t}{\sqrt{1-t^2}}dt \xrightarrow{u=t^2, du=2tdt}\frac 1 4\int_{0}^{1} u^{-\frac 1 2}(1-u)^{-\frac 1 2}\ln u du\]
+        That's hard, so let's consider instead:
+        \[\int_{0}^{1}u^{-\frac 1 2 + \varepsilon}(1-u)^{-\frac 1 2}\ln u du = \frac{\Gamma(\frac 1 2 + \varepsilon)\Gamma(\frac 1 2)}{\Gamma(1+\varepsilon)}  = \frac {\pi} {4}2^{-2\varepsilon} \frac{\Gamma(1+2\varepsilon)}{\Gamma(1+\varepsilon)^2} = \frac{\pi}{4}\left( 1 - 2 \ln 2 \varepsilon + 2 \ln^2 2\varepsilon^2 + \cdots\right)\left(1 + \zeta(2)\varepsilon^2\right)\]
+        \[ = \frac{\pi}{4}\left[ 1-2\ln 2 \varepsilon + \left( 2\ln^2 2 + \frac{\pi^2}{6}\right)\varepsilon^2\right] \xrightarrow{\text{extracting the $\varepsilon$ component} }\frac{\pi}{4}(-2\ln 2) = \boxed{-\frac{\pi}{2} \ln 2}\]
+        \item \[\int_{0}^{1} \frac{\ln^2 t}{\sqrt{1-t^2}}dt \xrightarrow{u=t^2, du=2tdt}\frac 1 8\int_{0}^{1} u^{-\frac 1 2}(1-u)^{-\frac 1 2}\ln^2 u du\]
+        We can just use the $\varepsilon^2$ component from 2 (c).
+        \[\frac 1 8\int_{0}^{1} u^{-\frac 1 2}(1-u)^{-\frac 1 2}\ln^2 u du \rightarrow \frac{\pi}{4}\left(2\ln^2 2 + \zeta(2) \right) = \boxed{\frac{\pi}{2} \ln^2 2 + \frac{\pi^3}{24}}\]
+    \end{enumerate}
+    \item Use the expressions derived in class for the Beta function integral representation type 2 to determine the value of the following integrals.
+    \begin{enumerate}
+        \item \[\int_{0}^{\infty} \frac{u\sqrt[3]{u}}{(u+1)^4}du = \int_{0}^{\infty}\frac{u^{\frac 7 3 - 1}}{(u+1)^4} = \frac{\Gamma(\frac 7 3) \Gamma(\frac 5 3)}{\Gamma(4)} = \frac{8}{162} \frac{\pi}{\sin(\frac{\pi}{3})} =\boxed{\frac{8\pi\sqrt 3}{243}}\]
+        \item \[\int_{0}^{\infty} \frac{\sqrt u \ln u}{u^3 + 1}du \xrightarrow{u=\sqrt[3]t, \ln u = \frac 1 3 \ln t} \frac 1 9 \int_{0}^{\infty} \frac{t^{-\frac 1 2}}{(1+t)^1}\ln t dt =\frac{d}{dz}\left[ \frac{\pi}{\sin(\pi z)}\right]\bigg|_{z=\frac 1 2} = -\frac{\pi^2 \cos (\pi \cdot 0.5)}{9\sin^2(\pi \cdot 0.5)} = \boxed{0}\]
+        \item \[\int_{0}^{\infty} \frac{u^2 \sqrt u \ln^2 u}{u^3 + 1}du\]
+        \\ \\
+        This integral \boxed{\text{diverges}} because the denominator behaves like the $3 - 2.5 = 0.5$ power of $u$, which diverges at $\infty$.
+    \end{enumerate}
+\end{enumerate}
+\end{document}

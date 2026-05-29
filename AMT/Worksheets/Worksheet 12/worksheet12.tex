@@ -1,0 +1,545 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{\today}
+\lfoot{Problem Set 12}
+\rfoot{}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Zn}[1]{\mathbb{Z}_{#1}}
+\newcommand{\mat}[4]{\begin{pmatrix}#1&#2\\#3&#4\end{pmatrix}}
+
+\begin{document}
+    \thispagestyle{fancy}
+    \begin{center}
+        \LARGE{Advanced Mathematical Techniques \\ Problem Set 12}
+    \end{center}
+    \vspace{10mm}
+    \begin{enumerate}
+
+%=============================================================
+        \item Determine whether the following sets form a group under the indicated operation. If it does not, explain why not and give an explicit example illustrating this failure. If it does, explain why and tell whether it is an abelian group or not.
+        \begin{enumerate}
+
+%------------------------------------------------------------
+            \item The set of all $2 \times 2$ symmetric matrices with integer entries, under addition. $\checkmark$
+            \\
+            \\ This \textbf{is an abelian group under addition}. The group is \textbf{closed}, since:
+            \[
+                \begin{pmatrix} a & b \\ b & c \end{pmatrix} + \begin{pmatrix} d & e \\ e & f \end{pmatrix}
+                = \begin{pmatrix} a+d & b+e \\ b+e & c+f \end{pmatrix}
+            \]
+            which is also a symmetric $2 \times 2$ matrix with integer entries. The group is \textbf{associative}, since:
+            \[
+                \left(\begin{pmatrix} a & b \\ b & c \end{pmatrix} + \begin{pmatrix} d & e \\ e & f \end{pmatrix}\right) + \begin{pmatrix} g & h \\ h & k \end{pmatrix}
+                = \begin{pmatrix} a & b \\ b & c \end{pmatrix} + \left(\begin{pmatrix} d & e \\ e & f \end{pmatrix} + \begin{pmatrix} g & h \\ h & k \end{pmatrix}\right)
+            \]
+            The group has an \textbf{identity element}, which is the $2 \times 2$ zero matrix, since:
+            \[
+                \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} + \begin{pmatrix} a & b \\ b & c \end{pmatrix}
+                = \begin{pmatrix} a & b \\ b & c \end{pmatrix}
+            \]
+            The group has \textbf{inverses}, since:
+            \[
+                \begin{pmatrix} a & b \\ b & c \end{pmatrix} + \begin{pmatrix} -a & -b \\ -b & -c \end{pmatrix}
+                = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}
+            \]
+            The group is \textbf{abelian}, since:
+            \[
+                \begin{pmatrix} a & b \\ b & c \end{pmatrix} + \begin{pmatrix} d & e \\ e & f \end{pmatrix}
+                = \begin{pmatrix} a+d & b+e \\ b+e & c+f \end{pmatrix}
+                = \begin{pmatrix} d & e \\ e & f \end{pmatrix} + \begin{pmatrix} a & b \\ b & c \end{pmatrix}
+            \]
+
+%------------------------------------------------------------
+            \item The set of symmetric $2 \times 2$ matrices with entries in $\Zn{5}$, under addition. $\checkmark$
+            \\
+            \\ This \textbf{is an abelian group under addition}. The group is \textbf{closed}, since:
+            \[
+                \begin{pmatrix} a & b \\ b & d \end{pmatrix} + \begin{pmatrix} e & f \\ f & g \end{pmatrix}
+                = \begin{pmatrix} a+e & b+f \\ b+f & d+g \end{pmatrix} \pmod{5}
+            \]
+            which is a symmetric $2\times 2$ matrix with entries in $\Zn{5}$. The group is \textbf{associative}, since addition of matrices is associative. The group has an \textbf{identity element}, the zero matrix, since:
+            \[
+                \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} + \begin{pmatrix} a & b \\ b & d \end{pmatrix}
+                = \begin{pmatrix} a & b \\ b & d \end{pmatrix}
+            \]
+            The group has \textbf{inverses}, since negation mod 5 gives:
+            \[
+                \begin{pmatrix} a & b \\ b & d \end{pmatrix} + \begin{pmatrix} -a & -b \\ -b & -d \end{pmatrix}
+                = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}
+            \]
+            and $-a,-b,-d \in \Zn{5}$. The group is \textbf{abelian}, since addition mod 5 is commutative:
+            \[
+                \begin{pmatrix} a & b \\ b & d \end{pmatrix} + \begin{pmatrix} e & f \\ f & g \end{pmatrix}
+                = \begin{pmatrix} a+e & b+f \\ b+f & d+g \end{pmatrix}
+                = \begin{pmatrix} e & f \\ f & g \end{pmatrix} + \begin{pmatrix} a & b \\ b & d \end{pmatrix}
+            \]
+
+%------------------------------------------------------------
+            \item The set of symmetric $2 \times 2$ matrices with integer entries, under multiplication.
+            \\
+            \\ This \textbf{is not} a group under multiplication. The set fails \textbf{closure}: the product of two symmetric matrices need not be symmetric. For example:
+            \[
+                \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pmatrix}
+                = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}
+            \]
+            Both factors are symmetric, but the product is not (the $(1,2)$-entry is $2$ while the $(2,1)$-entry is $0$).
+
+%------------------------------------------------------------
+            \item The set of symmetric matrices $\begin{pmatrix} a & b \\ b & d \end{pmatrix}$ with $a,b,d \in \Zn{5}$ and $ad-b^2 \neq 0$, under multiplication.
+            \\
+            \\ This \textbf{is not} a group under multiplication. The set fails \textbf{closure}: the product of two symmetric matrices need not be symmetric. For example, over $\Zn{5}$:
+            \[
+                \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 0 & 1 \\ 1 & 1 \end{pmatrix}
+                = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}
+            \]
+            Both factors are symmetric with nonzero determinant ($ad-b^2 = -1 \equiv 4 \neq 0$ in $\Zn{5}$), but the product is not symmetric.
+
+%------------------------------------------------------------
+            \item The set of matrices $\begin{pmatrix} a & b \\ c & d \end{pmatrix}$ with $a,b,c,d \in \Zn{5}$ and $ad-bc \neq 0$, under multiplication. $\checkmark$
+            \\
+            \\ This \textbf{is a group under multiplication}. The group is \textbf{closed}: if $\det(A)\neq 0$ and $\det(B)\neq 0$ in $\Zn{5}$, then:
+            \[
+                \det(AB) = \det(A)\det(B) \neq 0 \pmod{5}
+            \]
+            since $\Zn{5}$ is a field with no zero divisors. The group is \textbf{associative}, since matrix multiplication is associative. The group has an \textbf{identity element}:
+            \[
+                \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}\begin{pmatrix} a & b \\ c & d \end{pmatrix}
+                = \begin{pmatrix} a & b \\ c & d \end{pmatrix}
+            \]
+            The group has \textbf{inverses}: since $\det(A)\neq 0$ in the field $\Zn{5}$, $\det(A)$ is invertible mod 5 and:
+            \[
+                A^{-1} = \frac{1}{ad-bc}\begin{pmatrix} d & -b \\ -c & a \end{pmatrix}
+            \]
+            has entries in $\Zn{5}$ with $\det(A^{-1}) = (\det A)^{-1} \neq 0$. The group is \textbf{not abelian}, since:
+            \[
+                \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}\begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix}
+                = \begin{pmatrix} 2 & 1 \\ 1 & 1 \end{pmatrix}
+                \neq
+                \begin{pmatrix} 1 & 1 \\ 1 & 2 \end{pmatrix}
+                = \begin{pmatrix} 1 & 0 \\ 1 & 1 \end{pmatrix}\begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}
+            \]
+
+%------------------------------------------------------------
+            \item The set of matrices $\begin{pmatrix} a & b \\ c & d \end{pmatrix}$ with $a,b,c,d \in \Zn{6}$ and $ad-bc \neq 0$, under multiplication.
+            \\
+            \\ This \textbf{is not} a group under multiplication. The set fails \textbf{closure}: since $\Zn{6}$ has zero divisors, the product of two elements with nonzero determinant can have zero determinant. For example:
+            \[
+                A = \begin{pmatrix} 2 & 0 \\ 0 & 1 \end{pmatrix}, \quad B = \begin{pmatrix} 3 & 0 \\ 0 & 1 \end{pmatrix}
+            \]
+            We have $\det(A)=2\neq 0$ and $\det(B)=3\neq 0$ in $\Zn{6}$, but:
+            \[
+                AB = \begin{pmatrix} 6 & 0 \\ 0 & 1 \end{pmatrix} \equiv \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix} \pmod{6}
+            \]
+            and $\det(AB) = 0$, so $AB$ is not in the set.
+
+%------------------------------------------------------------
+            \item The set of numbers $a + b\sqrt{2}$ with $a,b \in \Z$, under addition. $\checkmark$
+            \\
+            \\ This \textbf{is an abelian group under addition}. The group is \textbf{closed}, since:
+            \[
+                (a + b\sqrt{2}) + (c + d\sqrt{2}) = (a+c) + (b+d)\sqrt{2}
+            \]
+            and $a+c, b+d \in \Z$. The group is \textbf{associative}, since addition of real numbers is associative. The group has an \textbf{identity element}, $0 = 0 + 0\cdot\sqrt{2}$, since:
+            \[
+                0 + (a + b\sqrt{2}) = a + b\sqrt{2}
+            \]
+            The group has \textbf{inverses}, since:
+            \[
+                (a + b\sqrt{2}) + (-a - b\sqrt{2}) = 0
+            \]
+            and $-a,-b \in \Z$. The group is \textbf{abelian}, since:
+            \[
+                (a + b\sqrt{2}) + (c + d\sqrt{2}) = (a+c)+(b+d)\sqrt{2} = (c + d\sqrt{2}) + (a + b\sqrt{2})
+            \]
+
+%------------------------------------------------------------
+            \item The set of numbers $a + b\sqrt{2}$ with $a,b \in \Z$ and $a^2 + b^2 \neq 0$, under multiplication.
+            \\
+            \\ This \textbf{is not} a group under multiplication. The set doesn't have \textbf{inverses} within $\Z$. The multiplicative inverse of $a+b\sqrt{2}$ is:
+            \[
+                \frac{1}{a+b\sqrt{2}} = \frac{a - b\sqrt{2}}{a^2 - 2b^2}
+            \]
+            For this to remain in the set we need $a^2-2b^2 \mid a$ and $a^2-2b^2 \mid b$, which is not always true. For example, $2+\sqrt{2}$ has $a^2-2b^2=4-2=2\neq 0$, but:
+            \[
+                \frac{1}{2+\sqrt{2}} = \frac{2-\sqrt{2}}{2} = 1 - \frac{1}{2}\sqrt{2}
+            \]
+            which does not have integer coefficients and so is not in the set.
+
+%------------------------------------------------------------
+            \item The set of numbers $a + b\sqrt{2}$ with $a,b \in \Zn{3}$, under addition. $\checkmark$
+            \\
+            \\ This \textbf{is an abelian group under addition}. The group is \textbf{closed}, since:
+            \[
+                (a + b\sqrt{2}) + (c + d\sqrt{2}) = (a+c) + (b+d)\sqrt{2} \pmod{3}
+            \]
+            and $a+c, b+d \in \Zn{3}$. The group is \textbf{associative}, since addition of real numbers is associative. The group has an \textbf{identity element}, $0+0\cdot\sqrt{2}$, since:
+            \[
+                (0 + 0\cdot\sqrt{2}) + (a + b\sqrt{2}) = a + b\sqrt{2}
+            \]
+            The group has \textbf{inverses}, since negation mod 3 gives:
+            \[
+                (a + b\sqrt{2}) + (-a - b\sqrt{2}) = 0
+            \]
+            and $-a,-b \in \Zn{3}$. The group is \textbf{abelian}, since:
+            \[
+                (a + b\sqrt{2}) + (c + d\sqrt{2}) = (a+c)+(b+d)\sqrt{2} = (c + d\sqrt{2}) + (a + b\sqrt{2})
+            \]
+
+%------------------------------------------------------------
+            \item The set of numbers $a + b\sqrt{2}$ with $a,b \in \Zn{3}$ and $a^2 - 2b^2 \neq 0 \pmod{3}$, under multiplication. $\checkmark$
+            \\
+            \\ This \textbf{is an abelian group under multiplication}. The group is \textbf{closed}, since:
+            \[
+                (a+b\sqrt{2})(c+d\sqrt{2}) = (ac+2bd)+(ad+bc)\sqrt{2}
+            \]
+            and $(ac+2bd),(ad+bc) \in \Zn{3}$. The group is \textbf{associative}, since multiplication of real numbers is associative. The group has an \textbf{identity element}, $1 = 1+0\cdot\sqrt{2}$, $N(1) = 1 \neq 0$, since:
+            \[
+                (1+0\cdot\sqrt{2})(a+b\sqrt{2}) = a + b\sqrt{2}
+            \]
+            The group has \textbf{inverses} since:
+            \[
+                \frac{1}{a+b\sqrt{2}} = \frac{a-b\sqrt{2}}{a^2-2b^2}
+            \]
+            has coefficients in $\Zn{3}$. The group is \textbf{abelian}, since multiplication of real numbers is commutative:
+            \[
+                (a+b\sqrt{2})(c+d\sqrt{2}) = (ac+2bd)+(ad+bc)\sqrt{2} = (c+d\sqrt{2})(a+b\sqrt{2})
+            \]
+
+%------------------------------------------------------------
+            \item The set of numbers $a + b\sqrt{2}$ with $a,b \in \Zn{6}$, under addition. $\checkmark$
+            \\
+            \\ This \textbf{is an abelian group under addition}. The group is \textbf{closed}, since:
+            \[
+                (a + b\sqrt{2}) + (c + d\sqrt{2}) = (a+c) + (b+d)\sqrt{2} \pmod{6}
+            \]
+            and $a+c, b+d \in \Zn{6}$. The group is \textbf{associative}, since addition of real numbers is associative. The group has an \textbf{identity element}, $0+0\cdot\sqrt{2}$, since:
+            \[
+                (0+0\cdot\sqrt{2}) + (a+b\sqrt{2}) = a+b\sqrt{2}
+            \]
+            The group has \textbf{inverses}, since:
+            \[
+                (a+b\sqrt{2}) + (-a-b\sqrt{2}) = 0
+            \]
+            and $-a,-b \in \Zn{6}$. The group is \textbf{abelian}, since:
+            \[
+                (a+b\sqrt{2}) + (c+d\sqrt{2}) = (a+c)+(b+d)\sqrt{2} = (c+d\sqrt{2}) + (a+b\sqrt{2})
+            \]
+
+%------------------------------------------------------------
+            \item The set of numbers $a + b\sqrt{2}$ with $a,b \in \Zn{6}$ and $a^2 - 2b^2 \neq 0 \pmod{6}$, under multiplication.
+            \\
+            \\ This \textbf{is not} a group under multiplication. The set fails \textbf{closure}: since $\Zn{6}$ has zero divisors, the product of two elements with nonzero norm can have zero norm. For example, let $\alpha = 2+0\cdot\sqrt{2}$ and $\beta = 3+0\cdot\sqrt{2}$. Then $N(\alpha)=4\neq 0$ and $N(\beta)=9\equiv 3\neq 0$ in $\Zn{6}$, but:
+            \[
+                \alpha\beta = 6+0\cdot\sqrt{2} \equiv 0+0\cdot\sqrt{2} \pmod{6}
+            \]
+            and $N(\alpha\beta)=0$, so $\alpha\beta$ is not in the set.
+
+%------------------------------------------------------------
+            \item The set of numbers $a + b\ln 2$ with $a,b \in \Q$, under addition. $\checkmark$
+            \\
+            \\ This \textbf{is an abelian group under addition}. The group is \textbf{closed}, since:
+            \[
+                (a + b\ln 2) + (c + d\ln 2) = (a+c) + (b+d)\ln 2
+            \]
+            and $a+c, b+d \in \Q$. The group is \textbf{associative}, since addition of real numbers is associative. The group has an \textbf{identity element}, $0 = 0+0\cdot\ln 2$, since:
+            \[
+                0 + (a+b\ln 2) = a+b\ln 2
+            \]
+            The group has \textbf{inverses}, since:
+            \[
+                (a+b\ln 2) + (-a - b\ln 2) = 0
+            \]
+            and $-a,-b \in \Q$. The group is \textbf{abelian}, since:
+            \[
+                (a+b\ln 2)+(c+d\ln 2) = (a+c)+(b+d)\ln 2 = (c+d\ln 2)+(a+b\ln 2)
+            \]
+
+%------------------------------------------------------------
+            \item The set of numbers $a + b\ln 2$ with $a,b \in \Q$ and $a^2+b^2 \neq 0$, under multiplication.
+            \\
+            \\ This \textbf{is not} a group under multiplication. The set fails \textbf{closure}: the product of two elements of the form $a+b\ln 2$ is generally not of that form. Specifically:
+            \[
+                (a + b\ln 2)(c + d\ln 2) = ac + (ad+bc)\ln 2 + bd(\ln 2)^2
+            \]
+            Since $(\ln 2)^2$ is not an integer linear combination of $1$ and $\ln 2$, the product is not in the set whenever $bd \neq 0$. For example:
+            \[
+                (1 + \ln 2)^2 = 1 + 2\ln 2 + (\ln 2)^2
+            \]
+            which is not of the form $a + b\ln 2$ for any $a,b \in \Q$.
+
+%------------------------------------------------------------
+            \item The set of $n \times n$ matrices $M$ with real entries satisfying $M^TM = I$, under multiplication. $\checkmark$
+            \\
+            \\ This \textbf{is a group under multiplication}. The group is \textbf{closed}: if $A^TA = I$ and $B^TB = I$, then:
+            \[
+                (AB)^T(AB) = B^TA^TAB = B^TIB = B^TB = I
+            \]
+            The group is \textbf{associative}, since matrix multiplication is associative. The group has an \textbf{identity element} $I$, since $I^TI = I$ and $IM = M$. The group has \textbf{inverses}: if $M^TM=I$ then $M^{-1}=M^T$, and $(M^T)^T(M^T) = MM^T = I$, so $M^T$ is also in the set. The group is \textbf{not abelian} for $n \geq 2$; for example in $\mathbb{R}^2$, a rotation by $90°$ and a reflection across the $x$-axis do not commute:
+            \[
+                \begin{pmatrix}0&-1\\1&0\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+                = \begin{pmatrix}0&1\\1&0\end{pmatrix}
+                \neq
+                \begin{pmatrix}0&-1\\-1&0\end{pmatrix}
+                = \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}0&-1\\1&0\end{pmatrix}
+            \]
+
+%------------------------------------------------------------
+            \item The set of $n\times n$ matrices $M$ with real entries satisfying $M^TM = I$ and $\det(M) = 1$, under multiplication. $\checkmark$
+            \\
+            \\ This \textbf{is a group under multiplication}. The group is \textbf{closed}: if $A^TA=I$, $B^TB=I$, $\det(A)=1$, and $\det(B)=1$, then $(AB)^T(AB)=I$ and:
+            \[
+                \det(AB) = \det(A)\det(B) = 1\cdot 1 = 1
+            \]
+            The group is \textbf{associative}, since matrix multiplication is associative. The group has an \textbf{identity element} $I$, with $I^TI=I$, $\det(I)=1$, and $IM=M$. The group has \textbf{inverses}: $M^{-1}=M^T$ with $\det(M^T)=\det(M)=1$. The group is \textbf{not abelian} for $n\geq 3$ (rotations in $\mathbb{R}^3$ do not commute in general).
+                        \item The set of $n\times n$ matrices $M$ with real entries satisfying $M^TM = I$ and $\det(M) = -1$, under multiplication.
+            \\
+            \\ This \textbf{is not} a group under multiplication. The set fails \textbf{closure}: if $\det(A) = -1$ and $\det(B) = -1$, then:
+            \[
+                \det(AB) = \det(A)\det(B) = (-1)(-1) = 1 \neq -1
+            \]
+            so $AB$ is not in the set. For example, in $\mathbb{R}^2$:
+            \[
+                \begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}-1&0\\0&1\end{pmatrix}
+                = \begin{pmatrix}-1&0\\0&-1\end{pmatrix}
+            \]
+            Both factors are orthogonal with determinant $-1$, but the product has determinant $+1$.
+
+
+%------------------------------------------------------------
+            \item The set of integer powers of $2$, $\{2^n : n \in \Z\}$, under multiplication. $\checkmark$
+            \\
+            \\ This \textbf{is an abelian group under multiplication}. The group is \textbf{closed}, since:
+            \[
+                2^m \cdot 2^n = 2^{m+n}
+            \]
+            and $m+n \in \Z$. The group is \textbf{associative}, since:
+            \[
+                (2^m \cdot 2^n) \cdot 2^p = 2^{m+n+p} = 2^m \cdot (2^n \cdot 2^p)
+            \]
+            The group has an \textbf{identity element}, $2^0 = 1$, since:
+            \[
+                2^0 \cdot 2^n = 2^n
+            \]
+            The group has \textbf{inverses}, since:
+            \[
+                2^n \cdot 2^{-n} = 2^0 = 1
+            \]
+            and $-n \in \Z$. The group is \textbf{abelian}, since:
+            \[
+                2^m \cdot 2^n = 2^{m+n} = 2^{n+m} = 2^n \cdot 2^m
+            \]
+
+        \end{enumerate}
+
+%=============================================================
+        \item Determine whether the following sets form a ring under ordinary addition and multiplication. If it does not, explain why not and give an explicit example illustrating this failure. If it does, explain why and tell whether it is an abelian ring or not.
+        \begin{enumerate}
+
+%------------------------------------------------------------
+            \item The set of $2 \times 2$ matrices with integer entries. $\checkmark$
+            \\
+            \\ This \textbf{is a ring}. It is an \textbf{abelian group under addition}: the zero matrix is the identity, $-A$ is the additive inverse of $A$, and matrix addition is commutative. The ring is \textbf{closed under multiplication}, since:
+            \[
+                \begin{pmatrix}a&b\\c&d\end{pmatrix}\begin{pmatrix}e&f\\g&h\end{pmatrix}
+                = \begin{pmatrix}ae+bg & af+bh \\ ce+dg & cf+dh\end{pmatrix}
+            \]
+            which has integer entries. \textbf{Multiplication is associative} and there is a \textbf{multiplicative identity} $I = \begin{pmatrix}1&0\\0&1\end{pmatrix}$. The \textbf{distributive laws} hold for all matrices. The ring is \textbf{not commutative} (not an abelian ring), since in general $AB \neq BA$; for example:
+            \[
+                \begin{pmatrix}1&1\\0&0\end{pmatrix}\begin{pmatrix}0&1\\0&1\end{pmatrix}
+                = \begin{pmatrix}0&2\\0&0\end{pmatrix}
+                \neq
+                \begin{pmatrix}0&0\\0&0\end{pmatrix}
+                = \begin{pmatrix}0&1\\0&1\end{pmatrix}\begin{pmatrix}1&1\\0&0\end{pmatrix}
+            \]
+
+%------------------------------------------------------------
+            \item The set of $2 \times 2$ matrices with entries in $\Zn{5}$. $\checkmark$
+            \\
+            \\ This \textbf{is a ring}. The argument is identical to the previous problem, replacing $\Z$ with $\Zn{5}$: it is an abelian group under addition (entries mod 5), closed under matrix multiplication (entries reduced mod 5), associative, has identity $I$, and satisfies the distributive laws. It is \textbf{not commutative}; for example:
+            \[
+                \begin{pmatrix}1&1\\0&0\end{pmatrix}\begin{pmatrix}0&1\\0&1\end{pmatrix}
+                = \begin{pmatrix}0&2\\0&0\end{pmatrix}
+                \neq
+                \begin{pmatrix}0&0\\0&0\end{pmatrix}
+                = \begin{pmatrix}0&1\\0&1\end{pmatrix}\begin{pmatrix}1&1\\0&0\end{pmatrix}
+                \pmod{5}
+            \]
+
+%------------------------------------------------------------
+            \item The set of $2 \times 2$ matrices with entries in $\Zn{6}$. $\checkmark$
+            \\
+            \\ This \textbf{is a ring}. The same argument applies as in the previous two problems, replacing $\Z$ with $\Zn{6}$: abelian group under addition, closed under multiplication (entries mod 6), associative, has identity $I$, and distributive laws hold. It is \textbf{not commutative}. This is because 6 is not prime, so $2 \cdot 3 \equiv 0 \pmod{6}$.
+
+%------------------------------------------------------------
+            \item The set of numbers $a + b\sqrt{2}$ with $a,b \in \Q$.
+            \\
+            \\ This \textbf{is a commutative ring}. It is an \textbf{abelian group under addition} (shown in part 1(g)). It is \textbf{closed under multiplication}, since:
+            \[
+                (a+b\sqrt{2})(c+d\sqrt{2}) = (ac+2bd) + (ad+bc)\sqrt{2}
+            \]
+            and $ac+2bd,\, ad+bc \in \Q$. Multiplication is \textbf{associative} and \textbf{commutative} (inherited from $\mathbb{R}$), with \textbf{multiplicative identity} $1 = 1+0\cdot\sqrt{2}$. The \textbf{distributive laws} hold. The ring is a \textbf{commutative ring} (abelian ring).
+
+%------------------------------------------------------------
+            \item The set of numbers $a + b\ln 2$ with $a,b \in \Q$.
+            \\
+            \\ This \textbf{is not} a ring. It fails \textbf{closure under multiplication}:
+            \[
+                (a + b\ln 2)(c + d\ln 2) = ac + (ad+bc)\ln 2 + bd(\ln 2)^2
+            \]
+            Since $(\ln 2)^2$ is not an integer linear combination of $1$ and $\ln 2$, the product is not in the set whenever $bd \neq 0$. For example:
+            \[
+                (1 + \ln 2)(1 + \ln 2) = 1 + 2\ln 2 + (\ln 2)^2 \notin \{a + b\ln 2 : a,b \in \Q\}
+            \]
+
+%------------------------------------------------------------
+            \item The set of numbers $a + b\sqrt{2}$ with $a,b \in \Zn{3}$.
+            \\
+            \\ This \textbf{is a commutative ring} (and a field). It is an \textbf{abelian group under addition} (shown in part 1(i)). It is \textbf{closed under multiplication}, since:
+            \[
+                (a+b\sqrt{2})(c+d\sqrt{2}) = (ac+2bd) + (ad+bc)\sqrt{2} \pmod{3}
+            \]
+            Multiplication is \textbf{associative}, \textbf{commutative}, has \textbf{multiplicative identity} $1+0\cdot\sqrt{2}$, and the \textbf{distributive laws} hold. Since $x^2-2$ has no roots in $\Zn{3}$ (as $0^2=0$, $1^2=1$, $2^2=4\equiv 1$ mod 3, so 2 is not a square), every nonzero element has a multiplicative inverse; this is in fact a \textbf{field} with 9 elements, and so certainly a commutative ring.
+
+%------------------------------------------------------------
+            \item The set of numbers $a + b\sqrt{2}$ with $a,b \in \Zn{5}$.
+            \\
+            \\ This \textbf{is a commutative ring} (and a field). It is an \textbf{abelian group under addition}. It is \textbf{closed under multiplication}, since:
+            \[
+                (a+b\sqrt{2})(c+d\sqrt{2}) = (ac+2bd) + (ad+bc)\sqrt{2} \pmod{5}
+            \]
+            Multiplication is \textbf{associative}, \textbf{commutative}, with \textbf{multiplicative identity} $1+0\cdot\sqrt{2}$ and the \textbf{distributive laws} hold. Since the squares mod 5 are $\{0,1,4\}$ and $2 \notin \{0,1,4\}$, $x^2-2$ is irreducible over $\Zn{5}$, so every nonzero element has a multiplicative inverse.
+%------------------------------------------------------------
+            \item The set of numbers $a + b\sqrt{2}$ with $a,b \in \Zn{6}$.
+            \\
+            \\ This \textbf{is a commutative ring}. It is an \textbf{abelian group under addition} (shown in part 1(k)). It is \textbf{closed under multiplication}, since:
+            \[
+                (a+b\sqrt{2})(c+d\sqrt{2}) = (ac+2bd) + (ad+bc)\sqrt{2} \pmod{6}
+            \]
+            Multiplication is \textbf{associative}, \textbf{commutative}, has \textbf{multiplicative identity} $1+0\cdot\sqrt{2}$, and the \textbf{distributive laws} hold. It is a \textbf{commutative ring} but not a field, as it has zero divisors: $(2+0\cdot\sqrt{2})(3+0\cdot\sqrt{2}) = 6 \equiv 0 \pmod{6}$.
+
+%------------------------------------------------------------
+            \item The set of $n \times n$ matrices $M$ with real entries satisfying $M^TM = I$.
+            \\
+            \\ This \textbf{is not} a ring. The set fails \textbf{closure under addition}: the sum of two orthogonal matrices need not be orthogonal. For example:
+            \[
+                A = \begin{pmatrix}1&0\\0&1\end{pmatrix}, \quad A + A = \begin{pmatrix}2&0\\0&2\end{pmatrix}
+            \]
+            and $(2I)^T(2I) = 4I \neq I$, so $A+A$ is not in the set. Thus the set cannot form a ring.
+
+        \end{enumerate}
+
+%=============================================================
+        \item Determine whether the following sets form a field under ordinary addition and multiplication. If it does not, explain why not and give an explicit example illustrating this failure. If it does, explain why.
+        \begin{enumerate}
+
+%------------------------------------------------------------
+            \item The set of $2 \times 2$ matrices with integer entries.
+            \\
+            \\ This \textbf{is not} a field. Most nonzero elements have no multiplicative inverse in the set; for example:
+            \[
+                \begin{pmatrix}2&0\\0&1\end{pmatrix}^{-1} = \begin{pmatrix}1/2&0\\0&1\end{pmatrix}
+            \]
+            which does not have integer entries.
+
+%------------------------------------------------------------
+            \item The set of matrices $\begin{pmatrix}a&b\\c&d\end{pmatrix}$ with $a,b,c,d \in \Zn{5}$ and $ad-bc \neq 0$.
+            \\
+            \\ This \textbf{is not} a field. The set fails \textbf{closure under addition}: the sum of two invertible matrices may not be invertible. For example, with $A=I$ and $B=-I \equiv \begin{pmatrix}4&0\\0&4\end{pmatrix}\pmod{5}$, both are invertible, but:
+            \[
+                A + B = \begin{pmatrix}1&0\\0&1\end{pmatrix}+\begin{pmatrix}4&0\\0&4\end{pmatrix}
+                = \begin{pmatrix}0&0\\0&0\end{pmatrix} \pmod{5}
+            \]
+            which has zero determinant and is not in the set. Also, matrix multiplication is not commutative.
+
+%------------------------------------------------------------
+            \item The set of matrices $\begin{pmatrix}a&b\\c&d\end{pmatrix}$ with $a,b,c,d \in \Zn{6}$ and $ad-bc \neq 0$.
+            \\
+            \\ This \textbf{is not} a field. The same closure failure applies: with $A=I$ and $B=-I$, we have $A+B=\mathbf{0}$, which is not in the set. 
+
+%------------------------------------------------------------
+            \item The set of numbers $a+b\sqrt{2}$ with $a,b \in \Q$.
+            \\
+            \\ This \textbf{is} a field. It is a commutative ring (shown in part 2(d)), and every nonzero element has a multiplicative inverse in the set.
+
+%------------------------------------------------------------
+            \item The set of numbers $a+b\sqrt{2}$ with $a,b \in \Zn{3}$. $\checkmark$
+            \\
+            \\ This \textbf{is} a field. It is a commutative ring (shown in part 2(f)). Since $x^2-2$ is irreducible over $\Zn{3}$ (as $0^2=0$, $1^2=1$, $2^2\equiv 1$ mod 3, so 2 is not a square mod 3), every nonzero element $a+b\sqrt{2}$ satisfies $a^2-2b^2 \neq 0$ in $\Zn{3}$, and has multiplicative inverse:
+            \[
+                \frac{1}{a+b\sqrt{2}} = \frac{a-b\sqrt{2}}{a^2-2b^2} \in \Zn{3}[\sqrt{2}]
+            \]
+
+%------------------------------------------------------------
+            \item The set of numbers $a+b\sqrt{2}$ with $a,b \in \Zn{5}$. $\checkmark$
+            \\
+            \\ This \textbf{is} a field. It is a commutative ring (shown in part 2(g)). Since the squares mod 5 are $\{0,1,4\}$ and $2 \notin \{0,1,4\}$, $x^2-2$ is irreducible over $\Zn{5}$, so every nonzero element $a+b\sqrt{2}$ has $a^2-2b^2 \neq 0$ in $\Zn{5}$, and its inverse is:
+            \[
+                \frac{1}{a+b\sqrt{2}} = \frac{a-b\sqrt{2}}{a^2-2b^2} \in \Zn{5}[\sqrt{2}]
+            \]
+
+%------------------------------------------------------------
+            \item The set of numbers $a+b\sqrt{2}$ with $a,b \in \Zn{6}$.
+            \\
+            \\ This \textbf{is not} a field. $\Zn{6}$ is not a field (it has zero divisors: $2\cdot 3 \equiv 0 \pmod{6}$), and this propagates: $(2+0\cdot\sqrt{2})(3+0\cdot\sqrt{2})=6\equiv 0$ in the set, giving zero divisors. In particular, $2=2+0\cdot\sqrt{2}$ has no multiplicative inverse since $2x\equiv 1\pmod{6}$ has no solution.
+
+        \end{enumerate}
+        \item The set of all invertible $ 2 \times 2$ matrices with entries in $\Zn{3}$ forms a finite group under multiplication. How many elements does it contain? List 5 of these that are their own inverse and 3 pairs of matrix and inverse. Is this group abelian? Explain.
+        \\
+        \\This contains 48 elements, since we have 8 possibilities for the first column and only 6 for the second (to preserve invertibility). Five elements are:
+        \[\begin{pmatrix}
+1&0\\0&1\end{pmatrix}, \quad \begin{pmatrix}
+2&0\\0&2\end{pmatrix}, \quad \begin{pmatrix}
+0&1\\1&0\end{pmatrix}, \quad \begin{pmatrix}
+0&2\\2&0\end{pmatrix}, \quad \begin{pmatrix}
+2&0\\0&1\end{pmatrix}\]
+        Three pairs of matrix and inverse not listed above are:
+        \[\begin{pmatrix}
+1&1\\0&1\end{pmatrix}^{-1} = \begin{pmatrix}1&2\\0&1\end{pmatrix}, \quad \begin{pmatrix}
+1&0\\1&1\end{pmatrix}^{-1} = \begin{pmatrix}1&0\\2&1\end{pmatrix}, \quad \begin{pmatrix}
+1&1\\1&0\end{pmatrix}^{-1} = \begin{pmatrix}0&1\\1&2
+        \end{pmatrix}\]
+        This group is \textbf{not abelian}, since matrix multiplication is not commutative. For example:
+        \[\begin{pmatrix}
+1&1\\0&1\end{pmatrix}\begin{pmatrix}1&0\\1&1\end{pmatrix} = \begin{pmatrix}2&1\\1&1\end{pmatrix} \neq \begin{pmatrix}1&0\\1&1\end{pmatrix}\begin{pmatrix}1&1\\0&1\end{pmatrix} = \begin{pmatrix}1&1\\1&2
+        \end{pmatrix}\]
+        \item Consider the set of numbers $a + b\sqrt{2} + c\sqrt{3}$ with $a,b,c \in \Q$.
+        \begin{enumerate}
+            \item Explain why this set does not form a field.
+            \\
+            \\ This is because the product of two elements could have a nonzero $\sqrt{6}$ element, which is not included in the set. For example:
+            \[(1 + 1\sqrt{2} + 0\sqrt{3})(1 + 0\sqrt{2} + 1\sqrt{3}) = 1 + 1\sqrt{2} + 1\sqrt{3} + 1\sqrt{6} \notin S\]
+            \item Based on your answer to part (a), suggest an extension that is a larger set of numbers containing this set that is a field. Make your extension as minimal as possible, so that it just solves the problem that you laid out in part (a) and doesn't add any unnecessary elements.
+            \\
+            \\We can do this by adding an element to the condition to make it $ a + b\sqrt2 + c\sqrt3 + d\sqrt6$ with $a,b,c,d \in \Q$. This larger set is a field, since it is closed under addition and multiplication, has additive and multiplicative identities, additive inverses, and multiplicative inverses for all nonzero elements. The distributive laws hold, and multiplication is commutative. The extension is minimal since we only added the necessary $\sqrt{6}$ term to ensure closure under multiplication. Also, multiplying any two elements of the set that have $\sqrt{12}$ or $\sqrt{18}$ terms are able to be factored into $\sqrt{2}$ and $\sqrt{3}$ terms.
+            \item Would you be able to extend the set $a + b\sqrt{2} + c\sqrt{3} + d\sqrt{17}$ in a similar way? Explain why or why not.
+            \\
+            \\Yes. We just need to include every single possible radical that can come up from multiplying two elements together, in this case, $\sqrt{35}, \sqrt{85}, \sqrt{119}, \sqrt{595}$, in the definition of an element of the set.
+            \item Would you be able to extend the set $a + b\sqrt{2} + c\sqrt[3]{2}$ in a similar way? Explain why or why not.
+            \\
+            \\Yes. We would just need to include every possible fractional power multiple of 2 withiin the set, so the element would be: $a + b\cdot2^{1/6} + c\cdot2^{1/3} + d\cdot2^{1/2} + e\cdot2^{2/3}+f\cdot2^{5/6}$, $a,b,c,d,e,f \in \Q$.
+            \item Would you be able to extend the set $a + b\ln 2$ in a similar way? Explain why or why not.
+            \\
+            \\No, since $ln(2)^2$ is not an integer linear combination of $1$ and $ln(2)$, the product of two elements of the form $a + b\ln 2$ isn't guaranteed to always be able to be expressed in terms of constants and $\ln 2$, unless we expressed it as an approximate expansion.
+            \item Would you be able to expand the set $a + b\pi$ in a similar way? Explain why or why not. 
+            \\
+            \\No, since we can't express $\pi^2$ as an integer linear combination of $\pi$ and $1$ and $\pi^2$ without infinite terms in each element.
+            \item The \textit{degree} of a field, for our purposes, can be thought of as the number of letters required in an expression like those above to write a general element of the field. Give the degree of the field you discussed in each of parts (b)-(f).
+            \\
+            \\In order from b to f, the degrees are 4, 8, 6, $\infty$, and $\infty$.
+        \end{enumerate}
+    \end{enumerate}
+\end{document}

@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont, braket}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{\today}
+\lfoot{Chapter who cares}
+\rfoot{}
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Electrodynamics \\ Notes}\end{center}
+\section{Recap/Intro}
+\section{Today's stuff}
+Quantum Harmonic Oscillator.
+\\\\
+We start given that some $\hat H\phi = E_n\phi$. From this, we know that:
+\[\hbar \omega (\hat a _+ \hat a _- + \frac 1 2)\phi = E_n \phi\]
+By the raising operator, 
+\[\hbar \omega(a_+ a_- a_+ + \frac 1 2 a_+) \phi = E_n(a_+ \phi)\]
+\[\hbar \omega a_+ (a_- a_+ + \frac 1 2)\phi = a_+ \left[ \hbar \omega (a_- a_+ + \frac 1 2)\right]\phi\]
+\[\hbar \omega (a_-a_+ - \frac 1 2) = H\]
+\[a_+(\hat H + \hbar \omega)\phi = a_+ (E+\hbar \omega) \phi = (E+\hbar \omega)a_+ \phi\]
+Thus, 
+\[H(a_+\phi) = (E+\hbar \omega)(a_+\phi)\]
+from which we can find that:
+\[E_n = \hbar \omega\left(\frac 1 2 + n\right)\]
+Further, we MUST REMEMBER THAT:
+\[\hat a_+ \phi_n = \sqrt{n+1} \phi_{n+1}\]
+\[\hat a_- \phi_n = \sqrt{n} \phi_{n-1}\]
+\[\hat a_- \hat a_+ \phi_n = n \phi _n\]
+What do overlap integrals calculate? Know how to calculate them and find out what you are trying to match.
+
+\end{document}

@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{3/5/2026}
+\lfoot{Unit 1}
+\rfoot{}
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques (AMT) \\ Notes}\end{center}
+\section{Today's stuff}
+Let's try and solve:
+\[\int_{0}^{\infty} \frac{\ln u \ln(u+1)}{(u+1)^2}du\]
+and:
+\[\int_{0}^{\infty} \frac{\ln u \ln (u+1)}{u+1}du\]
+Know that if the only issue with an expression is that the logarithm goes to infinity, that's not an issue. Consider $\ln x$ vs $e^{-x}$. We see that $e^{-x}$ always takes precedence because it decreases so fast, so we can think of it as the big winner, in that whatever it wants to happen will happen. Similarly, the $\ln$ is the big loser, because the logarithm isn't good enough to make things converge or diverge.
+\\ We call the divergence that the logarithm produces \textbf{integrable}. 
+\[u \to 0, \ln u \to -\infty\]
+This is ok because the logarithm is weak and its divergence is \textbf{integrable.} However, as $u \to \infty$, the integral behaves like:
+\[\int_{0}^{\infty} \frac{\ln^2 u}{u}\]
+Let's sidestep this and do some truncated BC calculations.
+\[\int_{\text{c}}^{\infty} \frac{du}{u^p} = \frac{u^{-p+1}}{-p+1}\big|^\infty\]
+Clearly, this is okay if $p > 1$. Also, as $u$ goes to infinity, dividing by $u$ helps things converge (turns 1 into harmonic), though it doesn't work fully. Therefore, dividing by 2 powers of $u$ is even better!
+\\That's the behavior around $\infty$, so let's find the behavior around $0$. 
+Also, \[\int_{0}^{} \frac{du}{u^p}\]
+As $u$ goes to 0, dividing by $u$ hurts convergence, so we want to divide by less than 1 whole power. Notice that $p=1$ gives nothing helpful - it would give a logarithm after the integration, which would be undefined at $0$ and $\infty$.
+\\\\Going back to our problem, we know that the logarithms are weak and we only have one power of $u$ in the denominator, so we're good.
+\[\int_{0}^{\infty} \frac{\ln u \ln (u+1)}{u+1}du \text{   diverges.}\]
+Also, we know that since the first integral has a power of 2 in the denominator, it converges.
+\[\int_{0}^{\infty} \frac{\ln u \ln(u+1)}{(u+1)^2}du\]
+Consider instead:
+\[\int_{0}^{\infty} \frac{u^{\varepsilon} (u+1)^{\delta}}{(u+1)^2}du\]
+We want the coefficient of $\varepsilon \delta$. Rigorously (at least partially),
+\[\int_{0}^{\infty} \frac{u^{\varepsilon} (u+1)^{\delta}}{(u+1)^2}du = \int_{0}^{\infty} \frac{e^{\varepsilon \ln u}e^{\delta \ln(u+1)}}{((u+1)^2)}du\]
+For small $\varepsilon, \delta$ (which is assumed by the variable names themselves):
+\[\sum_{n=0}^{\infty} \sum_{m=0}^{\infty} \frac{\varepsilon^n \delta^m}{n!m!}\int_{0}^{\infty} \frac{\ln^n u \ln^m(u+1)}{(u+1)^2}du\]
+Solving by $B_2$, 
+\[\int_{0}^{\infty} \frac{u^{\varepsilon}}{(u+1)^{2-\delta}}du = \frac{\Gamma(1+\varepsilon) \Gamma(1 - \varepsilon - \delta)}{\Gamma(2- \delta)} = \frac{\Gamma(1+\varepsilon) \Gamma(1 - \varepsilon - \delta)}{(1-\delta)\Gamma(1- \delta)}\]
+\[ = \frac{1}{1-\delta}\exp(-\gamma \varepsilon + \sum_{k=2}^{\infty} \frac{(-1)^k \zeta(k)}{k}\varepsilon^k - \gamma(-\epsilon - \delta) + \sum_{k=2}^{\infty} \frac{(-1)^k\zeta(k)}{k}(-\varepsilon - \delta)^k - \left[ \gamma \delta + \sum_{k=2}^{\infty} \frac{(-1)^k\zeta(k)}{k}(- \delta)^k\right])\]
+The only contribution to the $\epsilon \delta$ is that one binomial term. Thus, the coefficient being 2 and the sum's term being 2 cancel to give us that the final answer is $\zeta(2)$. Similar logic shows that by expanding in terms of the zeta function gives us the final answer for the second term being squared in the integral is $2(\zeta(2) + \zeta(3))$.
+\\\\\\On to $B_3$, 
+\[\int_{0}^{\infty} x^{\alpha - 1}e^{-x}dx \cdot \int_{0}^{\infty} y^{\beta - 1}e^{-y}dy = \int_{0}^{\infty} dx \int_{0}^{\infty} dy x^{\alpha -1 } y^{\beta - 1}e^{-x-y}\]
+Let $x=u^2$, $y=v^2$,
+\[\Gamma(\alpha) \Gamma(\beta) = \int_{0}^{\infty} 2udu \int_{0}^{\infty} 2vdv \cdot u^{2\alpha - 2}v^{2\beta - 2}e^{-u^2-v^2}\]
+By polar, 
+\[= 4\int_{0}^{\infty} rdr \int_{0}^{\frac{\pi} 2} d\theta (r \cos \theta)^{2\alpha - 1} \cdot (r\sin\theta)^{2\beta - 1}e^{-r^2}\]
+\[ = 4\int_{0}^{\infty} r^{2\alpha + 2\beta - 1}e^{-r^2} \cdot \int_{0}^{\frac {\pi}2} \cos^{2\alpha - 1}\theta \sin^{2\beta - 1}\theta d\theta\]
+Let $r^2 = t$.
+\[ = 2\int_{0}^{\infty}t^{\alpha + \beta - 1}e^{-t}\cdot \int_{0}^{\frac {\pi} 2}\cos^{2\alpha - 1}\theta \sin^{2\beta - 1}\theta d\theta\]
+From the definition of $B_1$:
+\[\int_{0}^{\frac{\pi}2} \cos^{2\alpha - 1}\theta \sin^{2\beta - 1}\theta d\theta = B_3 =\frac{\Gamma(\alpha)\Gamma(\beta)}{2\Gamma(\alpha + \beta)}\]
+Let's test with:
+\[\frac{0}{\frac{\pi}2} cos^4\theta \sin^6\theta d\theta = \frac{\Gamma\left( \frac 5 2\right) \cdot \Gamma\left( \frac 7 2\right)}{2 \Gamma(6)} = \boxed{\frac{3\pi}{512}}\]
+\end{document}

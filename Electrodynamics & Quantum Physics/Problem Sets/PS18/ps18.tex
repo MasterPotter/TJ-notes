@@ -1,0 +1,153 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket} % For Dirac notation < | >
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{pgfplots}
+\usepackage{tikz}
+
+% Setup for headers and footers
+\pagestyle{fancy}
+\fancyhf{} % Clear all headers and footers
+\fancyhead[L]{Electrodynamics}
+\fancyhead[C]{Wavefunctions}
+\fancyhead[R]{Problem Set PS.18}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Title block for the first page
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+}
+
+\begin{document}
+\thispagestyle{plain}
+
+\begin{center}
+    {\Large Electrodynamics}\\
+    {\Large Problem Set PS.18}\\
+    \vspace{0.2cm}
+    Wavefunctions\\
+    March 16, 2026\\
+    Zoeb Izzi
+\end{center}
+
+\vspace{0.5cm}
+
+% Problem 1
+\noindent \textbf{1. Time Evolution in Infinite Square Well}
+\hrule
+\vspace{0.3cm}
+
+\noindent Consider a particle of mass $m$ in a one-dimensional infinite square well extending from $x = 0$ to $x = L$ with potential:
+\[ v(x) = \begin{cases} 0 & 0 < x < L \\ \infty & otherwise \end{cases} \]
+We know the normalized stationary states and energy eigenvalues are given by:
+\[ \phi_n(x) = \sqrt{\frac{2}{L}} \sin\left(\frac{n\pi}{L}x\right) \]
+\[ E_n = \frac{n^2\pi^2\hbar^2}{2mL^2} \]
+at time $t = 0$ the particle is prepared in the normalized state:
+\[ \psi(x) = \begin{cases} Ax & 0 \le x \le L/2 \\ A(L - x) & L/2 \le x \le L \\ 0 & elsewhere \end{cases} \]
+
+\begin{enumerate}[label=\alph*.]
+    \item Determine the normalization constant $A$.
+    \\
+    \\
+    \[ \int_0^L |\psi(x)|^2 dx = 1 \]
+    \[ \int_0^{L/2} (Ax)^2 dx + \int_{L/2}^L (A(L-x))^2 dx = 1 \]
+    By symmetry:
+    \[ 2 A^2 \int_0^{L/2} x^2 dx = 1 \]
+    \[ 2 A^2 \left[ \frac{x^3}{3} \right]_0^{L/2} = 2 A^2 \left( \frac{L^3/8}{3} \right) = A^2 \frac{L^3}{12} = 1 \]
+    \[\therefore \hspace{1mm} \boxed{A = \sqrt{\frac{12}{L^3}} = \frac{2\sqrt{3}}{L^{3/2}}} \]
+
+    \item We know that a general state can be written as the linear combination of eigenstates:
+    \[ \psi(x) = \sum_{n=1}^\infty c_n\phi_n(x) \]
+    Where
+    \[ c_n = \int_0^L \phi_n^*(x)\psi(x)dx \]
+    Explicitly calculate $c_1, c_2, c_3$.
+    \\
+    \\
+    \[ c_n = \sqrt{\frac{2}{L}} A \left[ \int_0^{L/2} x \sin\left(\frac{n\pi x}{L}\right) dx + \int_{L/2}^L (L-x) \sin\left(\frac{n\pi x}{L}\right) dx \right] \]
+    \[ I_1 = \left[ -\frac{Lx}{n\pi} \cos\left(\frac{n\pi x}{L}\right) + \frac{L^2}{n^2\pi^2} \sin\left(\frac{n\pi x}{L}\right) \right]_0^{L/2} \]
+    \[ I_1 = -\frac{L^2}{2n\pi} \cos\left(\frac{n\pi}{2}\right) + \frac{L^2}{n^2\pi^2} \sin\left(\frac{n\pi}{2}\right) \]
+    \[ \int_{L/2}^0 u \sin\left(\frac{n\pi(L-u)}{L}\right) (-du) = \int_0^{L/2} u \sin\left(n\pi - \frac{n\pi u}{L}\right) du \]
+    \begin{itemize}
+        \item If $n$ is \textbf{even}: $1 + (-1)^{n+1} = 0$, so $c_{even} = 0$.
+        \item If $n$ is \textbf{odd}: $1 + (-1)^{n+1} = 2$. Also, for odd $n$, $\cos(n\pi/2) = 0$.
+    \end{itemize}
+    When $n$ is odd:
+    \[ c_n = \sqrt{\frac{2}{L}} \sqrt{\frac{12}{L^3}} \times 2 \left( \frac{L^2}{n^2\pi^2} \sin\left(\frac{n\pi}{2}\right) \right) = \frac{\sqrt{24}}{L^2} \frac{2L^2}{n^2\pi^2} \sin\left(\frac{n\pi}{2}\right) = \frac{4\sqrt{6}}{n^2\pi^2} \sin\left(\frac{n\pi}{2}\right) \]
+    
+    \begin{align*}
+        c_1 &= \frac{4\sqrt{6}}{1^2\pi^2} \sin\left(\frac{\pi}{2}\right) = \frac{4\sqrt{6}}{\pi^2} \\
+        c_2 &= 0 \\
+        c_3 &= \frac{4\sqrt{6}}{3^2\pi^2} \sin\left(\frac{3\pi}{2}\right) = -\frac{4\sqrt{6}}{9\pi^2}
+    \end{align*}
+
+    \item Write out the time-dependent state $\psi(x, t)$ in the form:
+    \[ \psi(x, t) = \sum_{n=1}^3 c_n\phi_n(x)e^{-iE_nt/\hbar} \]
+    \\
+    \\
+    \[ \psi(x,t) = \left(\frac{4\sqrt{6}}{\pi^2}\right) \sqrt{\frac{2}{L}} \sin\left(\frac{\pi x}{L}\right) e^{-iE_1t/\hbar} - \left(\frac{4\sqrt{6}}{9\pi^2}\right) \sqrt{\frac{2}{L}} \sin\left(\frac{3\pi x}{L}\right) e^{-iE_3t/\hbar} \]
+    \[ = \frac{8\sqrt{3}}{\pi^2\sqrt{L}} \sin\left(\frac{\pi x}{L}\right) e^{-iE_1t/\hbar} - \frac{8\sqrt{3}}{9\pi^2\sqrt{L}} \sin\left(\frac{3\pi x}{L}\right) e^{-iE_3t/\hbar} \]
+
+    \item Suppose an energy measurement is made at time $t = 0$.
+    \begin{enumerate}[label=\roman*.]
+        \item What are the possible results?
+        \\
+        \\
+        The energy eigenvalues $E_n = \frac{n^2\pi^2\hbar^2}{2mL^2}$. However, since $c_n = 0$ for all even integers, it's really only $E_n$ for odd $n$.
+        
+        \item What is the probability of obtaining the result $E_n$?
+        \\
+        \[ P(E_n) = |c_n|^2 = \begin{cases} \frac{96}{n^4\pi^4} & \text{for } n \text{ odd} \\ 0 & \text{for } n \text{ even} \end{cases} \]
+        
+        \item What is the probability of measuring $E_1, E_2, E_3$?
+        \\
+        \begin{align*}
+            P(E_1) &= |c_1|^2 = \frac{96}{\pi^4} \approx 0.9855 \text{ (or } 98.55\%) \\
+            P(E_2) &= |c_2|^2 = 0 \\
+            P(E_3) &= |c_3|^2 = \frac{96}{81\pi^4} = \frac{32}{27\pi^4} \approx 0.0122 \text{ (or } 1.22\%)
+        \end{align*}
+    \end{enumerate}
+
+    \item Suppose the first energy measurement gives the value $E_3$.
+    \begin{enumerate}[label=\roman*.]
+        \item What is the state immediately after the measurement?
+        \\
+        \[ \psi_{\text{after}}(x) = \phi_3(x) = \sqrt{\frac{2}{L}} \sin\left(\frac{3\pi x}{L}\right) \]
+        
+        \item What is the state at a later time $t + \Delta t$?
+        \\
+        \[ \psi_{\text{later}}(x, t+\Delta t) = \phi_3(x) e^{-iE_3 \Delta t/\hbar} = \sqrt{\frac{2}{L}} \sin\left(\frac{3\pi x}{L}\right) e^{-iE_3 \Delta t/\hbar} \]
+    \end{enumerate}
+
+    \item Calculate $\langle H \rangle$. Should this be time-dependent?
+    \\
+    \\
+    \[ \langle H \rangle = \sum_{n \text{ odd}} \left( \frac{96}{n^4\pi^4} \right) \left( \frac{n^2\pi^2\hbar^2}{2mL^2} \right) = \frac{48\hbar^2}{\pi^2 mL^2} \sum_{n \text{ odd}} \frac{1}{n^2} \]
+    \[ \langle H \rangle = \frac{48\hbar^2}{\pi^2 mL^2} \left( \frac{\pi^2}{8} \right) = \frac{6\hbar^2}{mL^2} \]
+    \textbf{No.} The potential is time-independent, which implies energy is conserved. 
+
+    \item Calculate $\langle x \rangle$. Should this be time-dependent?
+    \\
+    \\
+    At $t=0$, the probability distribution $|\psi(x,0)|^2$ is perfectly symmetric about the center of the well, so $\langle x \rangle = L/2$. 
+        
+    Therefore, $\langle x \rangle = L/2$ permanently. \textbf{No, it is not time-dependent.}
+
+    \item What if we make a position measurement of the state $\psi(x, t)$ (not an energy measurement)? Explain the state of the system just after this measurement. Explicitly comment on its energy content and if the state is stationary or non-stationary.
+    \\
+    \\
+    \textbf{State just after measurement:} Measuring the position collapses the wavefunction into a Dirac delta function spiked exactly at the measured position $x_0$, so $\psi_{\text{after}}(x) = \delta(x - x_0)$.
+    
+    \textbf{Energy content:} Heisenberg's basics tell us that knowing the position causes infinite uncertainty in momentum, which corresponds to an infinite amount of kinetic energy. $\langle H \rangle \to \infty$. 
+    
+    \textbf{Stationary or non-stationary?} It is \textbf{non-stationary}. The delta function is a superposition of nearly all possible energy eigenstates. As time passes, the  phase factors of different modes will rapidly interfere and reduce, leaving the wave function to take over the well.
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{2/9/2026}
+\lfoot{Unit 1}
+\rfoot{}
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques (AMT) \\ Notes}\end{center}
+\section{Today's stuff}
+Recall the definition of the first Beta function (note the capital):
+\[B_1 = \int_{0}^{1}t^{\alpha - 1}(1-t)^{\beta -1}dt = \frac{\Gamma(\alpha) \Gamma(\beta)}{\Gamma(\alpha + \beta)}\]
+Let's define another Beta function:
+\[B_2: u = \frac t {1-t}, u = \frac{1-t}t = \frac 1 t - 1, t = \frac u {u-1}\]
+\[B_2 = \int_{0}^{\infty} \left[ \frac u {u+1} \right] ^{\alpha - 1} \left[ \frac 1 {u+1} \right] ^{\beta -1} \cdot \frac{t^2}{u^2}du = \int_{0}^{\infty} \frac{u^{\alpha - 1}}{(u+1)^{\alpha + \beta}}\]
+Let's try:
+\[\int_{0}^{\infty}\frac{u^{\frac 1 2}}{(u+1)^3}du = \frac{\Gamma(1.5)\Gamma(1.5)}{\Gamma(3)} = \frac{0.5 \cdot 0.5 \cdot \pi}{2} = \frac{\pi}{8}\]
+Also:
+\[\int_{0}^{\infty} \frac{x^{m-1}dx}{x^n + 1}, u = x^n, x = u^{\frac 1 n}, dx = \frac 1 n u^{1 - \frac 1 n}du\]
+\[\int_{0}^{\infty} \frac{u^{\frac 1 n^{m-1}}}{u+1}\frac 1 n u^{1-\frac 1 n}du = \frac 1 n \int_{0}^{\infty} \frac{u^{\frac m n -1}du}{u+1} = \frac 1 n \cdot \frac{\Gamma (\frac m n)\Gamma(1 - \frac{m}{n})}{\Gamma(1)} = \frac{\pi}{n} \csc \frac{m\pi}{n}\]
+We're bored, so:
+\[\frac{\partial}{\partial m}(\text{above}) = \int_{0}^{\infty} \frac{x^{m-1}\ln x}{x^n + 1}dx = -\frac{\pi^2}{n^2}\csc \frac{m\pi}{n}\cot\frac{m\pi}{n}\]
+Doing it again:
+\[\frac{\partial^2}{\partial m^2}(\text{above}) = \int_{0}^{\infty} \frac{x^{m-1}\ln^2 x}{x^n + 1}dx = \frac{\pi^3}{n^3}\csc \frac{m\pi}{n}\left[ 2 \csc ^2 \frac{m\pi}{n}-1\right]\]
+Also, 
+\[\int_{0}^{\infty} \frac{x^{\frac 1 2}\ln^2 x dx}{x^3 + 1} = \frac{\pi^3}{27}\]
+The above is left as an exercise for the reader.
+\end{document}

@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage{graphicx, physics}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{3/17/2026}
+\lfoot{Unit 1}
+\rfoot{}
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques (AMT) \\ Notes}\end{center}
+\section{Today's stuff}
+Consider the following integral, the integral representation of the Riemann zeta function:
+\[\int_{0}^{\infty} \frac{x^{n-1}}{e^{ax}-1}dx \xrightarrow{u = ax,\hspace{1mm} x = \frac u a,\hspace{1mm} du = adx,\hspace{1mm} dx = \frac{du} a} \int_{0}^{\infty} \frac{(u/a)^{n-1}}{e^u - 1} \frac{du}{a} = \frac{1}{a^n}\int_{0}^{\infty}e^{-u}u^{n-1}\sum_{k=0}^{\infty} e^{-ku}du\]
+\[ = \sum_{k=0}^{\infty} \frac{1}{a^n}\int_{0}^{\infty} u^{n-1}e^{-(k+1)u} = \frac{1}{a^n}\sum_{k=0}^{\infty} \frac{1}{(k+1)^n}\int_{0}^{\infty}v^{n-1}e^{-v}dv = \boxed{\frac{1}{a^n}\zeta(n)\Gamma(n)}\]
+The reflection identity of the zeta function is as follows:
+\[\zeta(s) = 2^s \pi^{s-1} \sin \frac{\pi s}{2} \Gamma(1-s) \zeta(1-s)\]
+and like the one for the $\Gamma$ function, it also allows us to define the function for values for which the other representations may not be defined.
+\\
+\\
+Taking $s=-4$, we see that the sine term becomes 0, and that this will happen for any and all even negative integers, which is why these are called the \textbf{trivial zeros} of the zeta function. 
+\\ \\
+Also, if we take $s=-1$, we see that the sum becomes:
+\[\sum_{k=0}^{\infty}k\]
+but the reflection identity gives that it equals $-\frac 1 {12}$, implying that:
+\[\sum_{k=0}^{\infty}k = -\frac 1 {12}\]
+which is nonsense, since the series doesn't converge. However, the function is perfectly well defined - it's just that the function dissociates from the series after
+the domain over which the series converges. After the convergence domain, the function and the series are no longer friends.
+\\ \\
+We also know that $\zeta(s)$ is nonzero when $s<0, s>1$. Thus, in that critical strip there must be some occurrence of $s$ such that $\zeta(s) = 0$. Further, due to the
+reflection identity's makeup with a $1-s$ term, we know that those values must live on the line $\Re(x)=\frac 1 2$, where that line is called the critical line.
+\\ \\
+Going back to that old integral, we see that taking the partial w.r.t $a$:
+\[\frac{\partial}{\partial a}: \int_{0}^{\infty}\frac{x^ne^{ax}}{(e^{ax}-1)^2} = a^{-(n+1)}\Gamma(n+1)\zeta(n)\]
+implying after some calculation that:
+\[\int_{0}^{\infty}\frac{x^ndx}{(e^{ax}-1)^2} = a^{-(n+1)}\Gamma(n+1)[\zeta(s)-\zeta(n+1)]\]
+\newpage
+Consider the following integral and find the behavior for large $x$.
+\[e^{ax}\int_{x}^{\infty}\frac{e^{-t}}{t}dt = f(x)\]
+Integrating by parts:
+\[f(x) = \frac 1 x - \frac 1 {x^2} + \frac 2 {x^3} - 6e^x\int_{x}^{\infty} t^{-4}e^{-t}dt\]
+We can allow the last term to be thought of as an error term, and we know that $\int_{x}^{\infty} t^{-4}e^{-t}dt < \int_{x}^{\infty} x^{-4}e^{-t}dt$, since $t>x$. Also,
+we know that $\int_{x}^{\infty} x^{-4}e^{-t}dt = \frac{e^{-x}}{x^4}$. Thus, 
+\[f(x) = \frac 1 x - \frac 1 {x^2} + \frac 2 {x^3} + error\]
+where the error term $ < \frac 6 {x^4}$. \\ \\ 
+We could've continued integrating by parts to get the following series as the terms: $\displaystyle \sum_{k=0}^{N} \frac{(-1)^kk!}{x^{k+1}} + error$, where $error < \frac{(N+1)!}{x^{N+2}}$.
+\\ \\ 
+We've been talking about this series for a while, but we haven't even stopped consider the fact that by the ratio test, it \textbf{DIVERGES!!} This is what we call an asymptotic or semiconvergent series, which have two properties:
+\begin{enumerate}
+    \item At a fixed number of terms, the error can be made as small as we want by increasing the value of $x$, where it's evaluated.
+    \item At a fixed value of $x$, the error grows without bound as the number of terms is increased.
+\end{enumerate}
+This leads to a sweet spot - small enough that the error is small, but large enough to get a good approximation of the asymptote. The sweet spot is the ideal number of terms to keep in the sum, which depends on the value of $x$, or how many terms are being evaluated.
+\\ \\ 
+We expect the sweet spot to occur where the neighboring terms have about the same absolute value, and we're looking for:
+\[\left| \frac{a_{n+1}}{a_n}\right| \approx 1\]
+This is so that the terms are roughly the same, which means they'll be roughly right around the central value. However, it doesn't actually matter, as long as you're in the right ballpark!
+\\ \\ 
+This has been one type of asymptotic functions where we integrate by parts, but another (admittedly less rigorous) class of possibilities is broader, of the style:
+\[\int_{0}^{\infty} e^{-xt}(1+2t^2)^{\frac 1 2}\]
+When $x$ is huge, in order for the series to matter at all, then $t$ should be small, which means we'll expand. 
+\[\int_{0}^{\infty} e^{-xt}(1+2t^2)^{\frac 1 2} dt \rightarrow \sum_{k=0}^{\infty} {\frac 1 2\choose k} 2^k \frac{(2k)!}{x^{2k+1}}\]
+Again, evaluating via the Ratio Test and finding when the ratio is 1 will find us the ideal amount of terms to keep based on the value at which we want to evaluate the series.
+\end{document}

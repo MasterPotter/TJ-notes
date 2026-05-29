@@ -1,0 +1,219 @@
+\documentclass[12pt]{amsart}
+\usepackage[margin=1in]{geometry}       % page margins
+\usepackage{setspace}                   % line spacing
+\usepackage{hyperref}                   % clickable links & cross-refs
+\usepackage{graphicx}                   % figures
+\usepackage{booktabs}                   % professional tables
+\usepackage{natbib}                     % citations (author-year)
+\usepackage{lipsum}                     % placeholder text — REMOVE when done
+\usepackage{graphicx, physics}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+
+% ── Hyperlink style ─────────────────────────────────────────
+\hypersetup{
+    colorlinks = true,
+    linkcolor  = blue,
+    citecolor  = blue,
+    urlcolor   = blue
+}
+
+% ── Line spacing ────────────────────────────────────────────
+\doublespacing
+
+% ── Rename abstract heading if desired ──────────────────────
+% \renewcommand{\abstractname}{Executive Summary}
+
+
+% ============================================================
+%  TITLE MATTER
+% ============================================================
+
+\title[ENGINEERING $>$ PHYSICS]{%
+    \large {\textbf{An Engineer's Discoveries in Quantum}\\[0.3em]}
+    \small {Designing and Building a Laser-Based Quantum Computer}%
+}
+
+% ── Authors ─────────────────────────────────────────────────
+% Each author gets their own \author, \address, \email block.
+% amsart renders these visibly below the title.
+% Use \and between authors if listing on one \author line,
+% or give each their own block as shown here.
+
+\author{Zoeb Izzi}
+\address{Quantum Physics \& Optics Lab, Thomas Jefferson High School for Science \& Technology, Alexandria, VA, USA}
+\email{2027ZIzzi@tjhsst.edu}
+
+% ── Corresponding author footnote ───────────────────────────
+% \thanks attaches a footnote to whichever \author it follows.
+% Move it to the right author block above, e.g.:
+%   \author{First Author\thanks{Corresponding author.}}
+\thanks{%
+    Corresponding author: Zoeb Izzi
+    (\href{mailto:2027ZIzzi@tjhsst.edu}{2027ZIzzi@tjhsst.edu}).
+    This work was supported by the higher level math and physics teachers from the TJHSST staff, including Mr. Hannum, Dr. Osborne, Dr. Lynch, and Dr. Smith. I also thank Ms. Kelly for her amazing mentorship as I began my physics journey and for her endless tolerance for my random questions about physics.
+    I, the lead author, declare no conflicts of interest.
+}
+\date{\today}
+\keywords{keyword one, keyword two, keyword three, keyword four}
+\begin{document}
+\begin{abstract}
+    Since its discovery in the early 20th century, quantum mechanics has been one of the most important fields of scientific research in history. It has the ability to tell us how the most fundamental of particles work together to create what is our universe, and unlock the secrets of how best to manipulate our resources to solve humanity's problems. However, in a computational sense, taking advantage of quantum mechanics is an extremely expensive, difficult endeavor. Traditional quantum computers require millions of dollars in equipment and highly trained specialists to manage them, not to mention the incredible amount of liquid helium required to keep them at an operational temperature. This paper presents several designs for optical quantum computers, which make use of the polarization of light to encode quantum information and make quantum computing more accessible to the general public, and the results of testing them in a variety of computational tasks.
+\end{abstract}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\section{Introduction}
+\label{sec:introduction}
+Quantum computing has been of great interest over the past three decades, and rightfully so. From speeding up protein and drug modeling in chemical engineering to revolutionizing modern encryption techniques, quantum computing offers the ability of humanity to take a huge step forward with regard to our computation of difficult problems. However, one large issue with quantum computing as of yet is the necessary requirements. Oftentimes, quantum computers require hundreds of thousands of dollars per year in upkeep, not to mention specialized engineers to help adjust systems.
+All of these costs make it drastically more difficult for not just universities, but even large corporations to make the switch from classical operation to quantum operation. Reducing the overhead costs for quantum computers remains an enormous problem that we attempt to solve by making use of a relatively new idea - photonic quantum computing.
+\\
+\indent Traditional quantum computers rely on using a variety of methods, one of which is to use lasers to "trap" atoms in grids, then applying electric or magnetic fields to them to get them to rotate and change their state. However, this requires not only large amounts of liquid helium to preserve quantum coherence, but, arguably more importantly, each of these evolutions take time. This drastically increases the amount of time necessary for computations to occur, even though the overall complexity ($O(\sqrt n)$ vs $O(n)$) may be lower. 
+Cite prior work like this \citep{WhateverWeDid} or as
+\citet{AuthorYear} when the author is the grammatical subject.
+
+\section{Methods}
+\label{sec:methods}
+
+\subsection{Participants / Data}
+\label{subsec:participants}
+
+\lipsum[4]
+
+\subsection{Materials / Measures}
+\label{subsec:materials}
+
+\lipsum[5]
+
+\subsection{Procedure}
+\label{subsec:procedure}
+
+\lipsum[6]
+
+\subsection{Analysis Plan}
+\label{subsec:analysis}
+
+\lipsum[7]
+
+
+% ============================================================
+%  4. EXPERIMENT
+% ============================================================
+
+\section{Experiment}
+\label{sec:experiment}
+
+\subsection{Design}
+\label{subsec:design}
+
+\lipsum[8]
+
+\subsection{Stimuli / Conditions}
+\label{subsec:stimuli}
+
+\lipsum[9]
+
+% Example figure — uncomment and fill in when ready
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=0.75\textwidth]{figures/fig1.pdf}
+%     \caption{Caption describing the figure.}
+%     \label{fig:experiment_design}
+% \end{figure}
+
+
+% ============================================================
+%  5. RESULTS
+% ============================================================
+
+\section{Results}
+\label{sec:results}
+
+\subsection{Descriptive Statistics}
+\label{subsec:descriptive}
+
+\lipsum[10]
+
+% Example table
+\begin{table}[ht]
+    \centering
+    \caption{Descriptive statistics for each condition.}
+    \label{tab:descriptive}
+    \begin{tabular}{lccc}
+        \toprule
+        \textbf{Condition} & $n$ & $M$   & $SD$ \\
+        \midrule
+        Condition A        & 50  & 4.2   & 0.8  \\
+        Condition B        & 50  & 3.7   & 1.1  \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{Hypothesis Tests}
+\label{subsec:tests}
+
+\lipsum[11]
+
+
+% ============================================================
+%  6. DISCUSSION
+% ============================================================
+
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Interpretation of Findings}
+\label{subsec:interpretation}
+
+\lipsum[12]
+
+\subsection{Limitations}
+\label{subsec:limitations}
+
+\lipsum[13]
+
+\subsection{Future Directions}
+\label{subsec:future}
+
+\lipsum[14]
+
+
+% ============================================================
+%  7. CONCLUSION
+% ============================================================
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+\lipsum[15]
+
+
+% ============================================================
+%  REFERENCES
+% ============================================================
+
+\newpage
+\bibliographystyle{amsplain}     % swap for: apalike, plain, ieee, apa
+\bibliography{references}        % points to your references.bib file
+
+% ── Inline fallback (no .bib file needed for quick testing) ─
+% Comment out the two lines above and uncomment below:
+%
+% \begin{thebibliography}{9}
+%
+% \bibitem{AuthorYear}
+%   Author, A.\ B., \& Author, C.\ D.\ (Year).
+%   Title of the article.
+%   \textit{Journal Name}, \textit{Volume}(Issue), pages.
+%   \url{https://doi.org/xxxxx}
+%
+% \end{thebibliography}
+
+
+\end{document}

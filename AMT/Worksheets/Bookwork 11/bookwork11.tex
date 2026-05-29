@@ -1,0 +1,85 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm, amssymb, mathtools}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{\today}
+\lfoot{Bookwork 11}
+\rfoot{}
+
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques \\ Bookwork 11}\end{center}
+\vspace{10mm}
+\begin{enumerate}
+    \item \textbf{Problem 5.6.19: }
+    \begin{enumerate}
+        \item Planck's theory of quantized oscillators leads to an average energy
+        \[\langle \varepsilon \rangle = \frac{\sum_{n=1}^{\infty} n \varepsilon_0 \exp(-\frac{n\varepsilon_0}{kT})}{\sum_{n=0}^{\infty} \exp(-\frac{n\varepsilon_0}{kT})}\]
+        where $\varepsilon_0$ is a fixed energy. Identify the numerator and denominator as binomial expansions and show that the ratio is:
+        \[\langle \varepsilon \rangle = \frac{\varepsilon_0}{\exp(\varepsilon_0/kT)-1}\]
+        \\
+        \[x = e^{-\varepsilon_0/kT}, \quad 0 < x < 1\]
+        \[\langle \varepsilon \rangle = \frac{\sum_{n=1}^{\infty} n\varepsilon_0\, e^{-n\varepsilon_0/kT}}{\sum_{n=0}^{\infty} x^n} 
+            = \frac{\varepsilon_0 \sum_{n=1}^{\infty} n x^n}{{\frac{1}{1-x}}}
+            = \frac{\varepsilon_0 \cdot \frac{x}{(1-x)^2}}{\frac{1}{1-x}} = \frac{\varepsilon_0\, e^{-\varepsilon_0/kT}}{1 - e^{-\varepsilon_0/kT}} 
+            = \frac{\varepsilon_0}{e^{\varepsilon_0/kT} - 1} \hspace{1mm} \checkmark\]
+        \item Show that $\langle \varepsilon \rangle$ of part (a) reduces to $kT$, the classical result, for $kT \gg \varepsilon_0$.
+        \\
+        \[
+            \langle \varepsilon \rangle 
+            = \frac{\varepsilon_0}{e^{\varepsilon_0/kT} - 1}
+        \xrightarrow[]{u=\frac{\varepsilon_0}{kT}} \frac{\varepsilon_0}{e^u - 1} 
+            = \frac{\varepsilon_0}{u + \frac{u^2}{2} + \cdots} 
+            = \frac{\varepsilon_0}{u\!\left(1 + \frac{u}{2} + \cdots\right)}
+            = \frac{kT}{1 + \frac{u}{2} + \cdots} 
+            \xrightarrow{u \to 0} kT \hspace{1mm} \checkmark
+        \]    \end{enumerate}
+    \item \textbf{Problem 8.1.5: } In a Maxwellian distribution the fraction of particles with speed between $v$ and $v + dv$ is 
+    \[\frac{dN}{N} = 4\pi \left( \frac{m}{2\pi kT} \right)^{3/2} \exp\left( -\frac{mv^2}{2kT} \right)v^2 dv\]
+    $N$ being the total number of particles. The average or expectation value of $v^n$ is defined as $\langle v^n \rangle = N^{-1} \int_{}^{}v^ndN$. Show that
+    \[\langle v^n \rangle = \left( \frac{2kT}{m}\right)^{n/2} \frac{\Gamma(\frac{n+3}{2})}{\Gamma(\frac{3}{2})}\]
+    \\
+    \[
+        \langle v^n \rangle 
+        = 4\pi\left(\frac{m}{2\pi kT}\right)^{3/2} \int_0^\infty v^{n+2}\, e^{-mv^2/2kT}\, dv
+    \]
+    \[t = \dfrac{mv^2}{2kT}, v = \left(\dfrac{2kT}{m}\right)^{1/2} t^{1/2}, 
+    dv = \dfrac{1}{2}\left(\dfrac{2kT}{m}\right)^{1/2} t^{-1/2}\,dt,
+    v^{n+2} = \left(\dfrac{2kT}{m}\right)^{(n+2)/2} t^{(n+2)/2}\]
+    \[
+        \int_0^\infty v^{n+2} e^{-mv^2/2kT}\,dv 
+        = \frac{1}{2}\left(\frac{2kT}{m}\right)^{(n+3)/2}
+          \int_0^\infty t^{\frac{n+3}{2}-1} e^{-t}\,dt 
+        = \frac{1}{2}\left(\frac{2kT}{m}\right)^{(n+3)/2}\Gamma\!\left(\frac{n+3}{2}\right)
+        \]\[\langle v^n \rangle 
+        = 4\pi \left(\frac{m}{2\pi kT}\right)^{3/2} 
+           \cdot \frac{1}{2}\left(\frac{2kT}{m}\right)^{(n+3)/2}
+           \Gamma\!\left(\frac{n+3}{2}\right) \\
+        = \frac{2}{\sqrt{\pi}}\left(\frac{2kT}{m}\right)^{n/2}
+           \Gamma\!\left(\frac{n+3}{2}\right)\]\[
+        \therefore \hspace{1mm}\langle v^n \rangle 
+        = \left(\frac{2kT}{m}\right)^{n/2}
+          \frac{\Gamma\!\left(\frac{n+3}{2}\right)}{\Gamma\!\left(\frac{3}{2}\right)} 
+        \qquad \checkmark
+    \]
+
+    \item \textbf{Problem 8.2.16: } The neutrino energy density (Fermi distribution) in the early history of the universe is given by
+    \[\rho_\nu = \frac{4\pi}{h^3} \int_{0}^{\infty} \frac{x^3}{\exp(\frac x{kT})+1}dx\]
+    Show that
+    \[\rho_\nu = \frac{7\pi^5}{30h^3}(kT)^4\]
+    \\
+    \[
+        \rho_\nu = \frac{4\pi}{h^3}\int_0^\infty \frac{x^3}{e^{x/kT}+1}\,dx \xrightarrow{u=x/kT}\frac{4\pi}{h^3}(kT)^4 \int_0^\infty \frac{u^3}{e^u + 1}\,du
+    \]
+    \[ = \frac{4\pi}{h^3}(kT)^4 (1-2^{-3})\Gamma(4)\zeta(4) = \frac{7\pi^5}{30h^3}(kT)^4 \vspace{1mm} \checkmark \]
+\end{enumerate}
+\end{document}

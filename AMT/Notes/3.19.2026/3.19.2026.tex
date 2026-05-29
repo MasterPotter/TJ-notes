@@ -1,0 +1,23 @@
+\documentclass{article}
+\usepackage{graphicx, physics}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{3/17/2026}
+\lfoot{Unit 1}
+\rfoot{}
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques (AMT) \\ Notes}\end{center}
+\section{Today's stuff}
+Recall that there are 2 types of asymptotic expansions - one that we integrate by parts, and the other that has a suppressed value for a long time so we simplify the integral. Note that these tend to be alternating series.
+Looking at an example with integration by parts, if we let:
+\[f(x) = e^x \int_{x}^{\infty}\frac{e^{-t}}{\sqrt[3] t}dt = e^x(-t^{-1/3}e^{-t}+\frac 1 3 t^{-4/3}e^{-t}-\frac49 t^{-7/3}e^{-t})\bigg| ^\infty_x - \frac{e^x \cdot 28}{27}\int_{x}^{\infty} t^{-10/3}e^{-t}dt\]
+\end{document}

@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{\today}
+\lfoot{Bookwork 7}
+\rfoot{}
+
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques \\ Bookwork 7}\end{center}
+\vspace{10mm}
+\begin{enumerate}
+    \item \textbf{Problem 5.9.8:} Prove that: \[\int_{0}^{\infty}\frac{x^ne^xdx}{(e^x-1)^2}=n!\zeta(n)\]
+    \[\int_0^\infty \frac{x^{n-1}}{e^{ax} - 1} \, dx = \frac{1}{a^n} \Gamma(n) \zeta(n)\]
+    \[ \frac{\partial}{\partial a} \int_0^\infty \frac{x^{n-1}}{e^{ax} - 1} = -\int_0^\infty \frac{x^n e^{ax}}{(e^{ax} - 1)^2} \, dx = -a^{-(n+1)} \Gamma(n+1) \zeta(n)\]
+    \[\int_0^\infty \frac{x^n e^{ax}}{(e^{ax} - 1)^2} \, dx = a^{-(n+1)} \Gamma(n+1) \zeta(n)\]
+    \[a = 1, \int_{0}^{\infty} \frac{x^ne^xdx}{(e^x-1)^2} = \Gamma(n+1)\zeta(n) = n!\zeta(n) \hspace{1mm} \checkmark\]
+    \item \textbf{Problem 5.9.9:} The Bloch-Gruneissen approximation for the resistance in a monovalent metal is:
+    \[\rho = C\frac{T^5}{\Theta^6}\int_{0}^{\Theta/T}\frac{x^5dx}{(e^x-1)(1-e^{-x})}\]
+    where $\Theta$ is the Debye temperature characteristic of the metal.
+    \begin{enumerate}
+        \item For $T \to \infty$, show that
+        \[\rho \approx \frac C 4 \cdot \frac T {\Theta^2}\]
+        \\
+        \[\int_{0}^{\Theta/T}\frac{x^5dx}{(e^x-1)(1-e^{-x})} = \int_{0}^{\Theta/T}\frac{x^5e^xdx}{(e^x-1)^2} \xrightarrow{\Theta/T \approx 0, x \approx 0} \approx \int_{0}^{\Theta/T}\frac{x^5dx}{(1+x-1)^2} = \int_{0}^{\Theta/T} x^3dx = \frac 1 4\left(\frac{\Theta}{T}\right)^4\]
+        \[C\frac{T^5}{\Theta^6} \cdot \frac 1 4 \left( \frac{\Theta}{T}\right)^4 = \frac{C}{4} \cdot \frac{T}{\Theta^2} \hspace{1mm} \checkmark \]
+        \item For $T \to 0$, show that 
+        \[\rho \approx 5!\zeta(5)C\frac{T^5}{\Theta^6}\]
+        \\
+        \[T\to 0, \Theta/T \to \infty, \int_{0}^{\infty}\frac{x^5dx}{(e^x-1)(1-e^{-x})} = 5!\zeta(5)\qquad (5.9.8)\]
+        \[\therefore \rho \approx 5!\zeta(5)C\frac{T^5}{\Theta^6} \hspace{1mm} \checkmark\]
+    \end{enumerate}
+    \item \textbf{Problem 8.2.14:} The total energy radiated by a blackbody is given by:
+    \[u = \frac{8\pi k^4T^4}{c^3h^3}\int_{0}^{\infty}\frac{x^3}{e^x-1}dx\]
+    Show that the integral portion is equal to $3!\zeta(4) = 6\zeta(4)$.
+    \\
+    \[\int_{0}^{\infty} \frac{x^3}{e^x-1}dx = \int_{0}^{\infty}\frac{x^3e^{-x}}{1-e^{-x}}dx = \int_{0}^{\infty}\sum_{k=1}^{\infty} x^3e^{-kx}dx = \sum_{k=1}^{\infty} \int_{0}^{\infty}x^3e^{-kx}dx\]
+    \[u = mx, dx = \frac{du}{m}, Above = \sum_{k=1}^{\infty} \frac{1}{k^4}\int_{0}^{\infty} u^3e^-udu = \Gamma(4)\zeta(4) = 3!\zeta(4) \hspace{1mm} \checkmark\]
+\end{enumerate}
+\end{document}

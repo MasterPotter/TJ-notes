@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{\today}
+\lfoot{Problem Set 4}
+\rfoot{}
+
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques \\ Problem Set 4}\end{center}
+\vspace{10mm}
+
+\begin{enumerate}
+    \item This problem concerns the evaluation of integrals of the form $\int_{0}^{\infty} e^{-ax}\ln^nxdx$ for natural numbers $n$ and positive real numbers $a$.
+    \begin{enumerate}
+        \item Use the integral representation of the Gamma function to write the value of the integral $\int_{0}^{\infty} x^{\varepsilon}e^{-x}dx$.
+        \\
+        \[\int_{0}^{\infty} x^{\varepsilon}e^{-x}dx = \boxed{\Gamma(1+\varepsilon)}\]
+        \item Write the Maclaurin expansion for $x^{\varepsilon}$, thought of as a function of $\varepsilon$ rather than $x$. Your expansion should contain powers of $\varepsilon$.
+        \\
+        \[x^{\varepsilon} = e^{\varepsilon\ln x} = \boxed{\sum_{k=0}^{\infty}\frac{(\varepsilon\ln x)^k}{k!}}\]
+        \item Substitute your result from part (b) into the integral given in part (a) and exchange the order of summation and integration to obtain a series of the form $\sum_{k=0}^{\infty}c_k\varepsilon^k$, where the coefficients $c_k$ contain integrals involving $x$. It is not necessary to justify the exchange of summation and integration for this problem.
+        \\
+        \[\int_{0}^{\infty} x^{\varepsilon}e^{-x}dx = \int_{0}^{\infty}\sum_{k=0}^{\infty}\frac{(\varepsilon\ln x)^k}{k!} e^{-x}dx = \sum_{k=0}^{\infty} \frac{\varepsilon^k}{k!} \int_{0}^{\infty} \ln^k(x) e^{-x}dx\]
+        \[c_k = \boxed{\frac{1}{k!}\int_{0}^{\infty} \ln^k(x) e^{-x}}\]
+        \item Use the Maclaurin expansion for $\ln\Gamma(1+x)$ derived in class to determine the first four nonzero terms in the Maclaurin expansion for $\Gamma(1+\varepsilon)$, thought of as a function of $\varepsilon$. Your coefficients may be left in terms of the Zeta function at integer arguments and/or the Euler-Mascheroni constant $\gamma$.
+        \\
+        \[\ln \Gamma(x) = -\gamma \varepsilon + \frac{\zeta(2)}{2}\varepsilon^2 - \frac{\zeta(3)}{3}\varepsilon^3 + \frac{\zeta(4)}{4}\varepsilon^4 - \cdots\]
+        \[\Gamma(x) = e^{-\gamma \varepsilon + \frac{\zeta(2)}{2}\varepsilon^2 - \frac{\zeta(3)}{3}\varepsilon^3 + \frac{\zeta(4)}{4}\varepsilon^4 - \cdots} \]\[= 1 + (-\gamma \varepsilon + \frac{\zeta(2)}{2}\varepsilon^2 - \frac{\zeta(3)}{3}\varepsilon^3 + \frac{\zeta(4)}{4}\varepsilon^4 - \cdots) + \frac 1 {2!} (-\gamma \varepsilon + \frac{\zeta(2)}{2}\varepsilon^2 - \frac{\zeta(3)}{3}\varepsilon^3 + \frac{\zeta(4)}{4}\varepsilon^4 - \cdots) + \frac 1{3!} \cdots\]
+        Of this, the first 4 terms are:
+        \[\boxed{1 - \gamma \varepsilon + \varepsilon^2\left( \frac{\gamma^2}{2} + \frac{\pi^2}{12} \right) - \varepsilon^3\left(\frac{\zeta(3)}{3} + \frac{\pi^2 \gamma}{12} + \frac{\gamma^3}{6}\right)}\]
+        \item Combine your results from parts (a), (c), and (d) to determine the values of the following integrals:
+        \\\\ By using the coefficients found above,
+        \begin{enumerate}
+            \item $\int_{0}^{\infty} e^{-x}\ln xdx = \boxed{-\gamma}$
+            \item $\int_{0}^{\infty} e^{-x}\ln^2 xdx = \boxed{\zeta(2) + \gamma^2}$
+            \item $\int_{0}^{\infty}e^{-x}\ln^3 xdx = \boxed{-2\zeta(3) -3\gamma\zeta(2) - \gamma^3}$
+        \end{enumerate}
+        \item Redo part (a) for the integral $\int_{0}^{\infty}x^\varepsilon e^{-ax}dx$, assuming $a$ is a positive real number. Then, use your result from part (d) to find the first four nonzero terms in a Maclaurin series for this integral in powers of $\varepsilon$. Hint: This can be done very easily with a few observations. Note that $7^{\varepsilon} = e^{\varepsilon\ln 7}$, so $7^{\varepsilon}e^{4\varepsilon} = e^{(4+\ln7)\varepsilon}$.
+        \\ 
+        \[u = ax, x = \frac u a, dx = \frac{du}{a}, \int_{0}^{\infty} \left(\frac u a\right)^{\varepsilon}e^{-u}\frac{du}{a} = a^{-1-\varepsilon} \Gamma(1+\varepsilon) = \frac 1 a \exp(-(\gamma + \ln a)\varepsilon + \frac{\zeta(2)}{2}\varepsilon^2 - \frac{\zeta(3)}{3}\varepsilon^3 + \cdots)\]
+        \[ = \boxed{\frac{1}{a}\left[ 1 - (\gamma + \ln a)\varepsilon + \left(\frac{\pi^2}{12}+\frac{(\gamma+\ln a)^2}{2}\right)\varepsilon^2 - \left(\frac{\pi^2(\gamma + \ln a)}{12}\frac{2\zeta(3) +(\gamma + \ln a)^3}{6}\varepsilon^3\right) + \cdots\right]}\]
+        \item Argue that there is no substantive difference between performing the maniuplation in part (c) for $\int_{0}^{\infty}x^{\varepsilon}e^{-x}$ and performing that maniuplation for $\int_{0}^{\infty} x^{\varepsilon}e^{-ax}$. Then, use your result from part (f) in conjunction with this fact to evaluate $\int_{0}^{\infty} e^{-5x}\ln ^2 xdx$.
+        \\\\
+        There is no substantive difference because we see that regardless of the expansion of the $e^{-x}$ term remains independent of the sum.
+        \[a = 5, \varepsilon = 2, c_2 = \frac{1}{5} \left( \frac{\zeta(2) + (\gamma + \ln 5)^2}{2}\right)\]
+        \[\int_{0}^{\infty}e^{-5x}\ln^2 xdx = 2!\cdot c_2  = \boxed{\frac 1 5 \left(\frac{\pi^2}{6} + (\gamma + \ln 5)^2\right)}\]
+    \end{enumerate}
+    \item This problem concerns the evaluation of the integral $\int_{0}^{\infty} xe^{-3x}\ln^2xdx$.
+    \begin{enumerate}
+        \item Evaluate the integral $\int_{0}^{\infty} x^{1+\varepsilon}e^{-3x}dx$ in terms of the Gamma function.
+        \\\[u = 3x, x = \frac u 3, dx = \frac{du}{3}, \int_{0}^{\infty} x^{1+\varepsilon}e^{-3x}dx = \boxed{3^{-2-\varepsilon} \Gamma(2+\varepsilon)}\]
+        \item Use the recurrence relation for the Gamma function to rewrite your result from part (a) in a form that allows you to make use of the expansion found in part (d) of problem 1.
+        \\\[3^{-2-\varepsilon}\Gamma(2+\varepsilon) = 3^{-2 - \varepsilon}(1+\varepsilon)\Gamma(1-\varepsilon) = \boxed{\frac{(1+\varepsilon)}{9}e^{-\varepsilon \ln 3}\Gamma(1+\varepsilon)}\]
+        \item Write out the first 3 nonzero terms of the Maclaurin expansion for the integral you found in part (a).
+        \\ \[\frac 1 9 (1-\varepsilon\ln 3 + \frac{\varepsilon^2\ln^2 3}{2!} + \cdots)\left(1 - \gamma\varepsilon + \frac{\gamma^2}{2}\epsilon^2 + \frac{\pi^2}{12}\epsilon^2 - \cdots\right)\]
+        \[ = \frac 1 9 + \frac{\varepsilon(1 - \ln3 - \gamma)}{9} + \frac{\varepsilon^2(\frac{\ln^23}{2} + \frac{\gamma^2}{2}+\frac{\pi^2}{12}+\gamma\ln 3 - \gamma - \ln 3)}{9} \]
+        \[= \boxed{\frac 1 9 \left[ 1 + (1 - \ln 3 - \gamma)\varepsilon + \left(\frac{\pi^2}{12}+\frac{(\gamma+\ln 3)^2}{2} - \gamma - \ln 3\right)\varepsilon^2\right]}\]
+        \item Use the manipulations you performed in parts (b) and (c) of problem 1 to write a Maclaurin expansion of the form $\sum_{0}^{\infty}c_k\varepsilon^k$ for the integral in part (a). Your coefficients will contain integrals involving $x$. Note that you do \textit{not} want powers of $(1+\varepsilon)$. You want powers of $\varepsilon$.
+        \\
+        \[\int_{0}^{\infty} x^{1+\varepsilon}e^{-3x}dx = \int_{0}^{\infty} x\left( \sum_{k=0}^{\infty} \frac{\ln^k x}{k!}\varepsilon^k\right)e^{-3x}dx = \boxed{\sum_{k=0}^{\infty} \left(\frac{1}{k!}\int_{0}^{\infty} xe^{-3x}\ln^kxdx\right)\varepsilon^k}\]
+        \item Use your results from parts (c) and (d) along with those from problem 1 to determine the value of the integral $\int_{0}^{\infty} e^{-3x}x\ln^2xdx$. Your result should be written in terms of the irrational number $\gamma, \pi, $ and $\ln 3$ only, along with rational numbers.
+        \\\[\int_{0}^{\infty}e^{-3x}x\ln^2xdx = 2!c_2 = \boxed{\frac 1 9 \left(\frac{\pi^2}{6}+(\gamma + \ln 3)^2 - 2\gamma -2\ln 3 \right)}\]
+    \end{enumerate}
+    \item Use the integral expression for the Beta function derived in class to determine the value of the following integrals. You may include $\pi, \sqrt 3,\Gamma(\frac 1 3),$ and $\Gamma(\frac 1 4)$ in your expressions, but no other numbers (note that this means $\Gamma^2(\frac 1 3)$ is allowable, but $\Gamma(\frac 2 3)$ and $\gamma$ are not).
+    \begin{enumerate}
+        \item \[\int_{0}^{1} \sqrt{\frac{t}{1-t}}dt = \int_{0}^{1}t^{\frac 1 2}(1-t)^{-\frac 1 2}\frac{\Gamma(\frac 3 2)\Gamma(\frac 1 2)}{\Gamma(2)}= \boxed{\frac{\pi}{2}}\]
+        \item \[\int_{0}^{1}t^4\sqrt{1-t^2}dt, u = t^2 \xrightarrow{u=t^2, t=\sqrt u}\int_{0}^{1}u^{\frac 3 2}(1-u)^{\frac 1 2}du = \frac{\Gamma(\frac 5 2)\Gamma(\frac 3 2)}{2\Gamma(4)} = \boxed{\frac{\pi}{32}}\]
+        \item \[\int_{0}^{1}\sqrt[3]{t^2(1-t)} = \int_{0}^{1} t^{\frac 2 3}(1-t)^{\frac 1 3} = \frac{\Gamma(\frac 5 3)\Gamma(\frac 4 3)}{\Gamma(3)} = \frac 1 9 \Gamma(\frac 1 3)\Gamma(\frac 2 3) = \boxed{\frac{2\pi\sqrt3}{27}}\]
+    \end{enumerate}
+\end{enumerate}
+\end{document}

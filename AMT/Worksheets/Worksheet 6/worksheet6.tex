@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{\today}
+\lfoot{Problem Set 6}
+\rfoot{}
+
+\begin{document}
+\thispagestyle{fancy}
+\begin{center}\LARGE{Advanced Mathematical Techniques \\ Problem Set 6}\end{center}
+\vspace{10mm}
+\begin{enumerate}
+    \item \[\int_{0}^{\frac{\pi}{2}}\sin^4\theta \cos^6\theta d\theta = \frac{\Gamma(\frac 5 2)\Gamma(\frac 7 2)}{2\Gamma(6)} = \boxed{\frac {3\pi}{512}}\]
+    \item \[\int_{0}^{\frac{\pi}{2}}\sin^5 \theta \cos^6 \theta d\theta = \frac{\Gamma(3)\Gamma(\frac 7 2)}{2\Gamma(\frac {13}2)} = \boxed{\frac{8}{693}}\]
+    \item \[\int_{0}^{\frac{\pi}{2}}\frac{\ln\sin\theta}{\sin\theta}d\theta \text{ \hspace{5mm}\boxed{\text{diverges}} at 0 because of the natural log's weakness, since $\sin\theta \approx \theta$ near 0.}\]
+    \item \ \[t = \sin\theta \;\Longrightarrow\;
+    \int_{0}^{\pi/2}\frac{\ln\sin\theta}{\cos\theta}\,d\theta
+    = \int_0^1 \frac{\ln t}{1-t^2}\,dt
+    = \sum_{n=0}^{\infty}\underbrace{\int_0^1 t^{2n}\ln t\,dt}_{-1/(2n+1)^2}
+    = -\sum_{n=0}^{\infty}\frac{1}{(2n+1)^2}
+    = -\lambda(2) = \boxed{-\frac{\pi^2}{8}}\]
+    \item \[\int_{0}^{1}\frac{\ln^2(1-t)}{t\sqrt t}dt \rightarrow \int_{0}^{1} t^{-\frac 3 2}(1-t)^\varepsilon = \frac{\Gamma(-\frac 1 2)\Gamma(1+\varepsilon)}{\Gamma(\frac{1}{2} + \varepsilon)} = \frac{(\delta - \frac 1 2)^{-1}\Gamma(1+\varepsilon)\Gamma(\frac 1 2 + \delta)}{\Gamma(\frac 1 2 + \varepsilon + \delta)} = \frac{(\delta - \frac 1 2)^{-1}\Gamma(1+\varepsilon)\Gamma(\frac 1 2 + \delta)}{2^{-2\varepsilon-2\delta}}\]
+    \[ = \frac{(\delta - \frac 1 2)^-1}{2^{2\delta}}\sqrt{\pi}\frac{\Gamma(1+2\delta)}{\Gamma(1+\delta)}\frac{\Gamma(1+\varepsilon)2^{2\varepsilon}2^{2\delta}\Gamma(1+\varepsilon+\delta)}{\sqrt{\pi}\Gamma(1+2\varepsilon+2\delta)} \]\[= -2(1+2\delta+4\delta^2+\cdots)(1+2\varepsilon\ln 2 + 2\ln^2 2 \varepsilon^2 + \cdots)\exp(\sum_{k=2}^{\infty}\frac{(-1)^k\zeta(k)}{k}\left[ (2^k-1)\delta^k + \varepsilon^k - (2^k-1)(\varepsilon+\delta)^k\right]) \]\[\xrightarrow{\text{taking the 2nd power coeff}}2\left(-4\ln^2 2 + \frac{\pi^2}{6}\cdot \frac 1 2 \right) = \boxed{\frac{2\pi^2}{3}-8\ln^2 2}\]
+    \item \[\int_{0}^{1}\frac{\ln t \ln(1-t)}{t}dt = -\sum_{n=1}^{\infty} \frac 1 n \int_{0}^{1} t^{n-1}\ln tdt = \sum_{n=1}^{\infty} \frac 1 {n^3} = \boxed{\zeta(3)}\]
+    \item \[\int_{0}^{1}\frac{\ln(1-t)}{t^2\sqrt t} \text{ \boxed{\text{diverges}}. At $t=0$, $\ln(1-t) \approx -t$, so the integrand is $t^{-\frac 3 2} < -1$ so it diverges.}\]
+    \item \[\int_{0}^{1} \frac{t + \ln(1-t)}{t^2\sqrt t} = -\sum_{n=2}^{\infty} \frac 1 n \cdot \frac 2 {2n-3} = -\sum_{n=2}^{\infty} \left( \frac{2}{3n} - \frac{4}{3(2n-3)}\right) = \frac{-2}{3} - \frac{4\ln 2}{3} = \boxed{-\frac{2(1+2\ln 2)}{3}}\]
+\end{enumerate}
+\end{document}

@@ -1,0 +1,198 @@
+\documentclass{article}
+\usepackage{graphicx, physics}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{\today}
+\lfoot{Problem Set 11}
+\rfoot{}
+
+\begin{document}
+    \thispagestyle{fancy}
+    \begin{center}
+        \LARGE{Advanced Mathematical Techniques \\ Problem Set 11}
+    \end{center}
+    \vspace{10mm}
+    \begin{enumerate}
+
+        %% ----------------------------------------------------------------
+        %% PROBLEM 1
+        %% ----------------------------------------------------------------
+        \item As we saw in class, the population of atoms occupying a state of energy $\varepsilon$ in thermal equilibrium at temperature $T$ is proportional to $e^{-\beta\varepsilon}$ where $\beta = 1/k_BT$. This can be interpreted as indicating that $k_BT$ represents the amount of energy that is easily available to atoms in thermal equilibrium at absolute temperature $T$. Please use the electron-volt as the energy unit throughout this problem. The Boltzmann constant is given by $k_B = 8.61733\times10^{-5}$ eV/K.
+
+        \begin{enumerate}
+            \item The bond energy of a hydrogen molecule is given by about 4.52 eV. Determine the Boltzmann factor for this energy at a temperature of 300 K (about `room temperature'). This can be thought of as a relative probability that hydrogen molecules will dissociate at this temperature.
+            \\
+            \\The Boltzmann factor for the H$_2$ bond energy $\varepsilon = 4.52$ eV at $T = 300$ K is:
+            \[e^{-\varepsilon / k_B T} = e^{-\frac{4.52\text{ eV}}{(8.617\times10^{-5}\text{ eV/K})(300\text{ K})}} = \boxed{e^{-174.9} \approx 1.168\times10^{-76}}\]
+            This is super small which shows that hydrogen molecules are very unlikely to dissociate at room temperature.
+            \item A hydrogen molecule requires at least 0.015157 eV of energy in order to rotate about an axis perpendicular to its bond axis. Determine the Boltzmann factor associated with this energy at the following temperatures.
+            \\
+            \begin{enumerate}
+                \item $T = 300$ K:
+                \[e^{-\varepsilon/k_BT} = e^{-\frac{0.015157}{(8.617\times10^{-5})(300)}} \approx \boxed{0.5564}\]
+                \item $T = 77$ K:
+                \[e^{-\varepsilon/k_BT} = e^{-\frac{0.015157}{(8.617\times10^{-5})(77)}} \approx \boxed{0.1018}\]
+                \item $T = 4$ K:
+                \[e^{-\varepsilon/k_BT} = e^{-\frac{0.015157}{(8.617\times10^{-5})(4)}} \approx \boxed{7.98\times10^{-20}}\]
+            \end{enumerate}
+
+            \item A nitrogen molecule requires at least 0.0004933 eV of energy in order to rotate about an axis perpendicular to its bond axis. Determine the Boltzmann factor associated with this energy at the following temperatures.
+            \\
+            \begin{enumerate}
+                \item $T = 300$ K:
+                \[e^{-\varepsilon/k_BT} = e^{-\frac{0.0004933}{(8.617\times10^{-5})(300)}} \approx \boxed{0.9811}\]
+                \item $T = 77$ K:
+                \[e^{-\varepsilon/k_BT} = e^{-\frac{0.0004933}{(8.617\times10^{-5})(77)}} \approx \boxed{0.9284}\]
+                \item $T = 4$ K:
+                \[e^{-\varepsilon/k_BT} = e^{-\frac{0.0004933}{(8.617\times10^{-5})(4)}} \approx \boxed{0.2390}\]
+            \end{enumerate}
+
+            \item Explain the difference between your answers to parts (b) and (c) in terms of the dependence the heat capacity at constant volume has on temperature.
+            \\
+            \\The rotational energy gap for H$_2$ is much greater than for N$_2$. As seen in part (b), when H$_2$ cools from 300 K to 77 K its Boltzmann factor drops dramatically from 0.556 to 0.102, indicating that the available thermal energy $k_BT$ is to small to excite higher rotational states. The rotational degree of freedom effectively freezes out which reduces $C_V$ by taking away a contribution.
+            \\
+            \\However in part (c) the same temperature change only reduces the Boltzmann factor from 0.981 to 0.928. The rotational freedom of N$_2$ continues to be excited, so it contributes to $C_V$ at this temperature. This illustrates why $C_V$ depends on temperature, since a low temperature could remove a degree of freedom, when $k_BT \gg \varepsilon_{\text{rot}}$.
+
+            \item Determine the amount of energy, in electron-volts, that is freely available (so\ldots\ this is just the energy $k_BT$) at the following temperatures. Please give your answers as approximate fractions like $1/3$ eV.
+            \\
+            \\The thermal energy $k_BT$ at each temperature:
+            \begin{enumerate}
+                \item $T = 4$ K: $k_BT = (8.617\times10^{-5})(4) = 3.447\times10^{-4}$ eV $\approx \boxed{\dfrac{1}{2900}\text{ eV}}$
+                \item $T = 77$ K: $k_BT = (8.617\times10^{-5})(77) = 6.635\times10^{-3}$ eV $\approx \boxed{\dfrac{1}{150}\text{ eV}}$
+                \item $T = 300$ K: $k_BT = (8.617\times10^{-5})(300) = 2.585\times10^{-2}$ eV $\approx \boxed{\dfrac{1}{40}\text{ eV}}$
+                \item $T = 5800$ K: $k_BT = (8.617\times10^{-5})(5800) = 0.4998$ eV $\approx \boxed{\dfrac{1}{2}\text{ eV}}$
+            \end{enumerate}
+        \end{enumerate}
+
+        %% ----------------------------------------------------------------
+        %% PROBLEM 2
+        %% ----------------------------------------------------------------
+        \item Suppose that we have $N = 5\times10^{20}$ atoms, each of which are free to occupy any one of three accessible energy states with energies of $0$, $\varepsilon$, and $5\varepsilon$. You may assume that the number of atoms in each of these states throughout this problem is large enough that you can use the Stirling approximation with impunity. All numerical answers should be given in scientific notation correct to three decimal places.
+        \\
+        \\With the Boltzmann populations
+        \[n_1 = \frac{N}{1+x+x^5}, \quad n_2 = \frac{Nx}{1+x+x^5}, \quad n_3 = \frac{Nx^5}{1+x+x^5}, \quad x = e^{-\varepsilon/k_BT}.\]
+
+        \begin{enumerate}
+            \item What configuration will give the largest entropy if we do not have to restrict the total energy of the system? What is the entropy of this configuration?
+            \\
+            \\Entropy is maximized when all states are equally populated:
+            \[n_1 = n_2 = n_3 = \frac{N}{3}\]
+            \[S = k_B N\ln 3 \approx \boxed{2.197\times10^{21}\,k_B}\]
+
+            \item Determine the temperature of the system if the total energy is fixed at $2\times10^{20}\,\varepsilon$. Give your result as a decimal multiple of $\varepsilon/k_B$. How many atoms will be in each state under this restriction, and what will be the resulting entropy?
+            \\
+            \\$E = 2\times10^{20}\,\varepsilon$. The energy condition $\frac{x+5x^5}{1+x+x^5} = \frac{2}{5}$ gives:
+            \[23x^5 + 3x - 2 = 0 \implies x = 0.4771\]
+            \[T = \frac{-\varepsilon}{k_B\ln(0.4771)} = \boxed{1.352\,\frac{\varepsilon}{k_B}}\]
+            \[n_1 = 3.329\times10^{20}, \quad n_2 = 1.589\times10^{20}, \quad n_3 = 0.082\times10^{20}\]
+            \[S = -k_B\sum_{k=1}^3 n_k\ln\!\left(\frac{n_k}{N}\right) = \boxed{3.513\times10^{20}\,k_B}\]
+
+            \item Determine the temperature of the system if the total energy is fixed at $7\times10^{20}\,\varepsilon$. Give your result as a decimal multiple of $\varepsilon/k_B$. How many atoms will be in each state under this restriction, and what will be the resulting entropy?
+            \\
+            \\$E = 7\times10^{20}\,\varepsilon$. The energy condition $\frac{x+5x^5}{1+x+x^5} = \frac{7}{5}$ gives:
+            \[18x^5 - 2x - 7 = 0 \implies x = 0.8653\]
+            \[T = \frac{-\varepsilon}{k_B\ln(0.8653)} = \boxed{6.912\,\frac{\varepsilon}{k_B}}\]
+            \[n_1 = 2.127\times10^{20}, \quad n_2 = 1.841\times10^{20}, \quad n_3 = 1.032\times10^{20}\]
+            \[S = \boxed{5.286\times10^{20}\,k_B}\]
+
+            \item Determine the temperature of the system if the total energy is fixed at $20\times10^{20}\,\varepsilon$. Give your result as a decimal multiple of $\varepsilon/k_B$. How many atoms will be in each state under this restriction, and what will be the resulting entropy? What's different about this situation?
+            \\
+            \\$E = 20\times10^{20}\,\varepsilon$. The energy condition $\frac{x+5x^5}{1+x+x^5} = 4$ gives:
+            \[x^5 - 3x - 4 = 0 \implies x = 1.5383\]
+            \[T = \frac{-\varepsilon}{k_B\ln(1.5383)} = \boxed{-2.322\,\frac{\varepsilon}{k_B}}\]
+            \[n_1 = 0.449\times10^{20}, \quad n_2 = 0.690\times10^{20}, \quad n_3 = 3.862\times10^{20}\]
+            \[S = \boxed{3.445\times10^{20}\,k_B}\]
+            The thing that is different here is that the temperature is \textit{negative}. This requires a population inversion, where most atoms occupy the highest energy state, which can only be achieved by supplying more energy than is accessible at any positive finite temperature. Therefore, a negative temperature is in a sense ``hotter'' than any positive temperature.
+
+            \item Suppose that the temperature is fixed at $7\,\varepsilon/k_B$. How many atoms are in each state? What is the total energy of the system? What is the resulting entropy?
+            \\
+            \\$T = 7\,\varepsilon/k_B \implies x = e^{-1/7} = 0.86688$:
+            \[n_1 = 2.122\times10^{20}, \quad n_2 = 1.839\times10^{20}, \quad n_3 = 1.039\times10^{20}\]
+            \[U = n_2\varepsilon + 5n_3\varepsilon = \boxed{7.034\times10^{20}\,\varepsilon}\]
+            \[S = \boxed{5.291\times10^{20}\,k_B}\]
+        \end{enumerate}
+
+        %% ----------------------------------------------------------------
+        %% PROBLEM 3
+        %% ----------------------------------------------------------------
+        \item When considering gases on a larger scale, we need to include the gravitational force. The potential energy associated with a molecule of mass $m$ at height $h$ above the surface of the Earth can be taken as $U_g = mgh$, where $g = 9.8$ m/s$^2$. In the following, we will ignore the contributions pressure makes to the potential energy of a gas molecule and the fact that the atmosphere is not at constant temperature.
+
+        \begin{enumerate}
+            \item Write a normalized distribution for the probability of finding a gas molecule of mass $m$ at height $h$ above the surface of the Earth, taking the atmosphere in thermal equilibrium at temperature $T$.
+            \\
+            \\The Boltzmann factor tell us that $p \propto e^{-mgh/k_BT}$. Normalizing over $h\in[0,\infty)$:
+            \[\int_0^\infty A\,e^{-mgh/k_BT}\,dh = A\,\frac{k_BT}{mg} = 1 \implies A = \frac{mg}{k_BT}\]
+            \[\boxed{p(h) = \frac{mg}{k_BT}\,e^{-mgh/k_BT}}\]
+
+            \item Determine the average height of a gas molecule of mass $m$ in equilibrium at Kelvin temperature $T$. Find the average height of a chlorine, argon, and oxygen molecule/atom in thermal equilibrium at 300 Kelvin, in kilometers, then determine the probability that each of these will be found above 20 kilometers.
+            \\
+            \\The mean height is:
+            \[\langle h\rangle = \int_0^\infty h\,p(h)\,dh = \frac{k_BT}{mg} = \frac{RT}{Mg}\]
+            where $M = mN_A$ is the molar mass and $R = k_B N_A$. With $RT/g = (8.314)(300)/9.8 = 254.5$ m$\cdot$kg/mol:
+            \[\langle h\rangle_{\text{Cl}_2} = \frac{254.5}{0.0709} \approx \boxed{3.59\text{ km}}, \quad
+              \langle h\rangle_{\text{Ar}}  = \frac{254.5}{0.03995} \approx \boxed{6.37\text{ km}}, \quad
+              \langle h\rangle_{\text{O}_2} = \frac{254.5}{0.032}  \approx \boxed{7.95\text{ km}}\]
+            The probability of finding a molecule above height $h_0$ is $P(h>h_0) = e^{-h_0/\langle h\rangle}$:
+            \[P_{\text{Cl}_2}(h>20\text{ km}) = e^{-20/3.59} \approx \boxed{0.38\%}, \quad
+              P_{\text{Ar}}(h>20\text{ km})  = e^{-20/6.37} \approx \boxed{4.33\%},\]\[
+              P_{\text{O}_2}(h>20\text{ km}) = e^{-20/7.95} \approx \boxed{8.09\%}\]
+        \end{enumerate}
+
+        %% ----------------------------------------------------------------
+        %% PROBLEM 4
+        %% ----------------------------------------------------------------
+        \item The Maxwell-Boltzmann distribution is based on the idea that the probability that a state of energy $E$ will be populated in a system in equilibrium at Kelvin temperature $T$ is proportional to $e^{-\beta E}$, where $\beta = 1/k_BT$. The Boltzmann constant $k_B = 1.38\times10^{-23}$ J/K can be thought of as a conversion constant between Kelvin and Joules. One of the simplest applications of this distribution involves the sharing of kinetic energy between gaseous molecules in thermal equilibrium.
+
+        \begin{enumerate}
+            \item The kinetic energy of a molecule with mass $m$ and speed $v$ is given by $K = \frac{1}{2}mv^2$. Ignoring other contributions to the energy of a system of gaseous molecules with mass $m$, write an expression proportional to the probability that a molecule will have a velocity lying between $(v_x, v_y, v_z)$ and $(v_x+dv_x,\, v_y+dv_y,\, v_z+dv_z)$.
+            \\
+            \\With $K = \frac{1}{2}m(v_x^2+v_y^2+v_z^2)$, the probability element is:
+            \[\boxed{P \propto e^{-m(v_x^2+v_y^2+v_z^2)/2k_BT}\,dv_x\,dv_y\,dv_z}\]
+
+            \item The probability that a molecule will have some velocity pointing in some direction between 0 and $\infty$ is 1. Use this fact to normalize the probability distribution found in (a).
+            \\
+            \[\int_{0}^{2\pi}\sin\theta d\theta = 2, \int_{0}^{2\pi}d\phi = 2\pi\]
+            \[1 = \int_0^\infty 4\pi A\,v^2\,e^{-mv^2/2k_BT}\,dv = 4\pi A\cdot\frac{1}{4}\sqrt{\frac{\pi}{(m/2k_BT)^3}}\]
+            \[\boxed{f(v)\,dv = 4\pi\!\left(\frac{m}{2\pi k_BT}\right)^{\!3/2} v^2\,e^{-mv^2/2k_BT}\,dv}\]
+
+            \item Use your normalized probability distribution to determine the average speed and the root-mean-square speed for molecules of mass $m$ in thermal equilibrium at temperature $T$. Which of these two is larger? Why aren't they the same?
+            \\
+            \\Setting $\alpha = m/2k_BT$ and using $\int_0^\infty x^3 e^{-\alpha x^2}dx = \frac{1}{2\alpha^2}$ and $\int_0^\infty x^4 e^{-\alpha x^2}dx = \frac{3}{8}\sqrt{\pi/\alpha^5}$:
+            \[\langle v\rangle = 4\pi\!\left(\frac{m}{2\pi k_BT}\right)^{\!3/2}\frac{1}{2\alpha^2} = \boxed{\sqrt{\frac{8k_BT}{\pi m}}}\]
+            \[\langle v^2\rangle = 4\pi\!\left(\frac{m}{2\pi k_BT}\right)^{\!3/2}\frac{3}{8}\sqrt{\frac{\pi}{\alpha^5}} = \frac{3k_BT}{m} \implies \boxed{v_\text{rms} = \sqrt{\frac{3k_BT}{m}}}\]
+            $v_\text{rms} > \langle v\rangle$ because squaring weights the high-speed tail of the distribution more heavily before averaging, pulling $v_\text{rms}$ above $\langle v\rangle$.
+
+            \item Determine the mean speed and root-mean-square speed $v_\text{rms} = \sqrt{\langle v^2\rangle}$ of hydrogen, nitrogen, and carbon dioxide molecules in thermal equilibrium in our atmosphere at a temperature of 300 K. For comparison, the escape speed of the Earth is approximately 11,200 m/s.
+            \\
+            \\Using $R = k_BN_A$, $M = mN_A$ (molar mass), and $RT = (8.314)(300) = 2494.2$ J/mol:
+            \[\langle v\rangle = \sqrt{\frac{8RT}{\pi M}}, \qquad v_\text{rms} = \sqrt{\frac{3RT}{M}}\]
+            \[\text{H}_2:\quad \langle v\rangle \approx \boxed{1775\text{ m/s}}, \quad v_\text{rms} \approx \boxed{1926\text{ m/s}}\]
+            \[\text{N}_2:\quad \langle v\rangle \approx \boxed{476\text{ m/s}}, \quad v_\text{rms} \approx \boxed{517\text{ m/s}}\]
+            \[\text{CO}_2:\quad \langle v\rangle \approx \boxed{380\text{ m/s}}, \quad v_\text{rms} \approx \boxed{412\text{ m/s}}\]
+            All are well below the Earth's escape speed of $\approx 11{,}200$ m/s.
+
+            \item Find an integral expression for the probability that a molecule of mass $m$ in thermal equilibrium at temperature $T$ has a speed lying between $v$ and $v+dv$. Do a $u$-substitution to move all the physical constants out front so that their only remnant lies in the integration limits. Use this to determine the probability that the speed of a hydrogen, nitrogen, and carbon dioxide molecule will be found between 400 and 500 meters per second at 300 K. What is the probability that the speed will be larger than 600 m/s?
+            \\
+            \\Substituting $u = v\sqrt{m/2k_BT} = v\sqrt{M/2RT}$:
+            \[P(v_1 < v < v_2) = \frac{4}{\sqrt{\pi}}\int_{u_1}^{u_2} u^2\,e^{-u^2}\,du, \qquad u = v\sqrt{\frac{M}{2RT}}\]
+            When $T=300$ K, $u = v\cdot 1.01416\times10^{-3}\sqrt{M}$ (with $M$ in g/mol).
+            \\
+            {H}$_2$ ($M=2.016$ g/mol): $u(400)=0.254,\;u(500)=0.318$
+            \[P(400<v<500\text{ m/s}) \approx \boxed{1.1\%}, \qquad u(600)=0.382 \implies P(v>600\text{ m/s}) \approx \boxed{96.6\%}\]
+            {N}$_2$ ($M=28.01$ g/mol): $u(400)=0.948,\;u(500)=1.185$
+            \[P(400<v<500\text{ m/s}) \approx \boxed{19.3\%}, \qquad u(600)=1.422 \implies P(v>600\text{ m/s}) \approx \boxed{25.7\%}\]
+            {CO}$_2$ ($M=44.01$ g/mol): $u(400)=1.188,\;u(500)=1.485$
+            \[P(400<v<500\text{ m/s}) \approx \boxed{19.9\%}, \qquad u(600)=1.783 \implies P(v>600\text{ m/s}) \approx \boxed{9.6\%}\]
+        \end{enumerate}
+
+    \end{enumerate}
+\end{document}

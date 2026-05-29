@@ -1,0 +1,122 @@
+\documentclass{article}
+\usepackage{graphicx, physics, dsfont}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{ragged2e}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\pagestyle{fancy}
+\lhead{Zoeb Izzi}
+\rhead{\today}
+\lfoot{Problem Set 10}
+\rfoot{}
+
+\begin{document}
+    \thispagestyle{fancy}
+    \begin{center}
+                \LARGE{Advanced Mathematical Techniques \\ Problem Set 10}
+    \end{center}
+    \vspace{10mm}
+    \begin{enumerate}
+        \item A system of $N=3\times10^{24}$ atoms can exist in three quantum states associated with energies of 0, $\varepsilon$, and $4\varepsilon$. The total energy of the system is $E = N\frac \varepsilon 2$. Use the expression:
+        \[S = k_B \ln \Omega \approx k_B \left[-\sum_{k=1}^{3} n_k \ln(\frac{n_k}{N}) + \frac 1 2 \ln(\frac{N}{4\pi^2n_1n_2n_3})\right]\]
+        for the entropy throughout, where the subscripts refer to the energy states. Give all answers to these questions as numerical values complete with units.
+        \begin{enumerate}
+            \item Suppose there are no atoms in the highest energy state. How many atoms are in each of the other two states in this case?
+            \\
+            \[0\times k + \varepsilon(N-k) = N\frac{\varepsilon}{2}\]
+            \[k = \frac{N}{2} = \boxed{1.5 \times 10^{24}}\]
+            Thus, there are \boxed{1.5\times 10^{24}} atoms in the ground state and \boxed{1.5\times10^{24}} atoms in the first excited state.
+            \item Explain why the expression given above for the entropy is flawed in the case associated with part (a). Then, modify part (a) slightly by supposing instead that there are 20 atoms in the highest energy state. Use the formula above to determine the entropy in this case.
+            \\
+            \\This is flawed because the second ln term blows up to $\infty$ when there are 0 atoms in any of the energy states. Assuming 20 atoms in the highest energy state and $1.5 \times 10^{24}$ atoms in either of the other two energy states gives us:
+            \[S = k_B \left[-\sum_{k=1}^{3} n_k \ln(\frac{n_k}{N}) + \frac 1 2 \ln(\frac{N}{4\pi^2n_1n_2n_3})\right] = \boxed{28.7098 \text{ J/K}}\]
+            \item Determine the entropy of the system in the case of 100 atoms in the highest energy state.
+            \\
+            \[S = k_B \left[-\sum_{k=1}^{3} n_k \ln(\frac{n_k}{N}) + \frac 1 2 \ln(\frac{N}{4\pi^2n_1n_2n_3})\right] = \boxed{28.7098 \text{ J/K}}\]
+            \item Compare your results from parts (b) and (c) and explain why both of these situations can be considered \textit{minor} variations from part (a).
+            \\
+            \\ These can be considered minor because the entropy is not significantly different and there are largely the same amount of atoms in each energy state. 100 atoms makes very little difference when considered on the order of $10^{24}$ atoms.
+            \item Determine the ratio of the second contribution to the entropy (the one with $\pi$) to that of the sum in the scenario given in part (b). Explain why the result from part (c) will be similar and what your result means about the \textit{importance} of the second contribution to our approximation of the entropy.
+            \\
+            \[\frac{\frac{1}{2} \ln(\frac{N}{4\pi^2n_1n_2n_3})}{-\sum_{k=1}^{3} n_k \ln(\frac{n_k}{N})} = \frac{30.8229}{2.0794 \cdot 10^{24}} = \boxed{1.4823 \cdot 10^{-23}}\]
+            The comparison for part (c) will yield similar results because we are dealing with an order of magnitude of 24 and the difference is in the 2nd order, so such a difference can be ignored. This means that the second contribution is basically meaningless in comparison to the first with regard to the approximation of the entropy.
+            \item Suppose there are $\frac N {100}$ atoms in the highest energy state. How many atoms are in each of the other states in this case? Determine the entropy of the system in this scenario. Explain the difference between this result and those from parts (b) and (c). Does this represent a \textit{minor} variation from part (a)?
+            \\
+            \[n_3 = \frac{N}{100} = \boxed{3 \cdot 10^{22}}, n_2 = \frac{N}{2} - 4\frac{N}{100} = \frac{46N}{100} = \boxed{1.38 \cdot 10^{24}}, n_1 = N - n_2 - n_3 = \frac{53N}{100} = \boxed{1.59 \cdot 10^{24}}\]
+            \[S = k_B \left[-\sum_{k=1}^{3} n_k \ln(\frac{n_k}{N}) + \frac 1 2 \ln(\frac{N}{4\pi^2n_1n_2n_3})\right] = \boxed{30.6397 \text{ J/K}}\]
+            This is a significant increase compared to previous parts because this is distinctly not a minor variation: a 1\% change is nonnegligible and can significantly affect the entropy of the system.
+            \item Suppose there are $\frac N {25}$ atoms in the highest energy state. How many atoms are in each of the other states in this case? Determine the entropy of the system in this scenario. Explain the difference between this result and that from part (f). Did the entropy decrease or increase?
+            \\\[n_3 = \frac{N}{25} = \boxed{1.2 \cdot 10^{23}}, n_2 = \frac{N}{2} - 4\frac{N}{25} = \frac{39N}{100} = \boxed{1.02 \cdot 10^{24}}, n_1 = N - n_2 - n_3 = \frac{62N}{100} = \boxed{1.86 \cdot 10^{24}}\]
+            \[S = k_B \left[-\sum_{k=1}^{3} n_k \ln(\frac{n_k}{N}) + \frac 1 2 \ln(\frac{N}{4\pi^2n_1n_2n_3})\right] = \boxed{32.8014 \text{ J/K}}\]
+            The entropy increased compared to part (f) because there are more possible states the atoms can be in.
+            \item Suppose there are $\frac N {10}$ atoms in the highest energy state. How many atoms are in each of the other states in this case? Determine the entropy of the system in this scenario. Explain the difference between this result and that from part (g). Did the entropy increase or decrease? What is the difference between this change and those seen previously? What does this indicate about the number of atoms in the highest energy state associated with the \textit{maximum} entropy for this total energy? Use the Boltzmann factor to confirm your statement by calculating the fraction of the total number of atoms in eacn state at maximum entropy.
+            \\\[n_3 = \frac{N}{10} = \boxed{3 \cdot 10^{23}}, n_2 = \frac{N}{2} - 4\frac{N}{10} = \frac{N}{10}= \boxed{3 \cdot 10^{23}}, n_1 = N - n_2 - n_3 = \frac{8N}{10} = \boxed{2.4 \cdot 10^{24}}\]
+            \[S = k_B \left[-\sum_{k=1}^{3} n_k \ln(\frac{n_k}{N}) + \frac 1 2 \ln(\frac{N}{4\pi^2n_1n_2n_3})\right] = \boxed{26.4684 \text{ J/K}}\]
+            The entropy decreased by a significant amount compared to part (g). This indicates that the maximum entropy is associated with a number of atoms in the highest energy state between $N/10$ and $N/25$.
+            \[0.5x + 3.5x^4 = 0.5, x \approx 0.5135, \frac{n_1}{N} \approx \boxed{0.6317}, \frac{n_2}{N} \approx \boxed{0.3244}, \frac{n_3}{N} \approx \boxed{0.0439}\]
+            \item Determine the \textit{absolute} maximum entropy this system can have, without regard for the 'total energy. What is the total energy of this 'maximum entropy' system? Give this last answer as a decimal multiple of $N\varepsilon$.
+            The maximum possible number of states occurs when there are an equal number of atoms in every energy level.
+            \[n_1 = n_2 = n_3 = \frac{N}{3} = 10^{24}\]
+            \[S = k_B \left[-3 \cdot \frac{N}{3} \ln(\frac{N}{3N}) + \frac 1 2 \ln(\frac{N}{4\pi^2 (\frac{N}{3})^3})\right] = \boxed{45.5039 \text{ J/K}}\]
+            Also, at this point, the total energy is:
+            \[E = \frac{N\varepsilon}{3} + \frac{4N\varepsilon}{3} = \boxed{\frac{5}{3}N\varepsilon}\]
+        \end{enumerate}
+        \item Ocean water has a bulk modulus of about 2.34 GPa, or 2.34 $\times 10^9$ Pa, at ordinary pressures. This is approximately 23,100 atm. The pressure increases as we descend into a body of water (or any liquid) as $\Delta p = \rho g h$, where $h$ is the depth of the water. Assuming the bulk modulus is constant (it's not actually... it increases with pressure), calculate the fractional change in volume associated with water at the bottom of the Pacific Ocean (4 km down) in comparison to water at the surface. Use 1025 $kg/m^3$ for the density.
+        \\
+        \[\frac{\Delta V}{V} = -\frac{ \Delta p}{B} = -\frac{\rho g h}{2.34 \times 10^9} =  -\frac{1025 \cdot 9.81 \cdot 4000}{2.34 \times 10^9} = \boxed{-\frac{4469}{260000} \approx -1.71885 \%}\]
+        \item The thermal expansion coefficient of steel is about $13 \times 10^{-6} \big/ K$. Using this, determine the fractional change in volume of a steel beam as it heats up from 0 degrees Celsius to 40 degrees Celsius. Explain why this might be relevant to structural engineers designing railroads.
+        \\
+        \[\frac{\Delta V}{V} = \alpha \Delta T = 13 \times 10^{-6} \times 40 = \boxed{\frac{13}{25000} \approx 0.052 \%}\]
+        This is important to structural engineers designing railroads because if they don't give the steel rails space to expand they may warp outwards which could cause the train to derail.
+        \item Determine the value of $B, \alpha,$ and $C_p$ for $n$ moles of an ideal gas with $l$ degrees of freedom held at pressure $p$ and temperature $T$.
+        \\ (maybe use nR since moles)
+        \[V = \frac{Nk_BT}{p}\]
+        \[\left( \frac{\partial V}{\partial p}\right)_T = -\frac{Nk_BT}{p^2} = -\frac{V}{p}, \left(\frac{\partial p}{\partial V}\right)_T = -\frac{p}{V}, \boxed{B = p}\]
+        \[\left(\frac{\partial V}{\partial T} \right)_p = \frac{Nk_B}{p} = \frac{V}{T}, \boxed{\alpha = T^{-1}}\]
+        \[C_v = \frac{U}{T} = \frac{l}{2}Nk_B, \boxed{C_p = C_v + Nk_B = \frac{l+2}{2}Nk_B}\]
+        \item One of the most difficult derivatives to express in terms of our three chosen quantities, and a sort of 'key' to getting the rest of the derivatives, is the heat capacity at constant volume, $C_V = T (\frac{\partial S }{\partial T})_V$. Determine the value of this derivative in terms of any or all of $p,T,V,B,\alpha,C_p$ by thinking of $S$ as a function of $p$ and $T$, dividing its differential by $dT$, and taking the volume as a constant.
+        \\
+        \[S = S(p,t), dS = \left(\frac{\partial S}{\partial T}\right)_p dT + \left(\frac{\partial S}{\partial p}\right)_T dp\]
+        \[\left(\frac{\partial S}{\partial T}\right)_V = \left(\frac{\partial S}{\partial T}\right)_p + \left(\frac{\partial S}{\partial p}\right)_T \left(\frac{\partial p}{\partial T}\right)_V\]
+        \[dV = \left(\frac{\partial V}{\partial T}\right)_p dT + \left(\frac{\partial V}{\partial p}\right)_T dp = 0 \implies \left(\frac{\partial p}{\partial T}\right)_V = -\frac{(\partial V/\partial T)_p}{(\partial V/\partial p)_T} = \frac{\alpha V}{V/B} = \alpha B\]
+        \[\left(\frac{\partial S}{\partial T}\right)_V = \frac{C_p}{T} + (-\alpha V)(\alpha B) = \frac{C_p}{T} - \alpha^2 VB\]
+        \[\boxed{C_V = T\left(\frac{\partial S}{\partial T}\right)_V = C_p - TV\alpha^2 B}\]    \item Determine the following derivatives in terms of any or all of $p,T,V,B,\alpha,C_p$ and state whether you expect them to be positive or negative for an ordinary material. Note: for these problems, it is easiest to think of $S$ as representing heat, i.e. you should think of changes in $S$ as representing a flow of heat; constant entropy processes are those taking place with no heat flow into or out of the system.
+        \begin{enumerate}
+            \item \[\left( \frac{\partial V}{\partial S}\right)_p\]
+            \[dV = \alpha V\,dT, dS = \frac{C_p}{T}dT,\]
+            \[\left(\frac{\partial V}{\partial S}\right)_p = \frac{\alpha V\,dT}{(C_p/T)\,dT} = \frac{\alpha VT}{C_p}.
+            \]
+            \[
+                \boxed{\left(\frac{\partial V}{\partial S}\right)_p = \frac{\alpha VT}{C_p}.}
+            \]
+            This is \textbf{positive} for an ordinary material (since $\alpha>0$, $V>0$, $T>0$, $C_p>0$): we expect adding heat at constant pressure to increase both entropy and volume.
+
+            \item \[\left( \frac{\partial T}{\partial V}\right)_S\]
+        \[\left(\frac{\partial T}{\partial V}\right)_S = -\left(\frac{\partial T}{\partial S}\right)_V \left(\frac{\partial S}{\partial V}\right)_T\]
+        \[\left(\frac{\partial S}{\partial V}\right)_T = \left(\frac{\partial p}{\partial T}\right)_V = \alpha B\]
+        \[C_V = T\left(\frac{\partial S}{\partial T}\right)_V \implies \left(\frac{\partial T}{\partial S}\right)_V = \frac{T}{C_V}\]
+        \[\left(\frac{\partial T}{\partial V}\right)_S = -\frac{T}{C_V} \cdot \alpha B\]
+        \[\boxed{\left(\frac{\partial T}{\partial V}\right)_S = -\frac{\alpha BT}{C_p - TV\alpha^2B}}\]
+        This is \textbf{negative} for an ordinary material: an adiabatic expansion lowers the temperature.
+ 
+        \item \[\left( \frac{\partial p}{\partial S}\right)_V\]
+        \[\left(\frac{\partial T}{\partial V}\right)_S = -\left(\frac{\partial p}{\partial S}\right)_V\]
+        \[\left(\frac{\partial p}{\partial S}\right)_V = -\left(\frac{\partial T}{\partial V}\right)_S = \frac{\alpha BT}{C_V} \text{ (from above)}\]
+        \[\boxed{\left(\frac{\partial p}{\partial S}\right)_V = \frac{\alpha BT}{C_p - TV\alpha^2B}}\]
+        This is \textbf{positive} for an ordinary material: adding heat at constant volume raises the pressure.
+ 
+        \item \[\left( \frac{\partial T}{\partial p}\right)_S\]
+        \[\left(\frac{\partial T}{\partial p}\right)_S = -\left(\frac{\partial T}{\partial S}\right)_p \left(\frac{\partial S}{\partial p}\right)_T\]
+        \[C_p = T\left(\frac{\partial S}{\partial T}\right)_p \implies \left(\frac{\partial T}{\partial S}\right)_p = \frac{T}{C_p}\]
+        \[\left(\frac{\partial S}{\partial p}\right)_T = -\left(\frac{\partial V}{\partial T}\right)_p = -\alpha V\]
+        \[\left(\frac{\partial T}{\partial p}\right)_S = -\frac{T}{C_p}\cdot(-\alpha V) = \frac{\alpha VT}{C_p}\]
+        \[\boxed{\left(\frac{\partial T}{\partial p}\right)_S = \frac{\alpha VT}{C_p}}\]
+        This is \textbf{positive} for an ordinary material: an adiabatic compression raises the temperature.
+        \end{enumerate}
+    \end{enumerate}
+\end{document}
