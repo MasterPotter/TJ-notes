@@ -2,41 +2,31 @@
 \usepackage[margin=1in]{geometry}       % page margins
 \usepackage{setspace}                   % line spacing
 \usepackage{hyperref}                   % clickable links & cross-refs
-\usepackage{graphicx}                   % figures
 \usepackage{booktabs}                   % professional tables
 \usepackage{natbib}                     % citations (author-year)
 \usepackage{lipsum}                     % placeholder text — REMOVE when done
 \usepackage{graphicx, physics}
 \usepackage{fancyhdr}
-\usepackage{hyperref}
 \usepackage{ragged2e}
 \usepackage{amsmath, amsthm, amssymb}
-\usepackage[margin=1in]{geometry}
-\usepackage{setspace}
 \usepackage{tikz}
+\usetikzlibrary{shapes.geometric, backgrounds, calc}
 
-% ── Hyperlink style ─────────────────────────────────────────
 \hypersetup{
     colorlinks = true,
     linkcolor  = blue,
     citecolor  = blue,
     urlcolor   = blue
 }
-
-% ── Line spacing ────────────────────────────────────────────
 \doublespacing
-
-% ── Rename abstract heading if desired ──────────────────────
-% \renewcommand{\abstractname}{Executive Summary}
-
 
 % ============================================================
 %  TITLE MATTER
 % ============================================================
 
-\title[ENGINEERING $>$ PHYSICS]{%
-    \large {\textbf{An Engineer's Discoveries in Quantum}\\[0.3em]}
-    \small {Designing and Building a Laser-Based Quantum Computer}%
+\title[An Engineer's Revelations in Quantum Computing]{%
+    \large{\textbf{An Engineer's Accounts of Quantum Computing}}\\[0.2em]
+    \small {Designing a Room-Temperature Optical Quantum Emulator}%
 }
 
 % ── Authors ─────────────────────────────────────────────────
@@ -57,150 +47,459 @@
     Corresponding author: Zoeb Izzi
     (\href{mailto:2027ZIzzi@tjhsst.edu}{2027ZIzzi@tjhsst.edu}).
     This work was supported by the higher level math and physics teachers from the TJHSST staff, including Mr. Hannum, Dr. Osborne, Dr. Lynch, and Dr. Smith. I also thank Ms. Kelly for her amazing mentorship as I began my physics journey and for her endless tolerance for my random questions about physics.
-    I, the lead author, declare no conflicts of interest.
+    I, the lead author, declare no conflicts of interest. This research was developed independent of any funding sources, all of which had no input on the design, execution, or interpretation of the research.%
 }
 \date{\today}
 \keywords{keyword one, keyword two, keyword three, keyword four}
 \begin{document}
-\begin{abstract}
-    Since its discovery in the early 20th century, quantum mechanics has been one of the most important fields of scientific research in history. It has the ability to tell us how the most fundamental of particles work together to create what is our universe, and unlock the secrets of how best to manipulate our resources to solve humanity's problems. However, in a computational sense, taking advantage of quantum mechanics is an extremely expensive, difficult endeavor. Traditional quantum computers require millions of dollars in equipment and highly trained specialists to manage them, not to mention the incredible amount of liquid helium required to keep them at an operational temperature. This paper presents several designs for optical quantum computers, which make use of the polarization of light to encode quantum information and make quantum computing more accessible to the general public, and the results of testing them in a variety of computational tasks.
-\end{abstract}
-\maketitle
-\newpage
-\tableofcontents
-\newpage
-\section{Introduction}
-\label{sec:introduction}
-Quantum computing has been of great interest over the past three decades, and rightfully so. From speeding up protein and drug modeling in chemical engineering to revolutionizing modern encryption techniques, quantum computing offers the ability of humanity to take a huge step forward with regard to our computation of difficult problems. However, one large issue with quantum computing as of yet is the necessary requirements. Oftentimes, quantum computers require hundreds of thousands of dollars per year in upkeep, not to mention specialized engineers to help adjust systems.
-All of these costs make it drastically more difficult for not just universities, but even large corporations to make the switch from classical operation to quantum operation. Reducing the overhead costs for quantum computers remains an enormous problem that we attempt to solve by making use of a relatively new idea - photonic quantum computing.
-\\
-\indent Traditional quantum computers rely on using a variety of methods, one of which is to use lasers to "trap" atoms in grids, then applying electric or magnetic fields to them to get them to rotate and change their state. However, this requires not only large amounts of liquid helium to preserve quantum coherence, but, arguably more importantly, each of these evolutions take time. This drastically increases the amount of time necessary for computations to occur, even though the overall complexity ($O(\sqrt n)$ vs $O(n)$) may be lower. 
-Cite prior work like this \citep{WhateverWeDid} or as
-\citet{AuthorYear} when the author is the grammatical subject.
+    \begin{abstract}
+        Since its discovery in the early 20th century, quantum mechanics has been one of the most important fields of scientific research in history. It has the ability to tell us how the most fundamental of particles work together to create what is our universe, and unlock the secrets of how best to manipulate our resources to solve humanity's problems. However, in a computational light, taking advantage of quantum mechanics is an extremely expensive, difficult endeavor. Traditional quantum computers require millions of dollars in equipment and highly trained specialists to manage them, not to mention the incredible amount of liquid helium required to preserve coherence. This paper presents several designs for optical quantum computers, which make use of the polarization of light to encode quantum information and make quantum computing more accessible to the general public.
+        \\
+        There are three designs presented here. The first uses Spontaneous Parametric Down-Conversion crystals to generate pairs of photons, which are then manipulated using polarizing beam splitters, non-polarizing beam splitters, half-wave plates, quarter-wave plates, controlled-NOT gates, and more to perform quantum computations. The second design uses a standard laser, non-polarizing beam splitters, and mirrors to generate individual laser beams that enter optical elements like those listed above to extract useful quantum information. The third design is a chip-based design which uses Spontaneous Four-Wave Mixing to generate pairs of photons that are then operated upon via nanophotonic gates to produce quantum output. The first design is the most traditional, but also the most expensive. The second design is the most accessible, but also the most physically intensive. The third takes advantage of the best elements of both to create a design that could be implemented in computational devices worldwide.
+    \end{abstract}
+    \maketitle
+    \newpage
+    \tableofcontents
+    \newpage
 
-\section{Methods}
-\label{sec:methods}
 
-\subsection{Participants / Data}
-\label{subsec:participants}
+    \section{Introduction}
+    \label{sec:introduction}
+    Quantum computing has gained significant interest over the past three decades, and rightfully so. From speeding up protein and drug modeling in chemical engineering to revolutionizing modern encryption techniques, quantum computing offers the ability to solve computationally intractable problems. However, one primary issue with quantum computing is the high cost and complexity of hardware. Frequently, quantum computers require hundreds of thousands of dollars per year in upkeep, not to mention specialized engineers to help adjust systems.
+    All of these costs make it drastically more difficult not only for universities, but also large corporations to make the switch from classical operation to quantum operation. Reducing the overhead costs for quantum computers remains an enormous problem that we attempt to solve by making use of a relatively new idea -- photonic quantum computing.
 
-\lipsum[4]
+    Traditional quantum computers rely on using a variety of methods, one of which is to use lasers to ``trap'' atoms in grids, then applying electric or magnetic fields to them to get them to rotate and change their state. However, this requires not only large amounts of liquid helium to preserve quantum coherence, but, arguably more importantly, each of these evolutions takes time. This drastically increases the amount of time necessary for computations to occur, even though the overall complexity (e.g., $O(\sqrt n)$ for Grover's vs. $O(n)$ for traditional search) may be lower. Optical quantum computing is often sidelined because it is difficult to get photons to interact, as is required for CNOT (Controlled-NOT) gates. For this reason, scientists, researchers, and the private sector alike have opted to go a different route. This ignores the possibility of using coherent classical lasers to emulate high-dimensional quantum states via parallel permutations, and using classical post-processing to offset the photon interactions. This paper expands the applicability and ease of light-based quantum computing by presenting designs that will work without absolute zero environmental requirements and, through the nature of classical lasers, have so many states that they can be used to emulate quantum systems with a large number of qubits, even if they cannot be used to perform quantum computations in the traditional sense.
+    Cite prior work like this \citep{WhateverWeDid} or as
+    \citet{AuthorYear} when the author is the grammatical subject.
 
-\subsection{Materials / Measures}
-\label{subsec:materials}
 
-\lipsum[5]
 
-\subsection{Procedure}
-\label{subsec:procedure}
+    \section{The First Design: Bulk-Optics Single-Photon Quantum Computing}
+\label{sec:Design 1}
 
-\lipsum[6]
+The first design serves as our traditional baseline, representing the standard laboratory approach to optical quantum computing. It relies on discrete, macroscopic components arranged on an optical bench to generate, manipulate, and measure individual quantum states. Rather than using a continuous, macroscopic laser beam, this paradigm operates at the fundamental limits of light by isolating single pairs of photons. Note that for the first two designs, we assume that the gates themselves are mounted on motorized platforms that are each controlled by an external computer, so the pipeline of operation would be as follows:
 
-\subsection{Analysis Plan}
-\label{subsec:analysis}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    % Core block styling (optimized for vertical stack)
+    block/.style={
+        rectangle, 
+        draw=black, 
+        fill=white, 
+        thick, 
+        text width=7cm, % Wider text area since we have vertical room
+        align=center, 
+        minimum height=1.2cm, 
+        rounded corners=4pt,
+        font=\sffamily\small
+    },
+    % Arrow styling using standard 'stealth' arrow
+    arrow/.style={
+        -stealth, 
+        thick, 
+        draw=gray!80,
+        line width=1.2pt
+    }
+]
 
-\lipsum[7]
+    % --- Nodes stacked vertically (y coordinates decrease) ---
+    \node (step1) [block] at (0, 0) {
+        \textbf{Step 1: Setup} \\ \vspace{0.05cm}
+        Operator sets up circuit on personal computer from anywhere in the world
+    };
+    
+    \node (step2) [block] at (0, -2.0) {
+        \textbf{Step 2: Transmission} \\ \vspace{0.05cm}
+        Laptop sends data to on-site computer
+    };
+    
+    \node (step3) [block] at (0, -4.0) {
+        \textbf{Step 3: Mapping} \\ \vspace{0.05cm}
+        On-site computer maps paths of each gate and sends gates to destination
+    };
+    
+    \node (step4) [block] at (0, -6.0) {
+        \textbf{Step 4: Verification} \\ \vspace{0.05cm}
+        Cameras in the room verify locations
+    };
+    
+    \node (step5) [block] at (0, -8.0) {
+        \textbf{Step 5: Execution} \\ \vspace{0.05cm}
+        Circuit is turned on and data collected
+    };
 
+    % --- Vertical Connections ---
+    \draw [arrow] (step1) -- (step2);
+    \draw [arrow] (step2) -- (step3);
+    \draw [arrow] (step3) -- (step4);
+    \draw [arrow] (step4) -- (step5);
+
+\end{tikzpicture}
+\end{figure}
+
+\subsection{Qubit Generation}
+The core of this design is a high-powered pump laser directed into a non-linear Spontaneous Parametric Down-Conversion (SPDC) crystal, such as Beta-Barium Borate (BBO). Within the crystal, a high-energy pump photon splits into a pair of lower-energy, entangled photons, conventionally labeled as the ``signal'' and ``idler.'' Because these photons are generated simultaneously, the detection of one photon can herald the presence of the other. Once generated, these single photons are routed into the system to serve as our physical qubits, where the quantum information is encoded within their orthogonal polarization states, (in this case, horizontal polarization $|H\rangle$ and vertical polarization $|V\rangle$) to represent the state space.
+
+Without loss of generalty, we can show a 4-qubit system as follows (using additional SPDC crystals and mirrors to create a larger system as needed):
+
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    scale=1.2,
+    photon/.style={draw=blue!80!black, ultra thick},
+    block/.style={draw=black, fill=blue!10, thick, inner sep=4pt, minimum width=1.0cm, align=center, font=\small},
+    mirror/.style={draw=black!80, fill=black!30, thick, minimum width=0.5cm, minimum height=0.08cm, inner sep=0pt}
+]
+
+    % --- Level 0: High-Power Laser Input ---
+    % Swapped single-photon generator for a proper Laser Pump
+    \node[block] (gen) at (-1,0) {Single Photon Generator};
+    
+    % --- Level 1: First SPDC (Aligned vertically) ---
+    \node[block] (spdc1) at (2,0) {SPDC};
+    \draw[photon] (gen.east) -- (spdc1.west);
+    
+    % Shallow angular emission from SPDC 1 (e.g., ~15 degrees for schematic clarity)
+    % Paths exit the center-east of the crystal
+    \draw[photon] (spdc1.east) -- (4, 0.5);
+    \draw[photon] (spdc1.east) -- (4, -0.5);
+    
+    % --- Level 2: Second Layer SPDCs ---
+    % These crystals MUST be rotated or aligned perpendicular to their incoming pump beams
+    \node[block, rotate=14] (spdc2_top) at (4.5, 0.62) {SPDC};
+    \node[block, rotate=-14] (spdc2_bot) at (4.5, -0.62) {SPDC};
+    
+    % --- Level 3: Shallow Splits & Routing Mirrors ---
+    % Photons split from the second layer crystals at narrow angles relative to their inputs.
+    % Tracing to mirror locations designed to route cleanly to parallel horizontal rails.
+    
+    % Upper-outer mirror: Incoming angle ~ 25 degrees -> Mirror rotation = 12.5 degrees
+    \node[mirror, rotate=12.5] (m1) at (6.5, 1.5) {};
+    \node[above right=2pt, font=\scriptsize] at (m1) {Mirror};
+    
+    % Upper-inner mirror: Incoming angle ~ 5 degrees -> Mirror rotation = 2.5 degrees
+    \node[mirror, rotate=2.5] (m2) at (6.5, 0.5) {};
+    \node[below right=2pt, font=\scriptsize] at (m2) {Mirror};
+    
+    % Lower-inner mirror: Incoming angle ~ -5 degrees -> Mirror rotation = -2.5 degrees
+    \node[mirror, rotate=-2.5] (m3) at (6.5, -0.5) {};
+    \node[above right=2pt, font=\scriptsize] at (m3) {Mirror};
+    
+    % Lower-outer mirror: Incoming angle ~ -25 degrees -> Mirror rotation = -12.5 degrees
+    \node[mirror, rotate=-12.5] (m4) at (6.5, -1.5) {};
+    \node[below right=2pt, font=\scriptsize] at (m4) {Mirror};
+
+    % Connect Level 2 SPDCs to the mirrors
+    \draw[photon] (spdc2_top.east) -- (m1.center);
+    \draw[photon] (spdc2_top.east) -- (m2.center);
+    \draw[photon] (spdc2_bot.east) -- (m3.center);
+    \draw[photon] (spdc2_bot.east) -- (m4.center);
+    
+    % --- Final Parallel Output Rails ---
+    \draw[photon] (m1.center) -- (8.0, 1.5);
+    \draw[photon] (m2.center) -- (8.0, 0.5);
+    \draw[photon] (m3.center) -- (8.0, -0.5);
+    \draw[photon] (m4.center) -- (8.0, -1.5);
+
+\end{tikzpicture}
+\caption{Schematic of a 4-qubit single-photon generation system using SPDC crystals. The high-power single photon generator pumps the first SPDC crystal, which generates entangled photon pairs. These photons are then routed into two additional SPDC crystals, each producing further entangled pairs. Mirrors are strategically placed to direct the photons into four parallel output rails, representing four distinct qubits.}
+\label{fig:single_photon_tree_bisected}
+\end{figure}
+
+\subsection{Optical Gate Manipulation}
+Once initialized, the single photons travel through an open-air array of bulk-optics components designed to perform quantum logic operations:
+\begin{itemize}
+    \item \textbf{Single-Qubit Rotations:} Polarization states are manipulated using Half-Wave Plates (HWP) and Quarter-Wave Plates (QWP). By physically rotating the axes of these birefringent crystals, we can rotate the photon's polarization state across the Bloch sphere, creating arbitrary superposition states. We map an X rotation to a HWP at $45^\circ$, a Z rotation to a HWP at $0^\circ$, a Hadamard gate to a HWP at $22.5^\circ$, a Y gate to an X gate followed by a QWP at $0^\circ$, and an arbitrary $\theta$ rotation to a HWP at $\theta/2$.
+    \item \textbf{Multi-Qubit Logic:} To perform conditional logic, the photons must interact. In this bulk setup, Controlled-NOT (CNOT) gates are constructed in the following way:
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+    scale=1.1,
+    photon/.style={draw=blue!80!black, ultra thick, ->, >=stealth},
+    signal/.style={draw=red!80!black, thick, dashed, ->, >=stealth},
+    block/.style={draw=black, fill=blue!10, thick, inner sep=5pt, minimum height=0.8cm, align=center, font=\small},
+    pbs/.style={draw=black, fill=green!10, thick, minimum size=0.9cm, align=center, font=\scriptsize\bfseries},
+    detector/.style={draw=black, fill=red!20, thick, minimum size=0.7cm, font=\scriptsize}
+]
+
+    % === TARGET PORT (Lower Baseline: y = 0) ===
+    \node[font=\bfseries] (target_port) at (-1.3, 0) {Target Port};
+    \node[block, fill=gray!10] (delay_t) at (3.5, 0) {Optical\\Delay ($\Delta t$)};
+    \node[block, fill=purple!10] (xgate) at (7.0, 0) {Active\\X Gate};
+    \node[font=\bfseries] (out_target) at (11, 0) {Output Target};
+
+    % Target Connections
+    \draw[photon] (target_port.east) -- (delay_t.west) node[above, midway] {$|T\rangle$};
+    \draw[photon] (delay_t.east) -- (xgate.west);
+    \draw[photon] (xgate.east) -- (out_target.west) node[above, midway] {$\qquad X^c|T\rangle$};
+
+
+    % === CONTROL PORT (Middle Baseline: y = 2.5) ===
+    \node[font=\bfseries] (control_port) at (-1.3, 2.5) {Control Port};
+    \node[pbs] (pbs) at (1.3, 2.5) {PBS};
+    \node[block, fill=gray!10] (delay_c) at (3.5, 2.5) {Optical\\Delay ($\Delta t$)};
+    
+    % Control H-Connections
+    \draw[photon] (control_port.east) -- (pbs.west) node[above, midway] {$\ket{C}$};
+    \draw[photon] (pbs.east) -- (delay_c.west) node[above, midway] {$|H\rangle$};
+    \draw[photon] (delay_c.east) -- (9.2, 2.5) node[above, midway] {$|H\rangle$};
+
+
+    % === DETECT & FEED-FORWARD LAYER (Upper Baseline: y = 4.0) ===
+    \node[detector] (det) at (1.3, 4.0) {Det};
+    \node[block, fill=orange!10] (logic) at (4.2, 4.0) {Feed-Forward\\Logic};
+    \node[block] (emit) at (7.0, 4.0) {V-Photon\\Emitter};
+
+    % Control V-Connections, Detection & Logic Trigger Lines
+    \draw[photon] (pbs.north) -- (det.south) node[left, midway] {$|V\rangle$};
+    \draw[signal] (det.east) -- (logic.west) node[above, midway] {Click};
+    \draw[signal] (logic.east) -- (emit.west);
+    \draw[photon] (emit.east) -- (9.1, 4.0) node[above, midway] {$|V\rangle$};
+    \draw[signal] (logic.south) -- (xgate.north) node[right, near end] {Trigger};
+
+
+    % === BRACKETS & LABELS ===
+    % Standard line bracket to ensure compilation without decoration library
+    \draw[thick] (9.25, 4.2) -- (9.35, 4.2) -- (9.35, 2.3) -- (9.25, 2.3);
+    \node[right, font=\bfseries] at (9.5, 3.25) {Output Control};
+
+\end{tikzpicture}
+\caption{Measurement-induced feed-forward CNOT architecture. A control photon's $V$ component triggers an electro-optic $X$ gate acting on the delayed target rail, while a conditional emitter restores the $|V\rangle$ state to preserve the control qubit's value.}
+\end{figure}
+\end{itemize}\[\]
+
+\subsection{Engineering Trade-offs and Limitations}
+While this bulk-optics SPDC paradigm yields exceptionally high state purity and serves as a highly verified baseline for quantum research, it is not feasible beyond just a handful of qubits. The primary issue is that SPDC is inherently probabilistic with extremely low probability of success; the crystal only splits a photon a tiny fraction of the time. As an algorithm demands more qubits, the probability of generating multiple heralded photon pairs simultaneously scales down exponentially. This makes scaling the architecture physically and financially prohibitive for widespread deployment, which allows for better solutions to manifest.
 
 % ============================================================
 %  4. EXPERIMENT
 % ============================================================
 
-\section{Experiment}
-\label{sec:experiment}
 
-\subsection{Design}
-\label{subsec:design}
+    \section{The Second Design: Coherent Laser-Based Quantum Computing}
+    \label{sec:Design 2}
+    This design uses coherent lasers to generate a large number of photons that can be manipulated to emulate quantum states. By using a continuous laser source, we can create a high-intensity beam that can be split and routed through various optical elements to perform quantum operations. This approach allows for the generation of many qubits simultaneously, making it more scalable than the SPDC-based design. Further, lasers are far cheaper than single photon generators, which makes this design far cheaper than the first. Note that the setups (e.g. the single-qubit rotation gates, the pipeline of operation, and the motorization of the gate systems) are the same as in the first design.
 
-\lipsum[8]
+    \subsection{Qubit Generation}
+    \label{subsec:Qubit Generation}
+    
+    Using the high powered laser source, we use a variety of Non-Polarizing Beam Splitters (NPBS) to split the laser beam into multiple paths, each representing a qubit. The polarization of the laser light can be manipulated using wave plates to encode quantum information. The initial beam setup, without loss of generality, can be modeled as follows (using additional NPBS and mirrors to create a larger system as needed):
 
-\subsection{Stimuli / Conditions}
-\label{subsec:stimuli}
+    \begin{figure}[hbtp]
+        \centering
+        \begin{tikzpicture}[
+    scale=1.5,
+    ray/.style={line width=1.5pt, black, -latex},
+    trans_ray/.style={line width=1.5pt, black!70, -latex},
+    ref_ray/.style={line width=1.5pt, black, -latex},
+    component/.style={draw=red, fill=red!10, thick}, % NPBS Cubes: Red outline, light red fill
+    mirror/.style={draw=black, fill=black!10, thick}   % Mirrors: Black/gray
+]
 
-\lipsum[9]
+    % --- STAGE 1 COORDINATES ---
+    \coordinate (LaserStart) at (0,0);
+    \coordinate (PBS1) at (2,0);
+    \coordinate (M1) at (2,-3.5);
 
-% Example figure — uncomment and fill in when ready
-% \begin{figure}[ht]
-%     \centering
-%     \includegraphics[width=0.75\textwidth]{figures/fig1.pdf}
-%     \caption{Caption describing the figure.}
-%     \label{fig:experiment_design}
-% \end{figure}
+    % --- STAGE 2 COORDINATES ---
+    \coordinate (PBS2) at (4.5,0);
+    \coordinate (M2) at (4.5,-1.5);
+    
+    \coordinate (PBS3) at (4.5,-3.5);
+    \coordinate (M3) at (4.5,-5.0);
+
+    % --- OUTPUT TERMINALS ---
+    \coordinate (Out1) at (7,0);
+    \coordinate (Out2) at (7,-1.5);
+    \coordinate (Out3) at (7,-3.5);
+    \coordinate (Out4) at (7,-5.0);
+
+    % ==========================================
+    % STAGE 1: FIRST SPLIT (1 -> 2 Beams)
+    % ==========================================
+
+    % Draw Input Laser Beam
+    \draw[ray] (LaserStart) -- ($(PBS1) - (0.4,0)$) node[midway, above, black, font=\small] {Initial Beam};
+    \draw[ray] ($(PBS1) - (0.4,0)$) -- (PBS1);
+
+    % Draw NPBS 1
+    \draw[component] ($(PBS1) - (0.4,0.4)$) rectangle ($(PBS1) + (0.4,0.4)$);
+    \draw[red, thick] ($(PBS1) - (0.4,0.4)$) -- ($(PBS1) + (0.4,0.4)$);
+    \node[black, font=\small\bfseries] at ($(PBS1) + (0,0.6)$) {NPBS};
+
+    % Top Path (Straight to Stage 2)
+    \draw[trans_ray] (PBS1) -- (PBS2);
+
+    % Bottom Path (Down to Mirror 1)
+    \draw[ref_ray] (PBS1) -- (M1);
+
+    % Mirror 1
+    \begin{scope}[shift={(M1)}]
+        \draw[mirror, rotate=-45] (-0.5,-0.05) rectangle (0.5,0.05);
+        \foreach \x in {-0.4,-0.2,0,0.2,0.4} {
+            \draw[black!60, thin, rotate=-45] (\x, -0.05) -- (\x-0.1, -0.15);
+        }
+    \end{scope}
+
+    % Bottom Path (Redirected to Stage 2)
+    \draw[ref_ray] (M1) -- (PBS3);
 
 
-% ============================================================
-%  5. RESULTS
-% ============================================================
+    % ==========================================
+    % STAGE 2: SECOND SPLIT (2 -> 4 Beams)
+    % ==========================================
 
-\section{Results}
-\label{sec:results}
+    % --- UPPER REPEATER TREE ---
+    % Draw NPBS 2
+    \draw[component] ($(PBS2) - (0.4,0.4)$) rectangle ($(PBS2) + (0.4,0.4)$);
+    \draw[red, thick] ($(PBS2) - (0.4,0.4)$) -- ($(PBS2) + (0.4,0.4)$);
+    \node[black, font=\small\bfseries] at ($(PBS2) + (0,0.6)$) {NPBS};
 
-\subsection{Descriptive Statistics}
-\label{subsec:descriptive}
+    % Beam 0 Out (Straight)
+    \draw[trans_ray] (PBS2) -- (Out1) node[right, black, font=\small\bfseries] {0};
 
-\lipsum[10]
+    % Beam 1 Down to Mirror 2
+    \draw[ref_ray] (PBS2) -- (M2);
 
-% Example table
-\begin{table}[ht]
+    % Mirror 2
+    \begin{scope}[shift={(M2)}]
+        \draw[mirror, rotate=-45] (-0.5,-0.05) rectangle (0.5,0.05);
+        \foreach \x in {-0.4,-0.2,0,0.2,0.4} {
+            \draw[black!60, thin, rotate=-45] (\x, -0.05) -- (\x-0.1, -0.15);
+        }
+    \end{scope}
+
+    % Beam 1 Out (Redirected)
+    \draw[ref_ray] (M2) -- (Out2) node[right, black, font=\small\bfseries] {1};
+
+
+    % --- LOWER REPEATER TREE ---
+    % Draw NPBS 3
+    \draw[component] ($(PBS3) - (0.4,0.4)$) rectangle ($(PBS3) + (0.4,0.4)$);
+    \draw[red, thick] ($(PBS3) - (0.4,0.4)$) -- ($(PBS3) + (0.4,0.4)$);
+    \node[black, font=\small\bfseries] at ($(PBS3) + (0,0.6)$) {NPBS};
+
+    % Beam 2 Out (Straight)
+    \draw[trans_ray] (PBS3) -- (Out3) node[right, black, font=\small\bfseries] {2};
+
+    % Beam 3 Down to Mirror 3
+    \draw[ref_ray] (PBS3) -- (M3);
+
+    % Mirror 3
+    \begin{scope}[shift={(M3)}]
+        \draw[mirror, rotate=-45] (-0.5,-0.05) rectangle (0.5,0.05);
+        \foreach \x in {-0.4,-0.2,0,0.2,0.4} {
+            \draw[black!60, thin, rotate=-45] (\x, -0.05) -- (\x-0.1, -0.15);
+        }
+    \end{scope}
+
+    % Beam 3 Out (Redirected)
+    \draw[ref_ray] (M3) -- (Out4) node[right, black, font=\small\bfseries] {3};
+
+\end{tikzpicture}
+    \end{figure}
+
+    \subsection{Optical Gate Manipulation}
+    \label{subsec:Optical Gate Manipulation}
+    All of the unary gates (gates that involve only 1 qubit) are identical to those proposed in the first design. 
+    This design uses temporal variation to simulate the CNOT effect. By introducing a randomization by which the control qubit and target qubit are outputted probabilistically depending on the relative probabilities of the control qubit, allowing both coherent beams to exist and picking only one to go through, we preserve the "entanglement" effect of the CNOT gate (simulated here by not allowing the target qubit without the X gate to be outputted if the control qubit ouputs $\ket{V}$, and vice versa). This design is simple and easy to implement, although it does require more overhead computation from an abstracted computer to deal with interference terms and "simplified" gates (gates that, deterministally, turn a qubit from one state to another, but probabilistically, do not). This design is also more physically intensive, as it requires a lot of mirrors and beam splitters to ensure that the qubits are outputted in the correct order. We represent it as follows:
+
+\begin{figure}[htbp]
     \centering
-    \caption{Descriptive statistics for each condition.}
-    \label{tab:descriptive}
-    \begin{tabular}{lccc}
-        \toprule
-        \textbf{Condition} & $n$ & $M$   & $SD$ \\
-        \midrule
-        Condition A        & 50  & 4.2   & 0.8  \\
-        Condition B        & 50  & 3.7   & 1.1  \\
-        \bottomrule
-    \end{tabular}
-\end{table}
+    \begin{tikzpicture}[
+        scale=1.3,
+        control_ray/.style={line width=1.5pt, purple, -latex},
+        target_ray/.style={line width=1.5pt, blue, -latex},
+        combined_ray/.style={line width=2pt, violet!80!black, -latex},
+        component/.style={draw=black, fill=gray!10, thick, minimum width=1.2cm, minimum height=0.8cm, align=center},
+        aom/.style={draw=orange!80!black, fill=orange!10, thick, minimum width=1.4cm, minimum height=1.2cm, align=center}
+    ]
 
-\subsection{Hypothesis Tests}
-\label{subsec:tests}
+        % --- Control Line (Unchanged) ---
+        \coordinate (C_In) at (0, 1.5);
+        \coordinate (C_Out) at (7.5, 1.5);
+        \draw[control_ray] (C_In) -- (C_Out) node[midway, above=15pt, black, font=\small] {Control Beam ($C$)};
+        
+        % Timing Synchronizer Hub Node
+        \node[draw=purple!80!black, fill=purple!5, thick, circle, inner sep=3pt] (AOM_Ctrl) at (3.5, 1.5) {\small Sync};
 
-\lipsum[11]
+        % --- Target Module (Shifted down by 0.5) ---
+        % AOM Selector moved from (3.5, 0) to (3.5, -0.5)
+        \node[aom] (AOM_Selector) at (3.5, -0.5) {AOM\\Selector};
+        \node[component] (X_Gate) at (1.5, -0.9) {X Gate\\(HWP)};
+        
+        \coordinate (T_In_Raw) at (0, -0.1);
+        \coordinate (T_In_Flip) at (0, -0.9);
+        \coordinate (T_Out) at (7.5, -0.5);
+
+        % Drawing the Input paths into the AOM
+        \draw[target_ray] (T_In_Raw) -- ($(AOM_Selector.west) + (0, 0.4)$) 
+            node[pos=0.3, above, black, font=\scriptsize] {Identity $T$};
+            
+        \draw[target_ray] (T_In_Flip) -- (X_Gate.west) 
+            node[pos=0, below=4pt, black, font=\scriptsize] {Raw Target $T$};
+        \draw[target_ray] (X_Gate.east) -- ($(AOM_Selector.west) + (0, -0.4)$) 
+            node[pos=1.2, below=4pt, black, font=\scriptsize] {Flipped $T \oplus 1$};
+
+        % --- Output Ray and Text ---
+        \draw[combined_ray] (AOM_Selector.east) -- (T_Out) 
+            node[pos=0.5, above=2pt, black, font=\scriptsize, align=left] {Time Slot 1: Passes $T$ \textbf{OR} \\ Time Slot 2: Passes $T \oplus 1$};
+
+        % Extended Software Sync Signal (Longer vertical gap)
+        \draw[dashed, thick, <->, >=stealth, blue!60!black] (AOM_Ctrl.south) -- (AOM_Selector.north) 
+            node[midway, right=2pt, font=\scriptsize, text=blue!80!black] {Temporal Selection Clocks};
+
+\end{tikzpicture}
+\caption{Temporal selection routing featuring expanded vertical gap spacing between the control path and the modulated AOM architecture.}
+\label{fig:aom_selector_shifted}
+\end{figure}
+\subsection{Engineering Trade-offs and Limitations}
+    \label{sec:Engineering Trade-offs and Limitations}
+Considering an AOM of 100 MHz, we can achieve a temporal resolution of 10 ns. This allows for precise control over the timing of the target qubit's passage through the AOM, ensuring that it is either flipped or passed unchanged based on the control qubit's state. The temporal selection mechanism effectively simulates the CNOT operation by leveraging the timing of the control and target beams, and while it does require future CNOTs to use more time to set their probabilities, the nanoscale timing allows the overall computation to still be extremely efficient. The main drawback is that this design requires an overhead computer to keep track of the "simplification" of quantum gates and determine which gates (which can be designated prior to implementation) are able to be simplified, since this technically does not allow for intereference terms to cancel out.
 
 
 % ============================================================
 %  6. DISCUSSION
 % ============================================================
 
-\section{Discussion}
-\label{sec:discussion}
 
-\subsection{Interpretation of Findings}
-\label{subsec:interpretation}
+    \section{Discussion}
+    \label{sec:discussion}
 
-\lipsum[12]
+    \subsection{Interpretation of Findings}
+    \label{subsec:interpretation}
 
-\subsection{Limitations}
-\label{subsec:limitations}
+    \lipsum[12]
 
-\lipsum[13]
+    \subsection{Limitations}
+    \label{subsec:limitations}
 
-\subsection{Future Directions}
-\label{subsec:future}
+    \lipsum[13]
 
-\lipsum[14]
+    \subsection{Future Directions}
+    \label{subsec:future}ou
+
+    \lipsum[14]
 
 
 % ============================================================
 %  7. CONCLUSION
 % ============================================================
 
-\section{Conclusion}
-\label{sec:conclusion}
 
-\lipsum[15]
+    \section{Conclusion}
+    \label{sec:conclusion}
+
+    \lipsum[15]
 
 
 % ============================================================
 %  REFERENCES
 % ============================================================
 
-\newpage
-\bibliographystyle{amsplain}     % swap for: apalike, plain, ieee, apa
-\bibliography{references}        % points to your references.bib file
+    \newpage
+    \bibliographystyle{amsplain}     % swap for: apalike, plain, ieee, apa
 
 % ── Inline fallback (no .bib file needed for quick testing) ─
 % Comment out the two lines above and uncomment below:
