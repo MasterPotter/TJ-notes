@@ -24,9 +24,9 @@
 %  TITLE MATTER
 % ============================================================
 
-\title[An Engineer's Revelations in Quantum Computing]{%
+\title[An Engineer's Accounts of Quantum Computing]{%
     \large{\textbf{An Engineer's Accounts of Quantum Computing}}\\[0.2em]
-    \small {Designing a Room-Temperature Optical Quantum Emulator}%
+    \small {Designing a Quantum Inspired Optical Accelerator}%
 }
 
 % ── Authors ─────────────────────────────────────────────────
@@ -53,9 +53,7 @@
 \keywords{keyword one, keyword two, keyword three, keyword four}
 \begin{document}
     \begin{abstract}
-        Since its discovery in the early 20th century, quantum mechanics has been one of the most important fields of scientific research in history. It has the ability to tell us how the most fundamental of particles work together to create what is our universe, and unlock the secrets of how best to manipulate our resources to solve humanity's problems. However, in a computational light, taking advantage of quantum mechanics is an extremely expensive, difficult endeavor. Traditional quantum computers require millions of dollars in equipment and highly trained specialists to manage them, not to mention the incredible amount of liquid helium required to preserve coherence. This paper presents several designs for optical quantum computers, which make use of the polarization of light to encode quantum information and make quantum computing more accessible to the general public.
-        \\
-        There are three designs presented here. The first uses Spontaneous Parametric Down-Conversion crystals to generate pairs of photons, which are then manipulated using polarizing beam splitters, non-polarizing beam splitters, half-wave plates, quarter-wave plates, controlled-NOT gates, and more to perform quantum computations. The second design uses a standard laser, non-polarizing beam splitters, and mirrors to generate individual laser beams that enter optical elements like those listed above to extract useful quantum information. The third design is a chip-based design which uses Spontaneous Four-Wave Mixing to generate pairs of photons that are then operated upon via nanophotonic gates to produce quantum output. The first design is the most traditional, but also the most expensive. The second design is the most accessible, but also the most physically intensive. The third takes advantage of the best elements of both to create a design that could be implemented in computational devices worldwide.
+        This paper presents a design for an optical quantum emulator that uses coherent, classical lasers to emulate quantum computations. It uses SPDC crystals to generate beams of photons that can (with caution) be treated as qubits and uses gates mounted on motorized platforms to manipulate them, with unary gates being represented by variations on the angle of half-wave plates and quarter-wave plates and binary/multinary gates being represented by a module design that uses a Polarizing Beam Splitter (PBS) to split a target beam, applying the appropriate transformations to one of the beams, and using an AOM to postselect the correct outcomes based on the state of the control beam(s). The design is easily scalable because of its motorized design and, because it uses classical lasers rather than single photon generators, has the potential to be far cheaper than most quantum computers currently.  
     \end{abstract}
     \maketitle
     \newpage
