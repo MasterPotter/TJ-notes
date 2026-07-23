@@ -1,14 +1,4 @@
-\contentsline {section}{\tocsection {}{1}{Introduction}}{3}{section.1}%
-\contentsline {section}{\tocsection {}{2}{The First Design: Bulk-Optics Single-Photon Quantum Computing}}{4}{section.2}%
-\contentsline {subsection}{\tocsubsection {}{2.1}{Qubit Generation}}{4}{subsection.2.1}%
-\contentsline {subsection}{\tocsubsection {}{2.2}{Optical Gate Manipulation}}{5}{subsection.2.2}%
-\contentsline {subsection}{\tocsubsection {}{2.3}{Engineering Trade-offs and Limitations}}{6}{subsection.2.3}%
-\contentsline {section}{\tocsection {}{3}{The Second Design: Coherent Laser-Based Quantum Computing}}{6}{section.3}%
-\contentsline {subsection}{\tocsubsection {}{3.1}{Qubit Generation}}{7}{subsection.3.1}%
-\contentsline {subsection}{\tocsubsection {}{3.2}{Optical Gate Manipulation}}{7}{subsection.3.2}%
-\contentsline {subsection}{\tocsubsection {}{3.3}{Engineering Trade-offs and Limitations}}{8}{subsection.3.3}%
-\contentsline {section}{\tocsection {}{4}{Discussion}}{8}{section.4}%
-\contentsline {subsection}{\tocsubsection {}{4.1}{Interpretation of Findings}}{8}{subsection.4.1}%
-\contentsline {subsection}{\tocsubsection {}{4.2}{Limitations}}{9}{subsection.4.2}%
-\contentsline {subsection}{\tocsubsection {}{4.3}{Future Directions}}{9}{subsection.4.3}%
-\contentsline {section}{\tocsection {}{5}{Conclusion}}{9}{section.5}%
+\contentsline {section}{\tocsection {}{1}{The Design}}{3}{section.1}%
+\contentsline {subsection}{\tocsubsection {}{1.1}{Qubit Generation}}{3}{subsection.1.1}%
+\contentsline {subsection}{\tocsubsection {}{1.2}{Optical Gate Manipulation}}{4}{subsection.1.2}%
+\contentsline {subsection}{\tocsubsection {}{1.3}{Engineering Trade-offs and Limitations}}{6}{subsection.1.3}%
